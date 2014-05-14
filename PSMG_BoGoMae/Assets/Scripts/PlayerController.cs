@@ -5,10 +5,22 @@ public class PlayerController : MonoBehaviour {
 
 
     public float moveSpeed = 10f;
-    public float turnSpeed = 50f;
+    public float turnSpeed = 200f;
 
 
     void Update()
+    {
+        
+    }
+
+    void FixedUpdate()
+    {
+
+        movePlayerWithInput();
+
+    }
+
+    private void movePlayerWithInput()
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -21,6 +33,14 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Item")
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 	
 }
