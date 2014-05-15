@@ -27,6 +27,7 @@ public class PlayerBehaviour : MonoBehaviour {
             if (gameManager != null)
             {
                 gameManager.SendMessage("ItemCollected", other.GetComponent<Item>());
+                gameManager.SendMessage("SpeedUp", 5);
 
             }
         }
