@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public GameObject player;
+
     private Vector3 offset;
 
 
@@ -14,7 +15,7 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         transform.position = player.transform.position + offset;
 
 	}
