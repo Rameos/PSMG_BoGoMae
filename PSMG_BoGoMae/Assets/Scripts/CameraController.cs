@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour {
 
     public Transform target;
     public float sensitivity = 30;
+    public float cameraHeight = 3;
 
     public float minXAngle = -90;
     public float maxXAngle = 90;
@@ -102,7 +103,7 @@ public class CameraController : MonoBehaviour {
         }
 
         this.transform.rotation = Quaternion.Euler(xAngle, yAngle, 0);
-        this.transform.position = target.position + this.transform.TransformDirection(new Vector3(0, 0, -currentDistance));
+        this.transform.position = target.position + this.transform.TransformDirection(new Vector3(0, cameraHeight, -currentDistance));
     }
 
     static float ClampAngle(float angle, float min, float max)

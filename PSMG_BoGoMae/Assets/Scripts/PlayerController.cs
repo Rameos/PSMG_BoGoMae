@@ -5,11 +5,11 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     CharacterController characterController;
-    public float moveSpeed = 2f;
-    public float turnSpeed = 100f;
+    public float moveSpeed = 3f;
+    public float turnSpeed = 100;
 
-    public float rotationSpeed = 60.0f;
-    public float walkingSpeed = 4.0f;
+    public float rotationSpeed = 100;
+    public float walkingSpeed = 10;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 
         transform.Rotate(Vector3.up, rotate * rotationSpeed * Time.deltaTime);
         Vector3 direction = this.transform.right * strafe + this.transform.forward * forward;
-        characterController.SimpleMove(direction * walkingSpeed);
+        characterController.SimpleMove(direction * this.walkingSpeed);
     }
 
     void FixedUpdate()
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
         //movePlayerWithInput();
 
     }
-
+    /*
     private void movePlayerWithInput()
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
     }
-
+    */
     void SpeedUp(int speedUp)
     {
         this.walkingSpeed *= speedUp;
