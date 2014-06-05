@@ -14,20 +14,34 @@ public class PlayerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Item"))
+        if (other.CompareTag("SpeedItem"))
         {
 
-            Debug.Log("Collision");
+            Debug.Log("Collision with speeditem");
             other.gameObject.SetActive(false);
             if (gameManager != null)
             {
+
                 gameManager.SendMessage("ItemCollected", other.GetComponent<Item>());
                 gameManager.SendMessage("SpeedUp", 5);
+
+            }
+        }
+        if (other.CompareTag("ScopeItem"))
+        {
+
+            Debug.Log("Collision with scopeitem");
+            other.gameObject.SetActive(false);
+            if (gameManager != null)
+            {
+                Debug.Log("in gamemanager != null");
+                gameManager.SendMessage("ItemCollected", other.GetComponent<Item>());
+                gameManager.SendMessage("PickedUpScope");
 
             }
         }
