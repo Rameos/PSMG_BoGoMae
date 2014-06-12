@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerBehaviour : MonoBehaviour {
 
     private GameManager gameManager;
-
+    public GUIText itemText;
 	// Use this for initialization
 	void Start () {
 
@@ -14,9 +14,17 @@ public class PlayerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(Input.GetButton("UseSpeed"))
+        {
+            gameObject.SendMessage("SpeedUp");
+        }
 
+        if (Input.GetButton("UseScope"))
+        {
+            gameObject.SendMessage("PickedUpScope");
+        }
 	}
-
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SpeedItem"))
@@ -26,9 +34,8 @@ public class PlayerBehaviour : MonoBehaviour {
             other.gameObject.SetActive(false);
             if (gameManager != null)
             {
+                itemText.text += " Speed (press (1) |"; 
 
-                gameManager.SendMessage("ItemCollected", other.GetComponent<Item>());
-                gameManager.SendMessage("SpeedUp", 5);
 
             }
         }
@@ -39,11 +46,14 @@ public class PlayerBehaviour : MonoBehaviour {
             other.gameObject.SetActive(false);
             if (gameManager != null)
             {
-                Debug.Log("in gamemanager != null");
-                gameManager.SendMessage("ItemCollected", other.GetComponent<Item>());
-                gameManager.SendMessage("PickedUpScope");
+                itemText.text += " Scope (press (2)"; 
 
             }
         }
     }
+
+
+
 }
+     
+

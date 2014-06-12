@@ -5,8 +5,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     public GUIText itemText;
-    
-    private bool speedItemCollected = false;
+
 
   
 	// Use this for initialization
@@ -25,11 +24,10 @@ public class GameManager : MonoBehaviour {
     void ItemCollected(Item item)
     {
 
-        itemText.text += " Speed!"; 
+        itemText.text += " Speed (press (1) |"; 
         item.gameObject.audio.Play();
         Destroy(item.gameObject, item.gameObject.audio.clip.length);
         item.gameObject.renderer.enabled = false;
-        speedItemCollected = true;
 
         Debug.Log("Speed Item aufgenommen!");
         

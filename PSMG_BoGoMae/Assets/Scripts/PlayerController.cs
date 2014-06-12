@@ -7,7 +7,10 @@ public class PlayerController : MonoBehaviour {
     CharacterController characterController;
 
     public float rotationSpeed = 100;
-    public float walkingSpeed = 20;
+    public float walkingSpeed = 15;
+
+    public Camera thirdPersonCamera;
+    public Camera firstPersonCamera;
 
     public ThirdPersonCameraController mainGameCamera;
     private float directionSpeed = 3.0f;
@@ -95,16 +98,17 @@ public class PlayerController : MonoBehaviour {
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
     }
     */
-    void SpeedUp(int speedUp)
+    void SpeedUp()
     {
         Debug.Log("in speedup");
-        this.walkingSpeed *= speedUp;
+        this.walkingSpeed *= 2;
     }
 
     void PickedUpScope()
     {
         Debug.Log("in pickedupscope");
-
+        thirdPersonCamera.enabled = false;
+        firstPersonCamera.enabled = true;
     }
 
 	
