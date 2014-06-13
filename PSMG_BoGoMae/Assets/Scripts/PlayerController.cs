@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
     CharacterController characterController;
 
     public float rotationSpeed = 100;
-    public float walkingSpeed = 15;
+    public float walkingSpeed = 10;
 
     public Camera thirdPersonCamera;
     public Camera firstPersonCamera;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     private float strafe = 0.0f;
     private float speed = 0.0f;
     private float direction = 0.0f;
+    private float scopeCounter = 0;
 
 
 
@@ -82,33 +83,29 @@ public class PlayerController : MonoBehaviour {
 
 
 
-    /*
-    private void movePlayerWithInput()
-    {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
-    }
-    */
     void SpeedUp()
     {
         Debug.Log("in speedup");
-        this.walkingSpeed *= 2;
+        this.walkingSpeed *= 5;
     }
 
     void PickedUpScope()
     {
-        Debug.Log("in pickedupscope");
-        thirdPersonCamera.enabled = false;
-        firstPersonCamera.enabled = true;
+
+        scopeCounter++;
+
+        if (scopeCounter % 2 == 0)
+        {
+            thirdPersonCamera.enabled = true;
+            firstPersonCamera.enabled = false;
+        }
+        else
+        {
+            thirdPersonCamera.enabled = false;
+            firstPersonCamera.enabled = true;
+
+        }
     }
 
 	

@@ -14,10 +14,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.GetButton("UseSpeed"))
-        {
-            gameObject.SendMessage("SpeedUp");
-        }
+  
 
         if (Input.GetButton("UseScope"))
         {
@@ -34,9 +31,7 @@ public class PlayerBehaviour : MonoBehaviour {
             other.gameObject.SetActive(false);
             if (gameManager != null)
             {
-                itemText.text += " Speed (press (1) |"; 
-
-
+                gameObject.SendMessage("SpeedUp");
             }
         }
         if (other.CompareTag("ScopeItem"))
@@ -46,7 +41,7 @@ public class PlayerBehaviour : MonoBehaviour {
             other.gameObject.SetActive(false);
             if (gameManager != null)
             {
-                itemText.text += " Scope (press (2)"; 
+                itemText.text += " Scope (press (2))"; 
 
             }
         }
