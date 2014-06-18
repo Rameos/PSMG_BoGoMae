@@ -81,16 +81,15 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-
-
-
-    void SpeedUp()
+    // receive message from PlayerCollisionResponse
+    void PickedUpSpeed()
     {
         Debug.Log("in speedup");
         this.walkingSpeed *= 5;
     }
 
-    void PickedUpScope()
+    // receive message from PlayerCollisionResponse
+    void UsedScope()
     {
 
         scopeCounter++;

@@ -14,7 +14,7 @@ public class CameraHandler : MonoBehaviour
     {
         refugee = GameObject.Find("Player");
         drone = GameObject.Find("DroneCube");
-        drone.gameObject.SetActive(false);
+        //drone.gameObject.SetActive(false);
         thirdPersonCamera.enabled = true;
         firstPersonCamera.enabled = false;
         droneCamera.enabled = false;
@@ -22,27 +22,12 @@ public class CameraHandler : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (Input.GetButton("EnterFirstPersonView"))
-        {
-            thirdPersonCamera.enabled = false;
-            firstPersonCamera.enabled = true;
-        }
-         */
+
         if (Input.GetButton("ExitFirstPersonView"))
         {
             thirdPersonCamera.enabled = true;
             firstPersonCamera.enabled = false;
         }
-    }
-
-    void PickedUpScope()
-    {
-        Debug.Log("in pickedupscope");
-        refugee.renderer.enabled = false;
-
-        thirdPersonCamera.enabled = false;
-        firstPersonCamera.enabled = true;
     }
 
     void OnGUI()
