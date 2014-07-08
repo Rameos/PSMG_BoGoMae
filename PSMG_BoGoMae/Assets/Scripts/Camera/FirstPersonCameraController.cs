@@ -22,14 +22,27 @@ public class FirstPersonCameraController : MonoBehaviour {
 	void Update () {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
+
+
 	}
 
     void LateUpdate()
     {
+        Vector2 gazeData = getGazeData(); 
+
+
         xAxisRotation += (mouseY * firstPersonLookSpeed);
         yAxisRotation += (mouseX * firstPersonLookSpeed);
 
         transform.localRotation = Quaternion.Euler(xAxisRotation, yAxisRotation, 0);
 
+    }
+
+    private Vector2 getGazeData()
+    {
+        Vector2 result = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+        result.y = Screen.height - result.y;
+
+        return result;
     }
 }

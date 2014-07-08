@@ -14,7 +14,7 @@ public class PlayerCollisionResponse : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetButton("UseScope"))
+        if (Input.GetButtonDown("UseScope"))
         {
             gameObject.SendMessage("UsedScope");
         }
@@ -30,8 +30,9 @@ public class PlayerCollisionResponse : MonoBehaviour
         {
 
             Debug.Log("Collision with speeditem");
-            gameObject.SendMessage("PickedUpSpeed");
-            gameObject.SendMessage("ItemCollected", " SpeedUp  ");
+            GameeventManager.pickUpItem(0);
+            //gameObject.SendMessage("PickedUpSpeed");
+            //gameObject.SendMessage("ItemCollected", " SpeedUp  ");
 
         }
 
@@ -39,12 +40,17 @@ public class PlayerCollisionResponse : MonoBehaviour
         {
 
             Debug.Log("Collision with scopeitem");
-
-            gameObject.SendMessage("ItemCollected", "| Scope (2) |");
+            GameeventManager.pickUpItem(1);
+            
+            //gameObject.SendMessage("ItemCollected", "| Scope (2) |");
 
         }
     }
 
+    void ItemCollected(string blablabla)
+    {
+        Debug.Log("Test");
+    }
 }
     
 
