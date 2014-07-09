@@ -8,11 +8,7 @@ public class FirstPersonCameraController : MonoBehaviour {
     private float xAxisRotation;
     private float yAxisRotation;
     private float mouseY, y;
-    public float minimumX = -360F;
-    public float maximumX = 360F;
-
-    public float minimumY = -60F;
-    public float maximumY = 60F;
+  
     private float mouseX, x;
     private float rotationY = 0f;
     private float firstPersonLookSpeed = 0.5f;
@@ -30,17 +26,8 @@ public class FirstPersonCameraController : MonoBehaviour {
 	void Update () {
 
 
-        gazePos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
-        x = gazePos.x;
-        y = Screen.height - gazePos.y;
-        Debug.Log(y);
-        //mouseX = Input.GetAxis("Mouse X");
-        //mouseY = Input.GetAxis("Mouse Y");
-
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
-
-
 
 	}
 
@@ -48,14 +35,10 @@ public class FirstPersonCameraController : MonoBehaviour {
     {
 
 
-        xAxisRotation = (x );
-        yAxisRotation = (y);
-
-        Vector2 gazeData = getGazeData(); 
-
-
-        xAxisRotation += (mouseY * firstPersonLookSpeed);
+        xAxisRotation += (mouseY * firstPersonLookSpeed) * -1f;
         yAxisRotation += (mouseX * firstPersonLookSpeed);
+
+        //Vector2 gazeData = getGazeData(); 
 
 
         transform.localRotation = Quaternion.Euler(xAxisRotation, yAxisRotation, 0);
