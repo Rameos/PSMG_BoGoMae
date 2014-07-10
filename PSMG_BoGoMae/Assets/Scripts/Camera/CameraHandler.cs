@@ -30,17 +30,4 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-
-        GUI.Box(new Rect(10, 10, 250, 90), "Player Menu");
-
-
-        if (GUI.Button(new Rect(20, 40, 230, 20), "Zurück ins Menü"))
-        {
-            Application.LoadLevel("MainMenu");
-        }
-
-
-    }
 }

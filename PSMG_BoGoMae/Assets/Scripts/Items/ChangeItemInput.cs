@@ -48,6 +48,16 @@ public class ChangeItemInput : MonoBehaviour {
     void OnGUI()
     {
 
+        GUI.Box(new Rect(10, 10, 250, 90), "Player Menu");
+
+
+        if (GUI.Button(new Rect(20, 40, 230, 20), "Zurück ins Menü"))
+        {
+            Application.LoadLevel("MainMenu");
+        }
+
+
+
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
         if (scopeIsCollected)
