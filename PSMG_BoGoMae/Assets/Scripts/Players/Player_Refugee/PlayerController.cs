@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         characterController = this.GetComponent<CharacterController>();
-      
+        GameeventManager.useScopeHandler += reactOnUseScope;
+        GameeventManager.useSpeedHandler += reactOnUseSpeed;      
     }
 
     void Update()
@@ -82,14 +83,13 @@ public class PlayerController : MonoBehaviour {
 
 
     // receive message from PlayerCollisionResponse
-    void PickedUpSpeed()
+    void reactOnUseSpeed()
     {
-        Debug.Log("in speedup");
         this.walkingSpeed *= 5;
     }
 
     // receive message from PlayerCollisionResponse
-    void UsedScope()
+    private void reactOnUseScope()
     {
 
         scopeCounter++;

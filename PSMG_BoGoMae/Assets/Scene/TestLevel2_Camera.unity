@@ -3725,6 +3725,8 @@ GameObject:
   - 81: {fileID: 610435512}
   - 114: {fileID: 610435517}
   - 114: {fileID: 610435518}
+  - 114: {fileID: 610435520}
+  - 114: {fileID: 610435519}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3831,6 +3833,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemText: {fileID: 1520108949}
+--- !u!114 &610435519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 610435511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34dc372fa2d1104dbc833d7cb27db7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &610435520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 610435511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a017f01ceb9fc84ea532986e4c3bfd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &610683022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7855,7 +7879,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thirdPersonCamera: {fileID: 610435515}
   firstPersonCamera: {fileID: 1887821138}
-  droneCamera: {fileID: 728579204}
 --- !u!4 &1126756666
 Transform:
   m_ObjectHideFlags: 0
@@ -13064,10 +13087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b810e4fcd534bdc46b96f930b9261be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
 --- !u!1 &1892511418
 GameObject:
   m_ObjectHideFlags: 0

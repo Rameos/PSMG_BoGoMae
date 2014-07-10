@@ -14,10 +14,7 @@ public class PlayerCollisionResponse : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetButtonDown("UseScope"))
-        {
-            gameObject.SendMessage("UsedScope");
-        }
+
 
     }
 
@@ -28,22 +25,14 @@ public class PlayerCollisionResponse : MonoBehaviour
 
         if (collider.CompareTag("SpeedItem"))
         {
-
             Debug.Log("Collision with speeditem");
-            GameeventManager.pickUpItem(0);
-            //gameObject.SendMessage("PickedUpSpeed");
-            //gameObject.SendMessage("ItemCollected", " SpeedUp  ");
-
+            GameeventManager.pickUpItem(1);
         }
 
         if (collider.CompareTag("ScopeItem"))
         {
-
             Debug.Log("Collision with scopeitem");
-            GameeventManager.pickUpItem(1);
-            
-            //gameObject.SendMessage("ItemCollected", "| Scope (2) |");
-
+            GameeventManager.pickUpItem(0);
         }
     }
 
