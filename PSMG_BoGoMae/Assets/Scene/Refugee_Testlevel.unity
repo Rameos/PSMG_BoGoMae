@@ -738,7 +738,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 293499646}
   - 95: {fileID: 293499652}
-  - 111: {fileID: 293499651}
   - 54: {fileID: 293499650}
   - 114: {fileID: 293499649}
   - 143: {fileID: 293499648}
@@ -825,35 +824,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!111 &293499651
-Animation:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11100000, guid: 4cdbb5b74d829344da46d84cad5b7906,
-    type: 2}
-  m_PrefabInternal: {fileID: 787006005}
-  m_GameObject: {fileID: 293499645}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400002, guid: a417a10898b833045bd35e39c639fc23, type: 3}
-  m_Animations:
-  - {fileID: 7400002, guid: 26fbef4464a5b7246a4f2fce9b365957, type: 3}
-  - {fileID: 7400002, guid: 47374042bade3df4ab247811f73f2be4, type: 3}
-  - {fileID: 7400002, guid: 9957423002adfaa4dafa355bad6bda31, type: 3}
-  - {fileID: 7400002, guid: 7ed83d0896f663c428aa677e5075ff98, type: 3}
-  - {fileID: 7400002, guid: 97d3eafe3c03200459ec4f4d07ef568a, type: 3}
-  - {fileID: 7400002, guid: add8abbc9ad73734f9724dc141935e38, type: 3}
-  - {fileID: 7400002, guid: 6105e1a1bb6db5d40ac38effecb56f71, type: 3}
-  - {fileID: 7400002, guid: 29528c42d3e3e2f4aab66bacc0f9945e, type: 3}
-  - {fileID: 7400002, guid: 8f4f919e472cf7d4e85b330091053f5b, type: 3}
-  - {fileID: 7400002, guid: b31c491adf7b4fa4ebe4093798063245, type: 3}
-  - {fileID: 7400002, guid: 2caad6116b132f24b897eef2d5b754e5, type: 3}
-  - {fileID: 7400002, guid: b9c44d4b475f1f34da568e3f84ab90e4, type: 3}
-  - {fileID: 7400002, guid: b9c44d4b475f1f34da568e3f84ab90e4, type: 3}
-  - {fileID: 7400002, guid: a417a10898b833045bd35e39c639fc23, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
 --- !u!95 &293499652
 Animator:
   serializedVersion: 3
@@ -864,7 +834,7 @@ Animator:
   m_GameObject: {fileID: 293499645}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: aef9e0d7fbf9f924091a41b93ff4fa44, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe675852e9bcc554b90542212cf7da09, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2497,7 +2467,12 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 1.70000005
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9500000, guid: 4cdbb5b74d829344da46d84cad5b7906, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fe675852e9bcc554b90542212cf7da09, type: 2}
+    m_RemovedComponents:
+    - {fileID: 11100000, guid: 4cdbb5b74d829344da46d84cad5b7906, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4cdbb5b74d829344da46d84cad5b7906, type: 2}
   m_RootGameObject: {fileID: 293499645}
   m_IsPrefabParent: 0
