@@ -24,8 +24,17 @@ public class PlayerController : MonoBehaviour {
     private float direction = 0.0f;
     private float scopeCounter = 0;
 
+    private Animator anim;
+    public int runningBool;
 
 
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+        //anim.SetLayerWeight(1, 1f);
+        runningBool = Animator.StringToHash("running");
+
+    }
 
     void Start()
     {
@@ -44,7 +53,16 @@ public class PlayerController : MonoBehaviour {
 
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
         Vector3 dir = this.transform.right * strafe + this.transform.forward * vertical;
-        characterController.SimpleMove(dir * this.walkingSpeed);
+        
+        if (vertical != 0 && horizontal != null)
+        {
+            anim.SetBool(runningBool, true);
+            characterController.SimpleMove(dir * this.walkingSpeed);
+        }
+        else
+        {
+            anim.SetBool(runningBool, false);
+        }
 
     }
 
@@ -57,7 +75,7 @@ public class PlayerController : MonoBehaviour {
             Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
             this.transform.rotation = (this.transform.rotation * deltaRotation);
         }
-
+      
     }
 
     public void ControlsToWorldSpace(Transform root, Transform camera, ref float directionOut, ref float speedOut)

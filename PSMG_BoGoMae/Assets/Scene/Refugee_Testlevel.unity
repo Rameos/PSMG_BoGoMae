@@ -781,6 +781,7 @@ MonoBehaviour:
   thirdPersonCamera: {fileID: 610435515}
   firstPersonCamera: {fileID: 1887821138}
   mainGameCamera: {fileID: 610435517}
+  runningBool: 0
 --- !u!143 &293499648
 CharacterController:
   m_ObjectHideFlags: 0
