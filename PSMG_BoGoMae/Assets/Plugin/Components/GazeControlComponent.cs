@@ -260,7 +260,6 @@ namespace iViewX
             {
                 Vector2 gazePos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
                 gazePos.y = Screen.height - gazePos.y;
-                Debug.Log("Camera.main.enabled ???"  + Camera.main.enabled);
                 raygaze = Camera.main.ScreenPointToRay(gazePos);
             }
 

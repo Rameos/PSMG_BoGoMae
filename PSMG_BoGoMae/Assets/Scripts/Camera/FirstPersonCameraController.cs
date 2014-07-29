@@ -63,9 +63,10 @@ public class FirstPersonCameraController : MonoBehaviour {
     private void rotateCamWithGaze()
     {
         float inputHorizontal = Input.GetAxis("Horizontal") + gazeInput.checkGazeInput();
+        float inputVertical = Input.GetAxis("Vertical") + gazeInput.checkGazeInput();
         Debug.Log("christoph" + gazeInput.checkGazeInput());
 
-        gameObject.transform.Rotate(0, inputHorizontal * rotationSpeed, 0);
+        gameObject.transform.Rotate(inputVertical * rotationSpeed * -1, 0, 0);
     }
 
 
