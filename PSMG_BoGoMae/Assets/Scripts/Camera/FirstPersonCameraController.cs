@@ -14,18 +14,23 @@ public class FirstPersonCameraController : MonoBehaviour {
     private float firstPersonLookSpeed = 0.5f;
     private Vector2 firstPersonXAxisClamp = new Vector2(-70.0f, 60.0f);
     private float firstPersonRotationDegreePerSecond = 120f;
-
+    GazeInputFromAOI gazeInput;
+    [SerializeField]
+    private float rotationSpeed = 2f;
+    private bool lookAroundWithMouse = true;
 
 	// Use this for initialization
 	void Start () {
+        GameeventManager.enableFirstPersonCameraHandler += reactOnEnableFirstPersonCamera;
+        GameeventManager.disableFirstPersonCameraHandler += reactOnDisableFirstPersonCamera;
+        gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
+        
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
@@ -34,23 +39,56 @@ public class FirstPersonCameraController : MonoBehaviour {
     void LateUpdate()
     {
 
+        if (lookAroundWithMouse)
+        {
+            rotateCamWithMouse();
 
+        }
+        else
+        {
+            rotateCamWithGaze();
+        }
+
+
+    }
+
+    private void rotateCamWithMouse()
+    {
         xAxisRotation += (mouseY * firstPersonLookSpeed) * -1f;
         yAxisRotation += (mouseX * firstPersonLookSpeed);
 
-        //Vector2 gazeData = getGazeData(); 
-
-
         transform.localRotation = Quaternion.Euler(xAxisRotation, yAxisRotation, 0);
-
-
     }
 
-    private Vector2 getGazeData()
+    private void rotateCamWithGaze()
     {
-        Vector2 result = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
-        result.y = Screen.height - result.y;
+        float inputHorizontal = Input.GetAxis("Horizontal") + gazeInput.checkGazeInput();
+        Debug.Log("christoph" + gazeInput.checkGazeInput());
 
-        return result;
+        gameObject.transform.Rotate(0, inputHorizontal * rotationSpeed, 0);
     }
+
+
+    private void reactOnEnableFirstPersonCamera()
+    {
+        lookAroundWithMouse = false;
+        disableMainCamera();
+    }
+
+    private void reactOnDisableFirstPersonCamera()
+    {
+        lookAroundWithMouse = true;
+        enableMainCamera();
+    }
+
+    private static bool disableMainCamera()
+    {
+        return Camera.main.enabled = false;
+    }
+
+    private static bool enableMainCamera()
+    {
+        return Camera.main.enabled = true;
+    }
+
 }

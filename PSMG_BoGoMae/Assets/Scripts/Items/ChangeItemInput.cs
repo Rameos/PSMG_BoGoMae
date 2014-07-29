@@ -6,6 +6,7 @@ public class ChangeItemInput : MonoBehaviour {
     private bool scopeIsCollected = false;
     private bool speedIsCollected = false;
     private bool speedIsUsed = false;
+    private bool scopeIsUsed = false;
 
     private float inventoryXposition = 300;
     private float inventoryYposition = 10;
@@ -64,7 +65,15 @@ public class ChangeItemInput : MonoBehaviour {
         {
             if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), "Fernglas"))
             {
-                GameeventManager.useScope();
+                if (scopeIsUsed)
+                {
+                    GameeventManager.stopUsingScope();
+                }
+                else
+                {
+                    GameeventManager.useScope();
+                    scopeIsUsed = true;
+                }
             }
 
         }
