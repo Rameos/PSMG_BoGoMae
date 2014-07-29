@@ -4,7 +4,7 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 
     string registerGameName = "HideAndSeekTestServer";
-    string serverNameVisibleToPlayer = "Hide&Seek Server";
+    string serverNameVisibleToPlayer = "Laufendes Spiel betreten";
     string serverComment = "gameServer";
     int numberOfPlayers = 2;
     bool isRefreshing = false;
@@ -13,7 +13,6 @@ public class NetworkManager : MonoBehaviour {
 
     public void StartServer() 
     {
-
 
         Network.InitializeServer(numberOfPlayers, 25002, false);
         MasterServer.RegisterHost(registerGameName, serverNameVisibleToPlayer, serverComment);
@@ -58,15 +57,20 @@ public class NetworkManager : MonoBehaviour {
 
     public void OnGUI()
     {
+        float buttonWidth = 200f;
+        float buttonHeight = 30f;
+
         if (Network.isClient || Network.isServer)
         {
             return;
         }
-        if (GUI.Button(new Rect(25f, 25f, 150f, 30f), "Start new server!"))
+        if (GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, Screen.height/2 - buttonHeight/2, buttonWidth, buttonHeight), "Start new game as Drone"))
         {
             StartServer();
+            Application.LoadLevel("Refugee_Testlevel");
+
         }
-        if (GUI.Button(new Rect(25f, 65f, 150f, 30f), "Refresh server list!"))
+        if (GUI.Button(new Rect(Screen.width / 2 - buttonWidth / 2, Screen.height / 2 - buttonHeight / 2 + buttonHeight*2, buttonWidth, buttonHeight), "Look for running game"))
         {
             StartCoroutine("RefreshHostList");
         }
@@ -75,10 +79,11 @@ public class NetworkManager : MonoBehaviour {
         {
             for (int i = 0; i < hostData.Length; i++) 
             {
-                if (GUI.Button(new Rect(Screen.width / 2, 65f + (30f * i), 300f, 30f), hostData[i].gameName))
+                if (GUI.Button(new Rect(Screen.width / 2 - buttonWidth / 2, Screen.height / 2 - buttonHeight / 2 + buttonHeight * 4, buttonWidth, buttonHeight), hostData[i].gameName))
                 {
-                    Debug.Log("connect to server");
                     Network.Connect(hostData[i]);
+                    Application.LoadLevel("Refugee_Testlevel");
+
                 }
             }
         }

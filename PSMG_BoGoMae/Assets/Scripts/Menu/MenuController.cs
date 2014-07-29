@@ -5,6 +5,7 @@ public class MenuController : MonoBehaviour {
 
     private Ray ray;
     private RaycastHit hit;
+    private NetworkManager networkmanager;
 
     void Start()
     {
@@ -13,6 +14,7 @@ public class MenuController : MonoBehaviour {
 
     void Update()
     {
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -32,5 +34,7 @@ public class MenuController : MonoBehaviour {
                 }
             }
         }
+         */
+
     }
 }
