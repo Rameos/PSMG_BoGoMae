@@ -81,14 +81,14 @@ public class FirstPersonCameraController : MonoBehaviour {
         enableMainCamera();
     }
 
-    private static bool disableMainCamera()
+    private static void disableMainCamera()
     {
-        return Camera.main.enabled = false;
+        //Camera.main.enabled = false;
     }
 
-    private static bool enableMainCamera()
+    private static void enableMainCamera()
     {
-        return Camera.main.enabled = true;
+        Camera.main.enabled = true;
     }
 
 }
