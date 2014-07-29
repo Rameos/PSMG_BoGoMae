@@ -59,7 +59,6 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         targetToFollow = GameObject.FindWithTag("Player").transform;
         lookDirection = targetToFollow.forward;
-        
 
          
 	}
@@ -74,61 +73,64 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     }
 
+
+
     void LateUpdate()
     {
 
-        Vector3 playerOffset = targetToFollow.position + new Vector3(0f, cameraDistanceHeight, 0f);
-        Vector3 lookAt = playerOffset;
-
-        /*
-         *      reset camera state
-         */
-        if (Input.GetAxis("ThirdPersonCameraReset") > CAMERA_RESET_TRESHOLD)
-        {
-            cameraState = CameraStates.ResetBehind;
-        }
-        else
-        {
+            Vector3 playerOffset = targetToFollow.position + new Vector3(0f, cameraDistanceHeight, 0f);
+            Vector3 lookAt = playerOffset;
 
             /*
-             *      default camera state
+             *      reset camera state
              */
-            if ((cameraState == CameraStates.ResetBehind && (Input.GetAxis("ThirdPersonCameraReset") <= CAMERA_RESET_TRESHOLD)))
+            if (Input.GetAxis("ThirdPersonCameraReset") > CAMERA_RESET_TRESHOLD)
             {
-                cameraState = CameraStates.Behind;
+                cameraState = CameraStates.ResetBehind;
             }
-       
-        }
+            else
+            {
 
-        switch (cameraState)
-        {
+                /*
+                 *      default camera state
+                 */
+                if ((cameraState == CameraStates.ResetBehind && (Input.GetAxis("ThirdPersonCameraReset") <= CAMERA_RESET_TRESHOLD)))
+                {
+                    cameraState = CameraStates.Behind;
+                }
 
-            case CameraStates.Behind:
-                ResetCamera();
-                // calc direction from camera to player
-                lookDirection = playerOffset - this.transform.position;
-                lookDirection.y = 0;
-                lookDirection.Normalize();
-                targetPosition = playerOffset + targetToFollow.up * cameraDistanceHeight - lookDirection * cameraDistance;
+            }
 
-                break;  
+            switch (cameraState)
+            {
+
+                case CameraStates.Behind:
+                    ResetCamera();
+                    // calc direction from camera to player
+                    lookDirection = playerOffset - this.transform.position;
+                    lookDirection.y = 0;
+                    lookDirection.Normalize();
+                    targetPosition = playerOffset + targetToFollow.up * cameraDistanceHeight - lookDirection * cameraDistance;
+
+                    break;
 
 
-            case CameraStates.ResetBehind:
-                ResetCamera();
-                lookDirection = targetToFollow.forward;
+                case CameraStates.ResetBehind:
+                    ResetCamera();
+                    lookDirection = targetToFollow.forward;
 
-                break;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
 
-        }
+            }
 
-        targetPosition = playerOffset + targetToFollow.up * cameraDistanceHeight - lookDirection * cameraDistance;
-        smoothPosition(this.transform.position, targetPosition);
+            targetPosition = playerOffset + targetToFollow.up * cameraDistanceHeight - lookDirection * cameraDistance;
+            smoothPosition(this.transform.position, targetPosition);
 
-        transform.LookAt(lookAt);
+            transform.LookAt(lookAt);
+        
     }
 
     private void smoothPosition(Vector3 fromPosition, Vector3 toPosition)
