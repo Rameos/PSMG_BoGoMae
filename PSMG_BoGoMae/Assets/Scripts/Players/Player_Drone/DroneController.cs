@@ -41,9 +41,14 @@ public class DroneController : MonoBehaviour {
     
         if (Input.GetMouseButtonDown(0) && onTrapClicked)
         {
-            
-            GameObject trapGameObject = (GameObject)Instantiate(trap.gameObject, trapSpawnPosition.position, Quaternion.identity);
+            /*
+            Vector3 test = new Vector3(getCrosshairXPosition(), getCrosshairYPosition(), 2);
+            Ray ray = Camera.main.ScreenPointToRay(test);
+            if (Physics.Raycast(ray)
+            GameObject trapGameObject = (GameObject)Instantiate(trap.gameObject, test, Quaternion.identity);
             onTrapClicked = false;
+            */
+        
         }
     }
 
@@ -57,13 +62,15 @@ public class DroneController : MonoBehaviour {
 
     private float getCrosshairXPosition()
     {
-        return (Screen.width / 2) - (crosshairWidth / 2);
+
+        return (gazeModel.posGazeLeft.x + gazeModel.posGazeRight.x) * 0.5f;
     }
 
     private float getCrosshairYPosition()
     {
-        return (Screen.height / 2) - (crosshairHeight / 2);
+        return (gazeModel.posGazeLeft.y + gazeModel.posGazeRight.y) * 0.5f;
     }
+
 
     private float getMouseXPosition()
     {

@@ -10,8 +10,11 @@ class AOI
 
     public AOI(Rect volume, Vector3 startPoint, Vector3 endPoint)
     {
+
         this.volume = volume;
         this.startPoint = startPoint;
         this.endPoint = endPoint;
     }
+
+    
 }

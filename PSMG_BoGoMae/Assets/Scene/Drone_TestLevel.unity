@@ -2595,8 +2595,6 @@ GameObject:
   - 124: {fileID: 1207122545}
   - 92: {fileID: 1207122544}
   - 114: {fileID: 1207122543}
-  - 114: {fileID: 1207122548}
-  - 114: {fileID: 1207122547}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2678,35 +2676,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
---- !u!114 &1207122547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 223ebb0973ed1364fa43a63456d2a967,
-    type: 2}
-  m_PrefabInternal: {fileID: 1974339135}
-  m_GameObject: {fileID: 1207122541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea740e66c231fcc42b1b82bc5e7efc4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texture_LeftAOI: {fileID: 2800000, guid: 9311518962cb0914ea0ea4131e42b3d7, type: 3}
-  texture_RightAOI: {fileID: 2800000, guid: abc828d9f1952aa41b8bd9f05fd9afa5, type: 3}
-  widthAOI: .449999988
-  isAOIVisualisationOn: 1
---- !u!114 &1207122548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400006, guid: 223ebb0973ed1364fa43a63456d2a967,
-    type: 2}
-  m_PrefabInternal: {fileID: 1974339135}
-  m_GameObject: {fileID: 1207122541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82838f88e8895c64aa67f0d332e4526f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 2
 --- !u!1 &1252994740
 GameObject:
   m_ObjectHideFlags: 0
@@ -3835,7 +3804,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400006, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
+    - {fileID: 11400004, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
   m_RootGameObject: {fileID: 1540220854}
   m_IsPrefabParent: 0

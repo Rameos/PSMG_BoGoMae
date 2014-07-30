@@ -35,7 +35,7 @@ public class DroneItemBehavior : MonoBehaviour {
 
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
-        if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Falle stellen"))
+        if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Nach Flüchtling suchen"))
         {
             GameeventManager.setTrap();
         }
