@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
 
     private Animator anim;
     public int runningBool;
+    private int runningBackwardsBool;
+    private int jumpingBool;
 
 
     void Awake()
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         //anim.SetLayerWeight(1, 1f);
         runningBool = Animator.StringToHash("running");
+       // runningBackwardsBool = Animator.StringToHash("runningBackwards");
 
     }
 
@@ -54,14 +57,20 @@ public class PlayerController : MonoBehaviour {
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
         Vector3 dir = this.transform.right * strafe + this.transform.forward * vertical;
         
-        if (vertical != 0 && horizontal != null)
+        if (vertical > 0 )
         {
             anim.SetBool(runningBool, true);
             characterController.SimpleMove(dir * this.walkingSpeed);
         }
+        else if (vertical < 0)
+        {
+           // characterController.SimpleMove(dir * this.walkingSpeed);
+         //   anim.SetBool(runningBackwardsBool, true);
+        }
         else
         {
             anim.SetBool(runningBool, false);
+          //  anim.SetBool(runningBackwardsBool, false);
         }
 
     }
@@ -104,6 +113,11 @@ public class PlayerController : MonoBehaviour {
     void reactOnUseSpeed()
     {
         this.walkingSpeed *= 5;
+    }
+
+    void controlMovement()
+    {
+
     }
 
     // receive message from PlayerCollisionResponse
