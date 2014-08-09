@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     private float vertical = 0.0f;
     private float horizontal = 0.0f;
+    private float jump = 0.0f;
     private float strafe = 0.0f;
     private float speed = 0.0f;
     private float direction = 0.0f;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         //anim.SetLayerWeight(1, 1f);
         runningBool = Animator.StringToHash("running");
+        jumpingBool = Animator.StringToHash("jumping");
        // runningBackwardsBool = Animator.StringToHash("runningBackwards");
 
     }
@@ -51,11 +53,26 @@ public class PlayerController : MonoBehaviour {
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
         strafe = Input.GetAxis("Strafe");
+        jump = Input.GetAxis("Jump");
+        
        
         ControlsToWorldSpace(this.transform, mainGameCamera.transform, ref direction, ref speed);
 
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
         Vector3 dir = this.transform.right * strafe + this.transform.forward * vertical;
+
+
+         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        if (jump > 0)
+        {
+            anim.SetBool(jumpingBool, true);
+            //yield return new WaitForFixedUpdate();
+        }
+        else
+        {
+           // if (!animation.IsPlaying("Jump"))
+            anim.SetBool(jumpingBool, false);
+        }
         
         if (vertical > 0 )
         {
