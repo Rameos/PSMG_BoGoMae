@@ -93,6 +93,6 @@ public class NetworkManager : MonoBehaviour {
     private void SpawnPlayer() 
     {
         Debug.Log("In SpawnPlayer");
-        Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0f, 100f, 0f), Quaternion.identity, 0);
+        Network.Instantiate(Resources.Load("Prefabs/Player_Refugee"), new Vector3(0f, 100f, 0f), Quaternion.identity, 0);
     }
 }
