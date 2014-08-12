@@ -57,10 +57,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        targetToFollow = GameObject.FindWithTag("Player").transform;
-        lookDirection = targetToFollow.forward;
-
-         
+        GameeventManager.refugeeIsActiveHandler += reactOnRefugeeIsActive;
+ 
 	}
 	
 	// Update is called once per frame
@@ -73,11 +71,35 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     }
 
+    void reactOnRefugeeIsActive()
+    {
+        Debug.Log("in reactOnRefugeeIsActive");
+        if (GameObject.FindWithTag("Refugee") != null)
+        {
+            GameObject refugee = GameObject.FindWithTag("Refugee");
+            setPlayerControllerVariables(refugee);
+            
+        }
+    }
 
+
+    void setPlayerControllerVariables(GameObject refugee)
+    {
+        Debug.Log("in setPlayerControllerVariables");
+        PlayerController playerController = refugee.AddComponent<PlayerController>();
+        ThirdPersonCameraController thirdPersonCameraController = Camera.main.GetComponent<ThirdPersonCameraController>();
+
+        playerController.thirdPersonCamera = Camera.main;
+        playerController.mainGameCamera = thirdPersonCameraController;
+        
+        targetToFollow = refugee.transform;
+        lookDirection = targetToFollow.forward;
+    }
 
     void LateUpdate()
     {
-
+        if (GameObject.FindWithTag("Refugee") != null)
+        {
             Vector3 playerOffset = targetToFollow.position + new Vector3(0f, cameraDistanceHeight, 0f);
             Vector3 lookAt = playerOffset;
 
@@ -130,6 +152,9 @@ public class ThirdPersonCameraController : MonoBehaviour {
             smoothPosition(this.transform.position, targetPosition);
 
             transform.LookAt(lookAt);
+
+        }
+        
         
     }
 

@@ -9,6 +9,7 @@ public delegate void useSpeed();
 public delegate void setTrap();
 public delegate void enableFirstPersonCamera();
 public delegate void disableFirstPersonCamera();
+public delegate void refugeeIsActive();
 
 
 public class GameeventManager : MonoBehaviour {
@@ -20,7 +21,15 @@ public class GameeventManager : MonoBehaviour {
     public static event setTrap setTrapHandler;
     public static event enableFirstPersonCamera enableFirstPersonCameraHandler;
     public static event disableFirstPersonCamera disableFirstPersonCameraHandler;
+    public static event refugeeIsActive refugeeIsActiveHandler;
 
+    public static void refugeeIsActive()
+    {
+        if (refugeeIsActiveHandler != null)
+        {
+            refugeeIsActiveHandler();
+        }
+    }
 
     public static void pickUpItem(int itemType)
     {
