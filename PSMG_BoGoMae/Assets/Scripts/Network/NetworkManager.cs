@@ -28,6 +28,7 @@ public class NetworkManager : MonoBehaviour {
         if (masterServerEvent == MasterServerEvent.RegistrationSucceeded)
         {
             Debug.Log("Registration Successful!");
+            SpawnPlayer();
         }
     }
 
@@ -67,8 +68,7 @@ public class NetworkManager : MonoBehaviour {
         if (GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, Screen.height/2 - buttonHeight/2, buttonWidth, buttonHeight), "Start new game as Drone"))
         {
             StartServer();
-            Application.LoadLevel("Refugee_Testlevel");
-
+            Application.LoadLevel("NetworkTestScene");
         }
         if (GUI.Button(new Rect(Screen.width / 2 - buttonWidth / 2, Screen.height / 2 - buttonHeight / 2 + buttonHeight*2, buttonWidth, buttonHeight), "Look for running game"))
         {
@@ -82,10 +82,17 @@ public class NetworkManager : MonoBehaviour {
                 if (GUI.Button(new Rect(Screen.width / 2 - buttonWidth / 2, Screen.height / 2 - buttonHeight / 2 + buttonHeight * 4, buttonWidth, buttonHeight), hostData[i].gameName))
                 {
                     Network.Connect(hostData[i]);
-                    Application.LoadLevel("Refugee_Testlevel");
+                    Application.LoadLevel("NetworkTestScene");
+                    SpawnPlayer();
 
                 }
             }
         }
+    }
+
+    private void SpawnPlayer() 
+    {
+        Debug.Log("In SpawnPlayer");
+        Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0f, 100f, 0f), Quaternion.identity, 0);
     }
 }
