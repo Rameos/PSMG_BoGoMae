@@ -1264,6 +1264,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &461313047
 GameObject:
   m_ObjectHideFlags: 0
