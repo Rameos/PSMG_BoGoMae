@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
     private int runningBackwardsBool;
     private int jumpingBool;
 
+    int turnLeft = Animator.StringToHash("TurnLeft");
+    int turnRight = Animator.StringToHash("TurnRight");
 
     void Awake()
     {
@@ -56,13 +58,10 @@ public class PlayerController : MonoBehaviour {
         jump = Input.GetAxis("Jump");
         
        
-        ControlsToWorldSpace(this.transform, mainGameCamera.transform, ref direction, ref speed);
+        //ControlsToWorldSpace(this.transform, mainGameCamera.transform, ref direction, ref speed);
 
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
-        Vector3 dir = this.transform.right * strafe + this.transform.forward * vertical;
 
-
-         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         if (jump > 0)
         {
             anim.SetBool(jumpingBool, true);
@@ -73,11 +72,29 @@ public class PlayerController : MonoBehaviour {
            // if (!animation.IsPlaying("Jump"))
             anim.SetBool(jumpingBool, false);
         }
+        //////////////////////////////////
+        if (horizontal < 0)
+        {
+            anim.SetBool(turnLeft, true);
+            // characterController.SimpleMove(dir * this.walkingSpeed);
+        }
+        else if (horizontal > 0)
+        {
+            // characterController.SimpleMove(dir * this.walkingSpeed);
+               anim.SetBool(turnRight, true);
+        }
+        else
+        {
+            anim.SetBool(turnLeft, false);
+            anim.SetBool(turnRight, false);
+
+        }
+        ///////////////////////////////////
         
         if (vertical > 0 )
         {
             anim.SetBool(runningBool, true);
-            characterController.SimpleMove(dir * this.walkingSpeed);
+           // characterController.SimpleMove(dir * this.walkingSpeed);
         }
         else if (vertical < 0)
         {
@@ -99,7 +116,7 @@ public class PlayerController : MonoBehaviour {
         {
             Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (horizontal < 0f ? -1f : 1f), 0f), Mathf.Abs(horizontal));
             Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
-            this.transform.rotation = (this.transform.rotation * deltaRotation);
+            //this.transform.rotation = (this.transform.rotation * deltaRotation);
         }
       
     }
