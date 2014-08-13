@@ -10,10 +10,11 @@ public delegate void setTrap();
 public delegate void enableFirstPersonCamera();
 public delegate void disableFirstPersonCamera();
 public delegate void refugeeIsActive();
+public delegate void droneIsActive();
 
 
 public class GameeventManager : MonoBehaviour {
-
+    
     public static event pickUpItem pickUpItemHandler;
     public static event useScope useScopeHandler;
     public static event stopUsingScope stopUsingScopeHandler;
@@ -22,12 +23,21 @@ public class GameeventManager : MonoBehaviour {
     public static event enableFirstPersonCamera enableFirstPersonCameraHandler;
     public static event disableFirstPersonCamera disableFirstPersonCameraHandler;
     public static event refugeeIsActive refugeeIsActiveHandler;
+    public static event droneIsActive droneIsActiveHandler;
 
     public static void refugeeIsActive()
     {
         if (refugeeIsActiveHandler != null)
         {
             refugeeIsActiveHandler();
+        }
+    }
+
+    public static void droneIsActive()
+    {
+        if (droneIsActiveHandler != null)
+        {
+            droneIsActiveHandler();
         }
     }
 

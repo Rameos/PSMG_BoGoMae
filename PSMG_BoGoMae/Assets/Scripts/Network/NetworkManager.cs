@@ -92,8 +92,26 @@ public class NetworkManager : MonoBehaviour {
 
     private void SpawnPlayer() 
     {
-        Debug.Log("In SpawnPlayer");
-        Network.Instantiate(Resources.Load("Prefabs/Player_Refugee"), new Vector3(0f, 100f, 0f), Quaternion.identity, 0);
-        GameeventManager.refugeeIsActive();
+
+        if(Network.isServer) {
+            Vector3 spawnPositionDrone = new Vector3(0, 850, 0);
+            InstantiatePlayer(Config.INSTANTIATE_DRONE, spawnPositionDrone);
+            Debug.Log("Drone is Server: "+Network.isServer);
+            GameeventManager.droneIsActive();
+        }
+        else if (Network.isClient)
+        {
+            Vector3 spawnPositionRefugee = new Vector3(0, 1, 0);
+            InstantiatePlayer(Config.INSTANTIATE_REFUGEE, spawnPositionRefugee);
+            Debug.Log("Refugee is Client: " + Network.isClient);
+            GameeventManager.refugeeIsActive();
+        }
+    }
+
+    
+
+    private void InstantiatePlayer(string player, Vector3 vector3SpawnPosition)
+    {
+        Network.Instantiate(Resources.Load(player), vector3SpawnPosition, Quaternion.identity, 0);
     }
 }

@@ -8,11 +8,20 @@ public class DroneCameraScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        GameeventManager.droneIsActiveHandler += reactOnDroneIsActive;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = drone.position;
+        if (GameObject.FindWithTag("Drone") != null)
+        {
+            transform.position = drone.position;
+
+        }
 	}
+
+    private void reactOnDroneIsActive()
+    {
+        // aktuell unnötig, event kann man aber bestimmt trotzdem brauchen später
+    }
 }
