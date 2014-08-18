@@ -35,13 +35,17 @@ public class ChangeItemInput : MonoBehaviour {
 
     private void reactOnChangedItem(int id)
     {
-        if (id == 0)
+        if (id == Config.SCOPE)
         {
             scopeIsCollected = true;
         }
-        if (id == 1)
+        if (id == Config.SPEED)
         {
             speedIsCollected = true;
+        }
+        if (id == Config.TRANSMITTER)
+        {
+
         }
 
     }

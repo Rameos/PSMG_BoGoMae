@@ -26,13 +26,19 @@ public class PlayerCollisionResponse : MonoBehaviour
         if (collider.CompareTag("SpeedItem"))
         {
             Debug.Log("Collision with speeditem");
-            GameeventManager.pickUpItem(1);
+            GameeventManager.pickUpItem(Config.SPEED);
         }
 
         if (collider.CompareTag("ScopeItem"))
         {
             Debug.Log("Collision with scopeitem");
-            GameeventManager.pickUpItem(0);
+            GameeventManager.pickUpItem(Config.SCOPE);
+        }
+
+        if (collider.CompareTag("Transmitter"))
+        {
+            Debug.Log("Collision with transmitter");
+            GameeventManager.transmitterCollected();
         }
     }
 

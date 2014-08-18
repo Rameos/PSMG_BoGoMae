@@ -1648,9 +1648,7 @@ GameObject:
   - 4: {fileID: 400218}
   - 111: {fileID: 11100000}
   - 114: {fileID: 11400000}
-  - 54: {fileID: 5400000}
-  - 114: {fileID: 11400004}
-  - 23: {fileID: 2300000}
+  - 114: {fileID: 11400002}
   - 143: {fileID: 14300000}
   m_Layer: 0
   m_Name: roBot
@@ -1892,7 +1890,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400250}
-  - 148: {fileID: 14800000}
+  - 54: {fileID: 5400000}
   m_Layer: 0
   m_Name: Player_Refugee
   m_TagString: Refugee
@@ -5027,6 +5025,7 @@ GameObject:
   - 124: {fileID: 12400000}
   - 92: {fileID: 9200000}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: FirstPersonCamera
   m_TagString: Untagged
@@ -10891,34 +10890,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
---- !u!23 &2300000
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100218}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100218}
+  m_GameObject: {fileID: 100250}
   serializedVersion: 2
-  m_Mass: 10000
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -10972,17 +10951,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bb042cfb3f2c24893804563cdf5a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11400004
+--- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100218}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1178b15810e03a54d8048c2b751352d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100666}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea740e66c231fcc42b1b82bc5e7efc4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texture_LeftAOI: {fileID: 0}
+  texture_RightAOI: {fileID: 0}
+  widthAOI: .449999988
+  texture_TopAOI: {fileID: 0}
+  texture_DownAOI: {fileID: 0}
+  heightAOI: .449999988
+  isAOIVisualisationOn: 1
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10994,7 +10991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b810e4fcd534bdc46b96f930b9261be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 2800000, guid: ee327e230fb940e4ea79a9eb32736884, type: 3}
   rotationSpeed: 2
 --- !u!124 &12400000
 Behaviour:
@@ -11480,25 +11477,13 @@ CharacterController:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100218}
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.5
   m_Radius: .5
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!148 &14800000
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100250}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 400250}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
+  m_Center: {x: 0, y: .5, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

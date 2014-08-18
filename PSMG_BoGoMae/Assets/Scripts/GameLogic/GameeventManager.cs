@@ -11,6 +11,7 @@ public delegate void enableFirstPersonCamera();
 public delegate void disableFirstPersonCamera();
 public delegate void refugeeIsActive();
 public delegate void droneIsActive();
+public delegate void transmitterCollected();
 
 
 public class GameeventManager : MonoBehaviour {
@@ -24,6 +25,15 @@ public class GameeventManager : MonoBehaviour {
     public static event disableFirstPersonCamera disableFirstPersonCameraHandler;
     public static event refugeeIsActive refugeeIsActiveHandler;
     public static event droneIsActive droneIsActiveHandler;
+    public static event transmitterCollected transmitterIsCollectedHandler;
+
+    public static void transmitterCollected()
+    {
+        if (transmitterIsCollectedHandler != null)
+        {
+            transmitterIsCollectedHandler();
+        }
+    }
 
     public static void refugeeIsActive()
     {
