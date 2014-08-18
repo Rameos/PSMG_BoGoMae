@@ -4541,10 +4541,8 @@ GameObject:
   - 4: {fileID: 636516194}
   - 111: {fileID: 636516196}
   - 114: {fileID: 636516195}
-  - 54: {fileID: 636516200}
   - 114: {fileID: 636516199}
   - 143: {fileID: 636516198}
-  - 114: {fileID: 636516197}
   m_Layer: 0
   m_Name: roBot
   m_TagString: Player
@@ -4608,22 +4606,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &636516197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 636516193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86c69a97f5af9c42b520b3cbc16cdf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 100
-  walkingSpeed: 10
-  thirdPersonCamera: {fileID: 610435515}
-  firstPersonCamera: {fileID: 1887821138}
-  mainGameCamera: {fileID: 610435517}
 --- !u!143 &636516198
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4649,21 +4631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1178b15810e03a54d8048c2b751352d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &636516200
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 636516193}
-  serializedVersion: 2
-  m_Mass: 10000
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &638367517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5304,9 +5271,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 731159833}
+  - 54: {fileID: 731159834}
   m_Layer: 0
   m_Name: Player_Refugee
-  m_TagString: Player
+  m_TagString: Refugee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5325,6 +5293,21 @@ Transform:
   - {fileID: 636516194}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!54 &731159834
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 731159832}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &731705785
 GameObject:
   m_ObjectHideFlags: 0
@@ -14007,7 +13990,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1887821137}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea740e66c231fcc42b1b82bc5e7efc4a, type: 3}
   m_Name: 

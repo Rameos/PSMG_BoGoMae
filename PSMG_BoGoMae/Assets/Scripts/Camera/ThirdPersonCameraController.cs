@@ -58,6 +58,12 @@ public class ThirdPersonCameraController : MonoBehaviour {
 	void Start () {
 
         GameeventManager.refugeeIsActiveHandler += reactOnRefugeeIsActive;
+
+        /*
+         *   Nur zum testen ohne Netzwerk - muss später weg! 
+         */
+        GameObject refugee = GameObject.FindWithTag("Refugee");
+        setPlayerControllerVariables(refugee);
  
 	}
 	
