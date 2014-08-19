@@ -3,29 +3,33 @@ using System.Collections;
 
 
 public delegate void pickUpItem(int itemType);
-public delegate void useScope();
-public delegate void stopUsingScope();
 public delegate void useSpeed();
 public delegate void setTrap();
-public delegate void enableFirstPersonCamera();
-public delegate void disableFirstPersonCamera();
 public delegate void refugeeIsActive();
 public delegate void droneIsActive();
 public delegate void transmitterCollected();
+public delegate void onLookAroundClicked(int counter);
+
 
 
 public class GameeventManager : MonoBehaviour {
     
     public static event pickUpItem pickUpItemHandler;
-    public static event useScope useScopeHandler;
-    public static event stopUsingScope stopUsingScopeHandler;
     public static event useSpeed useSpeedHandler;
     public static event setTrap setTrapHandler;
-    public static event enableFirstPersonCamera enableFirstPersonCameraHandler;
-    public static event disableFirstPersonCamera disableFirstPersonCameraHandler;
     public static event refugeeIsActive refugeeIsActiveHandler;
     public static event droneIsActive droneIsActiveHandler;
     public static event transmitterCollected transmitterIsCollectedHandler;
+    public static event onLookAroundClicked onLookAroundClickedHandler;
+
+    public static void onLookAroundClicked(int counter)
+    {
+        if (onLookAroundClickedHandler != null)
+        {
+            onLookAroundClickedHandler(counter);
+            
+        }
+    }
 
     public static void transmitterCollected()
     {
@@ -59,27 +63,9 @@ public class GameeventManager : MonoBehaviour {
         }
     }
 
-    public static void useScope()
-    {
-        if (useScopeHandler != null)
-        {
-            useScopeHandler();
-            enableFirstPersonCameraHandler();
-        }
-    }
-
-    public static void stopUsingScope()
-    {
-        if (stopUsingScopeHandler != null)
-        {
-            stopUsingScopeHandler();
-            disableFirstPersonCameraHandler();
-        }
-    }
-
     public static void useSpeed()
     {
-        if (useScopeHandler != null)
+        if (useSpeedHandler != null)
         {
             useSpeedHandler();
         }

@@ -3,10 +3,10 @@ using System.Collections;
 
 public class ChangeItemInput : MonoBehaviour {
 
-    private bool scopeIsCollected = false;
     private bool speedIsCollected = false;
     private bool speedIsUsed = false;
-    private bool scopeIsUsed = false;
+    private bool lookAroundIsUsed = false;
+    private int lookAroundCounter = 0;
 
     private float inventoryXposition = 300;
     private float inventoryYposition = 10;
@@ -35,10 +35,6 @@ public class ChangeItemInput : MonoBehaviour {
 
     private void reactOnChangedItem(int id)
     {
-        if (id == Config.SCOPE)
-        {
-            scopeIsCollected = true;
-        }
         if (id == Config.SPEED)
         {
             speedIsCollected = true;
@@ -52,35 +48,24 @@ public class ChangeItemInput : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.Box(new Rect(10, 10, 250, 90), "Player Menu");
+        UseLookAround();
 
+        UseSpeedItem();
+    }
 
-        if (GUI.Button(new Rect(20, 40, 230, 20), "Drohne Ansicht"))
-        {
-            Application.LoadLevel("Drone_TestLevel");
-        }
-
-
-
+    private void UseLookAround()
+    {
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
-        if (scopeIsCollected)
+        if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), "umsehen on / off"))
         {
-            if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), "Fernglas"))
-            {
-                if (scopeIsUsed)
-                {
-                    GameeventManager.stopUsingScope();
-                }
-                else
-                {
-                    GameeventManager.useScope();
-                    scopeIsUsed = true;
-                }
-            }
-
+            lookAroundCounter++;
+            GameeventManager.onLookAroundClicked(lookAroundCounter);
         }
+    }
 
+    private void UseSpeedItem()
+    {
         if (speedIsCollected && !speedIsUsed)
         {
             if (GUI.Button(new Rect(speedButtonXposition, speedButtonYposition, speedButtonWidth, speedButtonHeight), "Speed"))
@@ -90,7 +75,5 @@ public class ChangeItemInput : MonoBehaviour {
             }
 
         }
-
-
     }
 }

@@ -96,6 +96,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         ThirdPersonCameraController thirdPersonCameraController = Camera.main.GetComponent<ThirdPersonCameraController>();
 
         playerController.thirdPersonCamera = Camera.main;
+       // playerController.firstPersonCamera = GameObject.FindGameObjectWithTag("FirstPersonCamera").camera;
         playerController.mainGameCamera = thirdPersonCameraController;
         
         targetToFollow = refugee.transform;

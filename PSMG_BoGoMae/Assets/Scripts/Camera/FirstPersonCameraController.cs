@@ -14,6 +14,7 @@ public class FirstPersonCameraController : MonoBehaviour {
     private float yAxisMin = -360;
     private float yAxisMax = 360;
     private bool inFirstPerson = false;
+    private PlayerController playerController;
 
     public Texture2D crosshair;
     private float crosshairWidth = 32;
@@ -26,14 +27,11 @@ public class FirstPersonCameraController : MonoBehaviour {
     GazeInputFromAOI gazeInput;
     [SerializeField]
     private float rotationSpeed = 2f;
-    private bool lookAroundWithMouse = true;
 
 	// Use this for initialization
 	void Start () {
-        GameeventManager.enableFirstPersonCameraHandler += reactOnEnableFirstPersonCamera;
-        GameeventManager.disableFirstPersonCameraHandler += reactOnDisableFirstPersonCamera;
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
-        
+        GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
 	}
 	
 	// Update is called once per frame
@@ -45,12 +43,7 @@ public class FirstPersonCameraController : MonoBehaviour {
     void LateUpdate()
     {
 
-        if (lookAroundWithMouse)
-        {
-
-
-        }
-        else
+        if (inFirstPerson)
         {
             rotateCamWithGaze();
         }
@@ -101,17 +94,22 @@ public class FirstPersonCameraController : MonoBehaviour {
     }
 
 
-    private void reactOnEnableFirstPersonCamera()
+    private void reactOnEnableFirstPersonCamera(int counter)
     {
-        inFirstPerson = true;
-        lookAroundWithMouse = false;
-        disableMainCamera();
+        if (counter % 2 == 0)
+        {
+            inFirstPerson = false;
+        }
+        else
+        {
+            inFirstPerson = true;
+            disableMainCamera();
+        }
     }
 
     private void reactOnDisableFirstPersonCamera()
     {
         inFirstPerson = false;
-        lookAroundWithMouse = true;
         enableMainCamera();
     }
 

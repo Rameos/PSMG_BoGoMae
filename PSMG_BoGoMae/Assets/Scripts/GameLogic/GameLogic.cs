@@ -4,12 +4,12 @@ using System.Collections;
 public class GameLogic : MonoBehaviour {
 
 
-    private GameObject[] transmitterArray;
+    private int transmitterCounter;
 
 	// Use this for initialization
 	void Start () {
         GameeventManager.transmitterIsCollectedHandler += reactOnTransmitterCollected;
-        transmitterArray = GameObject.FindGameObjectsWithTag("Transmitter");
+        transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
 	}
 	
 	// Update is called once per frame
@@ -19,9 +19,8 @@ public class GameLogic : MonoBehaviour {
 
     private void reactOnTransmitterCollected()
     {
-        transmitterArray = GameObject.FindGameObjectsWithTag("Transmitter");
-        Debug.Log("transmitter array laenge:" +transmitterArray.Length);
-        if (transmitterArray.Length == 0)
+        transmitterCounter--;
+        if (transmitterCounter == 0)
         {
             Debug.Log("Refugee hat gewonnen | alle transmitter eingesammelt");
         }

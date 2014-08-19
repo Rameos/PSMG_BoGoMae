@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     private float strafe = 0.0f;
     private float speed = 0.0f;
     private float direction = 0.0f;
-    private float scopeCounter = 0;
+    private bool useLookAround = false;
 
 
 
@@ -30,8 +30,7 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         characterController = this.GetComponent<CharacterController>();
-        GameeventManager.useScopeHandler += reactOnUseScope;
-        GameeventManager.useSpeedHandler += reactOnUseSpeed;      
+        GameeventManager.useSpeedHandler += reactOnUseSpeed;
     }
 
     void Update()
@@ -86,25 +85,6 @@ public class PlayerController : MonoBehaviour {
     void reactOnUseSpeed()
     {
         this.walkingSpeed *= 5;
-    }
-
-    // receive message from PlayerCollisionResponse
-    private void reactOnUseScope()
-    {
-
-        scopeCounter++;
-
-        if (scopeCounter % 2 == 0)
-        {
-            thirdPersonCamera.enabled = true;
-            firstPersonCamera.enabled = false;
-        }
-        else
-        {
-            thirdPersonCamera.enabled = false;
-            firstPersonCamera.enabled = true;
-
-        }
     }
 
 	

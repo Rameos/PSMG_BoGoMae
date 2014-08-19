@@ -19,6 +19,7 @@ TagManager:
   - Refugee
   - Drone
   - Transmitter
+  - FirstPersonCamera
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
