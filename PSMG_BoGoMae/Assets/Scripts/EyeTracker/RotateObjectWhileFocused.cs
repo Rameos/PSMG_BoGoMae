@@ -21,12 +21,14 @@ public class RotateObjectWhileFocused : MonoBehaviourWithGazeComponent{
     
     public override void OnGazeEnter(RaycastHit hit)
     {
-    
+        Debug.Log("testtesttest");
     }
 
     //Rotate the Element if the Gaze stays on the Collider
     public override void OnGazeStay(RaycastHit hit)
     {
+
+        Debug.Log("on Gaze Stay");
         transform.Rotate(0, 0, rotationsPerMinute * Time.deltaTime);
 
         if(Input.GetKeyDown(KeyCode.Space))

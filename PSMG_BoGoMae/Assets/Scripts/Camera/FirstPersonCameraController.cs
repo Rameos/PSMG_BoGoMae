@@ -77,9 +77,9 @@ public class FirstPersonCameraController : MonoBehaviour {
     private void rotateCamWithGaze()
     {
         float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
-        xAxisWithLimit += inputXAxis;
+        xAxisWithLimit += inputXAxis * 0.5f;
         float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
-        yAxisWithLimit += inputYAxis;
+        yAxisWithLimit += inputYAxis * 0.5f;
 
         xAxisWithLimit = Mathf.Clamp(xAxisWithLimit, xAxisMin, xAxisMax);  
         yAxisWithLimit = Mathf.Clamp(yAxisWithLimit, yAxisMin, yAxisMax);
