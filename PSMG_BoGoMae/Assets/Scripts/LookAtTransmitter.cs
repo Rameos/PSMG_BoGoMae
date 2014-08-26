@@ -11,16 +11,16 @@ public class LookAtTransmitter : MonoBehaviourWithGazeComponent {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(gazeModel.isEyeTrackerRunning);
+
 	}
 
     public override void OnGazeEnter(RaycastHit hit)
     {
-        Debug.Log("gaze on transmitter");
+        //Debug.Log("gaze on transmitter");
     }
     public override void OnGazeStay(RaycastHit hit)
     {
-        Debug.Log("gaze stays on transmitter");
+       // Debug.Log("gaze stays on transmitter");
 
         if (Input.GetButton("DeactivateTransmitter"))
         {

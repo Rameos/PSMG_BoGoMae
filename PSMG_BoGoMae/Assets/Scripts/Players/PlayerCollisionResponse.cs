@@ -20,19 +20,18 @@ public class PlayerCollisionResponse : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        Destroy(collider.gameObject);
-        collider.gameObject.renderer.enabled = false;    
+        if (collider.CompareTag("Goal"))
+        {
+            Debug.Log("Ziel erreicht, Flüchtling gewinnt");
+            
+        }
 
         if (collider.CompareTag("SpeedItem"))
         {
+            Destroy(collider.gameObject);
+            collider.gameObject.renderer.enabled = false;    
             Debug.Log("Collision with speeditem");
             GameeventManager.pickUpItem(Config.SPEED);
-        }
-
-        if (collider.CompareTag("ScopeItem"))
-        {
-            Debug.Log("Collision with scopeitem");
-            GameeventManager.pickUpItem(Config.SCOPE);
         }
 
         if (collider.CompareTag("Transmitter"))
