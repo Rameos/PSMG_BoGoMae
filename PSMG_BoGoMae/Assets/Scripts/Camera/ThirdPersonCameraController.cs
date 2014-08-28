@@ -4,86 +4,268 @@ using System.Collections;
 
 public class ThirdPersonCameraController : MonoBehaviour {
 
-    [SerializeField]
-    private float cameraDistance = 25;
-    [SerializeField]
-    private float cameraDistanceHeight = 4.5f;
-    [SerializeField]
-    private float smooth = 2;
-    [SerializeField]
-    private Transform targetToFollow;
-    [SerializeField]
-    private Vector3 offset = new Vector3(0.0f, 1.5f, 0.0f);
-    [SerializeField]
-    private float widescreen = 0.2f;
-    [SerializeField]
-    private float firstPersonThreshold = 0.5f;
-    [SerializeField]
-    private float firstPersonLookSpeed = 3.0f;
-    [SerializeField]
-    private float firstPersonDegreePerSecond = 120.0f;
-    [SerializeField]
+    /*
+     * first person camera variables
+     */
+
+    private Vector2 gazePos;
+    private float xAxisRotation;
+    private float yAxisRotation;
+    private float xAxisWithLimit;
+    private float yAxisWithLimit;
+    private float xAxisMin = -30;
+    private float xAxisMax = 30;
+    private float yAxisMin = -360;
+    private float yAxisMax = 360;
+    public Texture2D crosshair;
+    private float crosshairWidth = 32;
+    private float crosshairHeight = 32;
+
+    private float rotationY = 0f;
+    private float firstPersonLookSpeed = 0.5f;
     private Vector2 firstPersonXAxisClamp = new Vector2(-70.0f, 60.0f);
-
-    private Vector3 targetPosition;
-    private Vector3 lookDirection;
-
-    // smoothing and damping
-    private Vector3 velocityCameraSmooth = Vector3.zero;
+    private float firstPersonRotationDegreePerSecond = 120f;
+    GazeInputFromAOI gazeInput;
     [SerializeField]
-    private float cameraSmoothDampTime = 0.1f;
+    private float rotationSpeed = 2f;
+
+
+    /*
+     * third person camera variables
+     */
+    public float cameraDistanceAwayToPlayer;
+    public float cameraDistanceUpToPlayer;
+
+    public Vector3 lookDirection;
+    public Vector3 offset = new Vector3(0f, 1.5f, 0f);
+
+    private Transform targetToFollow;
+    private Vector3 targetPosition;
+    private Vector3 velocityCamSmooth = Vector3.zero;
+    private float camSmoothDampTime = 0.1f;
     private CameraStates cameraState = CameraStates.Behind;
-    private const float CAMERA_RESET_TRESHOLD = 0.1f;
-
-    public CameraStates CameraState
-    {
-        get { return cameraState; }
-        set { cameraState = value; }
-    }
-
-    private float xAxisRotation = 0.0f;
-    private float lookWeight;
-    private bool inFirstPersonView = false;
- 
+    private bool inFirstPerson = false;
 
     public enum CameraStates
     {
         Behind,
-        ResetBehind,
+        FirstPerson,
+        Reset
+    }
+
+    void Start()
+    {
+        gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
+        targetToFollow = GameObject.FindGameObjectWithTag("TargetToFollow").transform;
+        GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
     }
 
 
-
-	// Use this for initialization
-	void Start () {
-
-        GameeventManager.refugeeIsActiveHandler += reactOnRefugeeIsActive;
-
-        /*
-         *   Nur zum testen ohne Netzwerk - muss später weg! 
-         */
-        GameObject refugee = GameObject.FindWithTag("Refugee");
-        setPlayerControllerVariables(refugee);
- 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void OnDrawGizmos()
+    void Update()
     {
 
     }
 
+    void LateUpdate()
+    {
+        Vector3 characterOffset = targetToFollow.position + new Vector3(0f, cameraDistanceUpToPlayer, 0f);
+
+        determineCameraState();
+
+        switch (cameraState)
+        {
+            case CameraStates.Behind:
+
+                lookDirection = characterOffset - this.transform.position;
+                lookDirection.y = 0;
+                lookDirection.Normalize();
+                targetPosition = characterOffset + targetToFollow.up * cameraDistanceUpToPlayer - lookDirection * cameraDistanceAwayToPlayer;
+         
+            break;
+
+            case CameraStates.Reset:
+
+                lookDirection = targetToFollow.forward;
+                
+            break;
+
+            case CameraStates.FirstPerson:
+
+                transform.position = targetToFollow.position;
+                rotateCamWithGaze();
+
+            break;
+        }
+
+
+        if (!inFirstPerson)
+        {
+            targetPosition = characterOffset + targetToFollow.up * cameraDistanceUpToPlayer - lookDirection * cameraDistanceAwayToPlayer;
+
+            compensateWalls(characterOffset, ref targetPosition);
+
+            smoothPosition(this.transform.position, targetPosition);
+        
+            transform.LookAt(targetToFollow);
+
+        }
+    }
+
+    private void determineCameraState()
+    {
+        if (Input.GetButton("ResetCamera"))
+        {
+            cameraState = CameraStates.Reset;
+        }
+        else if (inFirstPerson)
+        {
+            cameraState = CameraStates.FirstPerson;
+        }
+        else
+        {
+            cameraState = CameraStates.Behind;
+        }
+    }
+
+    private void smoothPosition(Vector3 fromPosition, Vector3 toPosition)
+    {
+        this.transform.position = Vector3.SmoothDamp(fromPosition, toPosition, ref velocityCamSmooth, camSmoothDampTime);
+    }
+
+    private void compensateWalls(Vector3 fromObject, ref Vector3 toTarget)
+    {
+        RaycastHit wallHit = new RaycastHit();
+        if (Physics.Linecast(fromObject, toTarget, out wallHit))
+        {
+            toTarget = new Vector3(wallHit.point.x, toTarget.y, wallHit.point.z);
+        }
+    }
+
+    private void reactOnEnableFirstPersonCamera(int counter)
+    {
+        if (counter % 2 == 0)
+        {
+            inFirstPerson = false;
+        }
+        else
+        {
+            inFirstPerson = true;
+        }
+    }
+
+    void OnGUI()
+    {
+
+        if (inFirstPerson)
+        {
+            GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
+        }
+    }
+
+    private float getCrosshairXPosition()
+    {
+
+        return (gazeModel.posGazeLeft.x + gazeModel.posGazeRight.x) * 0.5f;
+    }
+
+    private float getCrosshairYPosition()
+    {
+        return (gazeModel.posGazeLeft.y + gazeModel.posGazeRight.y) * 0.5f;
+    }
+
+
+
+    private void rotateCamWithGaze()
+    {
+        float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
+        xAxisWithLimit += inputXAxis * 0.5f;
+        float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
+        yAxisWithLimit += inputYAxis * 0.5f;
+
+        xAxisWithLimit = Mathf.Clamp(xAxisWithLimit, xAxisMin, xAxisMax);
+        yAxisWithLimit = Mathf.Clamp(yAxisWithLimit, yAxisMin, yAxisMax);
+
+        transform.rotation = Quaternion.Euler(xAxisWithLimit, yAxisWithLimit, 0);
+    }
+
+
+
+
+    /*
+    public float smooth = 1.5f;
+
+    private Transform playerRefugee;
+    private Vector3 relativeCameraPosition;
+    private float relativeCameraPositionMagnitude;
+    private Vector3 newPosition;
+
+    void Awake()
+    {
+        playerRefugee = GameObject.FindGameObjectWithTag(Tags.REFUGEE).transform;
+        relativeCameraPosition = transform.position - playerRefugee.position;
+        relativeCameraPositionMagnitude = relativeCameraPosition.magnitude - 0.5f;
+    }
+
+    void FixedUpdate()
+    {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            transform.LookAt(playerRefugee.position);
+        }
+        Vector3 standardPosition = playerRefugee.position + relativeCameraPosition;
+        Vector3 abovePosition = playerRefugee.position + Vector3.up * relativeCameraPositionMagnitude;
+        Vector3[] cameraPositionCheckPoints = new Vector3[5];
+        cameraPositionCheckPoints[0] = standardPosition;
+        cameraPositionCheckPoints[1] = Vector3.Lerp(standardPosition, abovePosition, 0.25f);
+        cameraPositionCheckPoints[2] = Vector3.Lerp(standardPosition, abovePosition, 0.5f);
+        cameraPositionCheckPoints[3] = Vector3.Lerp(standardPosition, abovePosition, 0.75f);
+        cameraPositionCheckPoints[4] = abovePosition;
+        
+        for (int i = 0; i < cameraPositionCheckPoints.Length; i++)
+        {
+            if (ViewingPositionsCheck(cameraPositionCheckPoints[i]))
+            {
+                break;
+            }
+        }
+        
+        transform.position = Vector3.Lerp(transform.position, newPosition, smooth * Time.deltaTime);
+        SmoothLookAt();
+    }
+
+    bool ViewingPositionsCheck(Vector3 checkPosition)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(checkPosition, playerRefugee.position - checkPosition, out hit, relativeCameraPositionMagnitude))
+        {
+            if (hit.transform != playerRefugee)
+            {
+                return false;
+            }
+        }
+
+        newPosition = checkPosition;
+        return true;
+    }
+
+    void SmoothLookAt()
+    {
+        Vector3 relativePlayerPosition = playerRefugee.position - transform.position;
+        Quaternion lookAtRotation = Quaternion.LookRotation(relativePlayerPosition, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookAtRotation, smooth * Time.deltaTime);
+    }
+
+    */
+    /*
     void reactOnRefugeeIsActive()
     {
         Debug.Log("in reactOnRefugeeIsActive");
         if (GameObject.FindWithTag("Refugee") != null)
         {
             GameObject refugee = GameObject.FindWithTag("Refugee");
-            setPlayerControllerVariables(refugee);
+            //setPlayerControllerVariables(refugee);
             
         }
     }
@@ -103,77 +285,6 @@ public class ThirdPersonCameraController : MonoBehaviour {
         lookDirection = targetToFollow.forward;
     }
 
-    void LateUpdate()
-    {
-        if (GameObject.FindWithTag("Refugee") != null)
-        {
-            Vector3 playerOffset = targetToFollow.position + new Vector3(0f, cameraDistanceHeight, 0f);
-            Vector3 lookAt = playerOffset;
-
-            /*
-             *      reset camera state
-             */
-            if (Input.GetAxis("ThirdPersonCameraReset") > CAMERA_RESET_TRESHOLD)
-            {
-                cameraState = CameraStates.ResetBehind;
-            }
-            else
-            {
-
-                /*
-                 *      default camera state
-                 */
-                if ((cameraState == CameraStates.ResetBehind && (Input.GetAxis("ThirdPersonCameraReset") <= CAMERA_RESET_TRESHOLD)))
-                {
-                    cameraState = CameraStates.Behind;
-                }
-
-            }
-
-            switch (cameraState)
-            {
-
-                case CameraStates.Behind:
-                    ResetCamera();
-                    // calc direction from camera to player
-                    lookDirection = playerOffset - this.transform.position;
-                    lookDirection.y = 0;
-                    lookDirection.Normalize();
-                    targetPosition = playerOffset + targetToFollow.up * cameraDistanceHeight - lookDirection * cameraDistance;
-
-                    break;
-
-
-                case CameraStates.ResetBehind:
-                    ResetCamera();
-                    lookDirection = targetToFollow.forward;
-
-                    break;
-
-                default:
-                    break;
-
-            }
-
-            targetPosition = playerOffset + targetToFollow.up * cameraDistanceHeight - lookDirection * cameraDistance;
-            smoothPosition(this.transform.position, targetPosition);
-
-            transform.LookAt(lookAt);
-
-        }
-        
-        
-    }
-
-    private void smoothPosition(Vector3 fromPosition, Vector3 toPosition)
-    {
-        // a smooth transition from current to wanted camera position
-        this.transform.position = Vector3.SmoothDamp(fromPosition, toPosition, ref velocityCameraSmooth, cameraSmoothDampTime);
-    }
-
-    private void ResetCamera()
-    {
-        lookWeight = Mathf.Lerp(lookWeight, 0.0f, Time.deltaTime * firstPersonLookSpeed);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.deltaTime);
-    }
+   
+    */
 }

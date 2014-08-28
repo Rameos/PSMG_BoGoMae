@@ -477,13 +477,13 @@ ModelImporter:
     4300110: l_ankleProxy_geo
     4300112: l_kneeProxy_geo
     4300114: l_hipProxy_geo
-    7400000: RunRightWide
-    7400002: RunLeftWide
+    7400000: Run Right
+    7400002: Run Left
     9500000: //RootNode
   materials:
     importMaterials: 0
     materialName: 1
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -497,7 +497,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: RunRightWide
+      name: Run Right
       takeName: _30_a_U1_M_P_RunForwardTurnRight_NtrlWide__Fb_Dia3m_No_0_PJ_4
       firstFrame: 98.5
       lastFrame: 115.699997
@@ -523,7 +523,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: RunLeftWide
+      name: Run Left
       takeName: _30_a_U1_M_P_RunForwardTurnRight_NtrlWide__Fb_Dia3m_No_0_PJ_4
       firstFrame: 98.5
       lastFrame: 115.699997
