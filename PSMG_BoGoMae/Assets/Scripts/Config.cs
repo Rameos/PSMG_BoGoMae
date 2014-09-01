@@ -6,6 +6,7 @@ public class Config
     public const int SPAWN_DRONE = 11;
     public const string INSTANTIATE_REFUGEE = "Prefabs/Player_Refugee";
     public const string INSTANTIATE_DRONE = "Prefabs/Drone";
+    public const string LEVEL = "Final_Scene";
 
     public const int SCOPE = 0;
     public const int SPEED = 1;

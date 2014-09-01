@@ -936,7 +936,7 @@ Transform:
   m_PrefabInternal: {fileID: 1592170397}
   m_GameObject: {fileID: 375040148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0156095028, y: 1.70000005, z: .0711285844}
+  m_LocalPosition: {x: .0156095028, y: 1.70000005, z: .0563729294}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children: []
   m_Father: {fileID: 1514048225}
@@ -5346,6 +5346,7 @@ GameObject:
   - 114: {fileID: 1514048227}
   - 95: {fileID: 1514048226}
   - 114: {fileID: 1514048232}
+  - 114: {fileID: 1514048233}
   m_Layer: 9
   m_Name: Player_Refugee
   m_TagString: Refugee
@@ -5480,6 +5481,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1178b15810e03a54d8048c2b751352d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1514048233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1514048224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19e2193b8506864b938026704b3e684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 100000, guid: 9d4d1b46cb58a564fa5813a4cec7bbd9, type: 2}
 --- !u!1 &1517339176
 GameObject:
   m_ObjectHideFlags: 0
@@ -5714,6 +5727,10 @@ Prefab:
     - target: {fileID: 400130, guid: b8cdda222d6fcc648975ae22c67b8002, type: 2}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: b8cdda222d6fcc648975ae22c67b8002, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .0563729294
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8cdda222d6fcc648975ae22c67b8002, type: 2}
