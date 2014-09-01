@@ -29,6 +29,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     [SerializeField]
     private float rotationSpeed = 2f;
     private float mouseSensitivity = 5.0f;
+    public GameObject refugee;
 
 
     /*
@@ -61,6 +62,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     void Start()
     {
+        //Screen.showCursor = false;
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         targetToFollow = GameObject.FindGameObjectWithTag("TargetToFollow").transform;
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
@@ -231,7 +233,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
         rotationUpDown -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         rotationUpDown = Mathf.Clamp(rotationUpDown, -upDownLookRange, upDownLookRange);
         transform.rotation = Quaternion.Euler(rotationUpDown, rotationLeftRight, 0);
-        Debug.Log(rotationLeftRight + " || " + rotationUpDown);
+        refugee.transform.rotation = Quaternion.Euler(0, rotationLeftRight, 0);
+
         //Camera.main.transform.localRotation = Quaternion.Euler(rotationUpDown, 0, 0);
     }
 
