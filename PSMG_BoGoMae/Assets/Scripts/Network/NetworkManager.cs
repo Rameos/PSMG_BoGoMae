@@ -28,7 +28,7 @@ public class NetworkManager : MonoBehaviour {
         if (masterServerEvent == MasterServerEvent.RegistrationSucceeded)
         {
             Debug.Log("Registration Successful!");
-            SpawnPlayer();
+            SpawnPlayer("server");
         }
     }
 
@@ -55,11 +55,41 @@ public class NetworkManager : MonoBehaviour {
 
     }
 
+	void OnPlayerDisconnected (NetworkPlayer player){
+		Debug.Log ("Player disconnected: " + player);
+		Network.RemoveRPCs (player);
+		Network.DestroyPlayerObjects (player);
+	}
+
+	void OnApplicationQuit(){
+
+		Debug.Log ("OnApplicationQuit");
+
+		if(Network.isServer)
+		{
+			Debug.Log("OnApplicationQuit isServer");
+			Network.Disconnect(200);
+			MasterServer.UnregisterHost();
+		}
+		if(Network.isClient)
+		{
+			Debug.Log("OnApplicationQuit isClient");
+			Network.Disconnect(200);
+		}
+	}
 
     public void OnGUI()
     {
         float buttonWidth = 200f;
         float buttonHeight = 30f;
+
+		if (Network.isServer) 
+		{
+			GUILayout.Label ("Running as a server");
+		}
+		else if (Network.isClient) {
+			GUILayout.Label("Running as a client");		
+		}
 
         if (Network.isClient || Network.isServer)
         {
@@ -82,28 +112,29 @@ public class NetworkManager : MonoBehaviour {
                 if (GUI.Button(new Rect(Screen.width / 2 - buttonWidth / 2, Screen.height / 2 - buttonHeight / 2 + buttonHeight * 4, buttonWidth, buttonHeight), hostData[i].gameName))
                 {
                     Network.Connect(hostData[i]);
-                    Application.LoadLevel("NetworkTestScene");
-                    SpawnPlayer();
+                    Application.LoadLevel(Config.LEVEL);
+                    SpawnPlayer("client");
 
                 }
             }
         }
     }
 
-    private void SpawnPlayer() 
+    private void SpawnPlayer(string role) 
     {
 
-        if(Network.isServer) {
+        if(role.Equals("server"))
+		{
             Vector3 spawnPositionDrone = new Vector3(0, 850, 0);
             InstantiatePlayer(Config.INSTANTIATE_DRONE, spawnPositionDrone);
-            Debug.Log("Drone is Server: "+Network.isServer);
+            Debug.Log("Network.isServer: "+Network.isServer);
             GameeventManager.droneIsActive();
         }
-        else if (Network.isClient)
+        else if (role.Equals("client"))
         {
             Vector3 spawnPositionRefugee = new Vector3(0, 1, 0);
             InstantiatePlayer(Config.INSTANTIATE_REFUGEE, spawnPositionRefugee);
-            Debug.Log("Refugee is Client: " + Network.isClient);
+            Debug.Log("Network.isClient: " + Network.isClient);
             GameeventManager.refugeeIsActive();
         }
     }

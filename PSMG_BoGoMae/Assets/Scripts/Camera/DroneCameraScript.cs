@@ -15,7 +15,7 @@ public class DroneCameraScript : MonoBehaviour {
 	void Update () {
         if (GameObject.FindWithTag("Drone") != null)
         {
-            transform.position = drone.position;
+            transform.position = drone.position + new Vector3(0, -5, 0);
 
         }
 	}
