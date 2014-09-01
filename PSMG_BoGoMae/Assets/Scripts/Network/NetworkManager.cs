@@ -82,7 +82,7 @@ public class NetworkManager : MonoBehaviour {
                 if (GUI.Button(new Rect(Screen.width / 2 - buttonWidth / 2, Screen.height / 2 - buttonHeight / 2 + buttonHeight * 4, buttonWidth, buttonHeight), hostData[i].gameName))
                 {
                     Network.Connect(hostData[i]);
-                    Application.LoadLevel("NetworkTestScene");
+                    Application.LoadLevel(Config.LEVEL);
                     SpawnPlayer();
 
                 }

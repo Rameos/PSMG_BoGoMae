@@ -22,12 +22,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
     private float crosshairHeight = 32;
 
     private float rotationY = 0f;
-    private float firstPersonLookSpeed = 0.5f;
+    private float firstPersonLookSpeed = 0.2f;
     private Vector2 firstPersonXAxisClamp = new Vector2(-70.0f, 60.0f);
     private float firstPersonRotationDegreePerSecond = 120f;
     GazeInputFromAOI gazeInput;
     [SerializeField]
     private float rotationSpeed = 2f;
+    private float mouseSensitivity = 5.0f;
 
 
     /*
@@ -44,12 +45,17 @@ public class ThirdPersonCameraController : MonoBehaviour {
     private Vector3 velocityCamSmooth = Vector3.zero;
     private float camSmoothDampTime = 0.1f;
     private CameraStates cameraState = CameraStates.Behind;
-    private bool inFirstPerson = false;
+    private bool inLookAround = false;
+    private bool inShooting = false;
+    private float rotationUpDown;
+    private float rotationLeftRight;
+    private float upDownLookRange = 60f;
 
     public enum CameraStates
     {
         Behind,
         FirstPerson,
+        Shooting,
         Reset
     }
 
@@ -58,7 +64,9 @@ public class ThirdPersonCameraController : MonoBehaviour {
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         targetToFollow = GameObject.FindGameObjectWithTag("TargetToFollow").transform;
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
+        GameeventManager.onShootClickedHandler += reactOnEnableShoot;
     }
+
 
 
     void Update()
@@ -95,10 +103,18 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 rotateCamWithGaze();
 
             break;
+
+            case CameraStates.Shooting:
+
+                transform.position = targetToFollow.position;
+                rotateCamWithMouse();
+
+            break;
+
         }
 
 
-        if (!inFirstPerson)
+        if (!inLookAround && !inShooting)
         {
             targetPosition = characterOffset + targetToFollow.up * cameraDistanceUpToPlayer - lookDirection * cameraDistanceAwayToPlayer;
 
@@ -111,15 +127,20 @@ public class ThirdPersonCameraController : MonoBehaviour {
         }
     }
 
+
     private void determineCameraState()
     {
         if (Input.GetButton("ResetCamera"))
         {
             cameraState = CameraStates.Reset;
         }
-        else if (inFirstPerson)
+        else if (inLookAround)
         {
             cameraState = CameraStates.FirstPerson;
+        }
+        else if (inShooting)
+        {
+            cameraState = CameraStates.Shooting;
         }
         else
         {
@@ -145,18 +166,31 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
         if (counter % 2 == 0)
         {
-            inFirstPerson = false;
+            inLookAround = false;
         }
         else
         {
-            inFirstPerson = true;
+            inLookAround = true;
+        }
+    }
+
+
+    private void reactOnEnableShoot(int counter)
+    {
+        if (counter % 2 == 0)
+        {
+            inShooting = false;
+        }
+        else
+        {
+            inShooting = true;
         }
     }
 
     void OnGUI()
     {
 
-        if (inFirstPerson)
+        if (inLookAround)
         {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
         }
@@ -178,14 +212,27 @@ public class ThirdPersonCameraController : MonoBehaviour {
     private void rotateCamWithGaze()
     {
         float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
-        xAxisWithLimit += inputXAxis * 0.5f;
+        xAxisWithLimit += inputXAxis * firstPersonLookSpeed;
         float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
-        yAxisWithLimit += inputYAxis * 0.5f;
+        yAxisWithLimit += inputYAxis * firstPersonLookSpeed;
 
         xAxisWithLimit = Mathf.Clamp(xAxisWithLimit, xAxisMin, xAxisMax);
         yAxisWithLimit = Mathf.Clamp(yAxisWithLimit, yAxisMin, yAxisMax);
 
         transform.rotation = Quaternion.Euler(xAxisWithLimit, yAxisWithLimit, 0);
+    }
+
+
+    private void rotateCamWithMouse()
+    {
+        rotationLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
+        //transform.Rotate(0, rotationLeftRight, 0);
+        
+        rotationUpDown -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        rotationUpDown = Mathf.Clamp(rotationUpDown, -upDownLookRange, upDownLookRange);
+        transform.rotation = Quaternion.Euler(rotationUpDown, rotationLeftRight, 0);
+        Debug.Log(rotationLeftRight + " || " + rotationUpDown);
+        //Camera.main.transform.localRotation = Quaternion.Euler(rotationUpDown, 0, 0);
     }
 
 

@@ -6,11 +6,13 @@ public class ChangeItemInput : MonoBehaviour {
     private bool speedIsCollected = false;
     private bool speedIsUsed = false;
     private bool lookAroundIsUsed = false;
+    private bool shootingIsUsed = false;
     private int lookAroundCounter = 0;
+    private int shootingCounter = 0;
 
     private float inventoryXposition = 300;
     private float inventoryYposition = 10;
-    private float inventoryWidth = 500;
+    private float inventoryWidth = 1000;
     private float inventoryHeight = 50;
 
     private float scopeButtonXposition = 310;
@@ -22,6 +24,11 @@ public class ChangeItemInput : MonoBehaviour {
     private float speedButtonYposition = 15;
     private float speedButtonWidth = 240;
     private float speedButtonHeight = 40;
+
+    private float shootButtonXposition = 790;
+    private float shootButtonYposition = 15;
+    private float shootButtonWidth = 240;
+    private float shootButtonHeight = 40;
 
 	// Use this for initialization
 	void Start () {
@@ -49,8 +56,19 @@ public class ChangeItemInput : MonoBehaviour {
     void OnGUI()
     {
         UseLookAround();
-
+        UseShooting();
         UseSpeedItem();
+    }
+
+    private void UseShooting()
+    {
+        GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
+
+        if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), "schießen"))
+        {
+            shootingCounter++;
+            GameeventManager.onShootClicked(shootingCounter);
+        }
     }
 
     private void UseLookAround()

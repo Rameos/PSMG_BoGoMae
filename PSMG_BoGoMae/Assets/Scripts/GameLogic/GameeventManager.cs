@@ -9,6 +9,7 @@ public delegate void refugeeIsActive();
 public delegate void droneIsActive();
 public delegate void transmitterCollected();
 public delegate void onLookAroundClicked(int counter);
+public delegate void onShootClicked(int counter);
 
 
 
@@ -21,6 +22,16 @@ public class GameeventManager : MonoBehaviour {
     public static event droneIsActive droneIsActiveHandler;
     public static event transmitterCollected transmitterIsCollectedHandler;
     public static event onLookAroundClicked onLookAroundClickedHandler;
+    public static event onShootClicked onShootClickedHandler;
+
+    public static void onShootClicked(int counter)
+    {
+        if (onShootClickedHandler != null)
+        {
+            onShootClickedHandler(counter);
+
+        }
+    }
 
     public static void onLookAroundClicked(int counter)
     {
