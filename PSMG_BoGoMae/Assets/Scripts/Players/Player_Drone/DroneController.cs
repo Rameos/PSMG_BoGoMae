@@ -55,9 +55,10 @@ public class DroneController : MonoBehaviour {
     void OnGUI()
     {
         
-        if(onTrapClicked) {
+      /*  if(onTrapClicked) {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
         }
+       */
     }
 
     private float getCrosshairXPosition()
