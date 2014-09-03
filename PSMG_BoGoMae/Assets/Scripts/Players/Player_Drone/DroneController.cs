@@ -18,6 +18,9 @@ public class DroneController : MonoBehaviour {
     private float moveForwardSpeed = 0;
     private float moveBackwardSpeed = 0;
     private float turnSpeed = 10;
+    private float speed = 0;
+
+    public float energy = 100;
 
  
 
@@ -35,6 +38,11 @@ public class DroneController : MonoBehaviour {
     private void reactOnSetTrap()
     {
         onTrapClicked = true;
+    }
+
+    private void changeWeapon()
+    {
+
     }
 
     private void setTrap()
@@ -55,6 +63,10 @@ public class DroneController : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.color = Color.green;
+        GUI.backgroundColor = Color.magenta;
+
+        GUI.Box(new Rect(Screen.width/2 + 200, Screen.height/2 -100, 100, 25), "Energy");
         
       /*  if(onTrapClicked) {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
@@ -86,9 +98,19 @@ public class DroneController : MonoBehaviour {
     
     private void movePlayerWithInput()
     {
+    
+
         if (Input.GetKey(KeyCode.W))
         {
-            if (moveForwardSpeed < 30)
+            if (speed < 30)
+            {
+                speed += 0.1f;
+            }
+            if (speed > 0)
+            {
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+          /*  if (moveForwardSpeed < 30)
             {
                 moveForwardSpeed += 0.05f;
                 if(moveBackwardSpeed>0)
@@ -97,11 +119,22 @@ public class DroneController : MonoBehaviour {
             }
             
             transform.Translate(Vector3.forward * moveForwardSpeed * Time.deltaTime);
+           */ 
         }
 
 
         if (Input.GetKey(KeyCode.S))
         {
+            
+            if (speed > -30)
+            {
+                speed -= 0.1f;
+            }
+            if (speed < 0)
+            {
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+            /*
             if (moveBackwardSpeed < 30)
             {
                 moveBackwardSpeed += 0.05f;
@@ -109,6 +142,7 @@ public class DroneController : MonoBehaviour {
                 moveForwardSpeed -= 0.05f;
             }
             transform.Translate(-Vector3.forward * moveBackwardSpeed * Time.deltaTime);
+            */
         }
             
 
@@ -117,6 +151,26 @@ public class DroneController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.D))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+
+        if (Input.anyKey == false)
+        {
+            if (speed < 0)
+            {
+                speed += 0.1f;
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+
+            if (speed > 0)
+            {
+                speed -= 0.01f;
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+        }
+
+        
     }
+
+
+
 
 }
