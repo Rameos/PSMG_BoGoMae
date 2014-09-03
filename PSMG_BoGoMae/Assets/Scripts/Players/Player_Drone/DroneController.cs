@@ -110,39 +110,20 @@ public class DroneController : MonoBehaviour {
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
             }
-          /*  if (moveForwardSpeed < 30)
-            {
-                moveForwardSpeed += 0.05f;
-                if(moveBackwardSpeed>0)
-                    moveBackwardSpeed -= 0.05f;
-                
-            }
-            
-            transform.Translate(Vector3.forward * moveForwardSpeed * Time.deltaTime);
-           */ 
         }
 
 
         if (Input.GetKey(KeyCode.S))
         {
-            
+            Debug.Log("speed " + speed);
             if (speed > -30)
             {
-                speed -= 0.1f;
+                speed += -0.1f;
             }
             if (speed < 0)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
             }
-            /*
-            if (moveBackwardSpeed < 30)
-            {
-                moveBackwardSpeed += 0.05f;
-                if(moveForwardSpeed>0)
-                moveForwardSpeed -= 0.05f;
-            }
-            transform.Translate(-Vector3.forward * moveBackwardSpeed * Time.deltaTime);
-            */
         }
             
 
@@ -152,11 +133,13 @@ public class DroneController : MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
 
-        if (Input.anyKey == false)
+
+
+        if (Input.GetKey(KeyCode.W) == false || Input.GetKey(KeyCode.S) == false)
         {
             if (speed < 0)
             {
-                speed += 0.1f;
+                speed += 0.01f;
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
             }
 
