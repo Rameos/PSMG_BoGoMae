@@ -29,8 +29,11 @@ public class DroneController : MonoBehaviour {
 
     void Update()
     {
-        movePlayerWithInput();
-        setTrap();
+        if (networkView.isMine)
+        {
+            movePlayerWithInput();
+            setTrap();
+        }
     }
 
     private void reactOnSetTrap()

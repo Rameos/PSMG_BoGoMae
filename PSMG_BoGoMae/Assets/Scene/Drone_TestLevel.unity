@@ -3177,7 +3177,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1540220856}
   - 114: {fileID: 1540220855}
-  - 148: {fileID: 1540220857}
+  - 148: {fileID: 1540220859}
   - 114: {fileID: 1540220858}
   m_Layer: 0
   m_Name: Drone
@@ -3201,7 +3201,6 @@ MonoBehaviour:
   crosshair: {fileID: 2800000, guid: ee327e230fb940e4ea79a9eb32736884, type: 3}
   trap: {fileID: 11400000, guid: d765de2179e4b334988e4091fd0df632, type: 2}
   trapSpawnPosition: {fileID: 680164472}
-  energy: 100
 --- !u!4 &1540220856
 Transform:
   m_ObjectHideFlags: 0
@@ -3223,10 +3222,10 @@ NetworkView:
   m_PrefabParentObject: {fileID: 14800000, guid: 223ebb0973ed1364fa43a63456d2a967,
     type: 2}
   m_PrefabInternal: {fileID: 1974339135}
-  m_GameObject: {fileID: 1540220854}
+  m_GameObject: {fileID: 2018743290}
   m_Enabled: 1
   m_StateSynchronization: 1
-  m_Observed: {fileID: 1540220856}
+  m_Observed: {fileID: 2018743291}
   m_ViewID:
     m_ID: 1
     m_Type: 1
@@ -3241,6 +3240,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f7737e19bc15b45bfef2d0fb5f4319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!148 &1540220859
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 14800002, guid: 223ebb0973ed1364fa43a63456d2a967,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974339135}
+  m_GameObject: {fileID: 1540220854}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1540220856}
+  m_ViewID:
+    m_ID: 2
+    m_Type: 1
 --- !u!1 &1582467919
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,6 +4099,22 @@ Prefab:
       propertyPath: energy
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 14800002, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800002, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400006, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
     - {fileID: 11400004, guid: 223ebb0973ed1364fa43a63456d2a967, type: 2}
@@ -4192,6 +4220,7 @@ GameObject:
   - 114: {fileID: 2018743293}
   - 23: {fileID: 2018743292}
   - 114: {fileID: 2018743296}
+  - 148: {fileID: 1540220857}
   m_Layer: 0
   m_Name: DroneCube
   m_TagString: Untagged
@@ -4247,7 +4276,6 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   trap: {fileID: 0}
   trapSpawnPosition: {fileID: 0}
-  energy: 100
 --- !u!65 &2018743294
 BoxCollider:
   m_ObjectHideFlags: 0
