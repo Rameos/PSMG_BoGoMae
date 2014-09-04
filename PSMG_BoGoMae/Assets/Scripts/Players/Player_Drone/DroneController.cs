@@ -26,14 +26,26 @@ public class DroneController : MonoBehaviour {
     {
         GameeventManager.setTrapHandler += reactOnSetTrap;
     }
-
-    void Update()
+    /*
+    void OnNetworkInstantiate(NetworkMessageInfo info)
     {
+        Camera camera = GameObject.FindGameObjectWithTag("DroneCamera").camera;
         if (networkView.isMine)
         {
-            movePlayerWithInput();
-            setTrap();
+            camera.enabled = true;
         }
+        else
+        {
+            camera.enabled = false;
+        }
+    }
+*/
+    void Update()
+    {
+
+         movePlayerWithInput();
+         setTrap();
+        
     }
 
     private void reactOnSetTrap()

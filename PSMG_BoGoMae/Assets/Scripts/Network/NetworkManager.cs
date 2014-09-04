@@ -40,7 +40,10 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnServerInitialized()
 	{
-		SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 850, 0));
+		GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 850, 0));
+        dronePlayer.GetComponent<DroneController>().enabled = true;
+        dronePlayer.transform.FindChild("Camera").gameObject.SetActive(true);
+        //SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 1, 0));
 	}
 	
 	
@@ -70,12 +73,19 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnConnectedToServer()
 	{
-		SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(0, 1, 0));
+		GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 1, 0));
+        refugeePlayer.GetComponent<ThirdPersonCharacter>().enabled = true;
+        refugeePlayer.GetComponent<ThirdPersonUserControl>().enabled = true;
+        refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
+        refugeePlayer.GetComponent<CameraController>().enabled = true;
+        refugeePlayer.GetComponent<ThirdPersonCharacter>().enabled = true;
+        refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
 	}
 	
 	
-	private void SpawnPlayer(string player, Vector3 position)
+	private GameObject SpawnPlayer(string player, Vector3 position)
 	{
-		Network.Instantiate(Resources.Load(player), position, Quaternion.identity, 0);
+        
+		return (GameObject) Network.Instantiate(Resources.Load(player), position, Quaternion.identity, 0);
 	}
 }

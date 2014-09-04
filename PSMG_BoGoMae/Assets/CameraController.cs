@@ -49,41 +49,59 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        determineCameraState();
 
-        if (Input.GetButton("Jump"))
-        {
-            verticalVelocity = jumpSpeed;
-        }
+            determineCameraState();
+
+            if (Input.GetButton("Jump"))
+            {
+                verticalVelocity = jumpSpeed;
+            }
+
+        
+
 	}
 
     void LateUpdate()
     {
 
-        switch (cameraState)
+            switch (cameraState)
+            {
+
+                case CameraStates.FirstPerson:
+
+                    rotateCamWithMouse();
+
+                    break;
+
+                case CameraStates.Shooting:
+
+                    rotateCamWithMouse();
+
+                    break;
+
+                case CameraStates.LookAround:
+
+                    rotateCamWithGaze();
+
+                    break;
+
+            }
+        
+    }
+    /*
+    void OnNetworkInstantiate(NetworkMessageInfo info)
+    {
+        Camera camera = GameObject.FindGameObjectWithTag("RefugeeCamera").camera;
+        if (networkView.isMine)
         {
-
-            case CameraStates.FirstPerson:
-
-                rotateCamWithMouse();
-
-                break;
-
-            case CameraStates.Shooting:
-
-                rotateCamWithMouse();
-
-                break;
-
-            case CameraStates.LookAround:
-
-                rotateCamWithGaze();
-
-                break;
-
+            camera.enabled = true;
+        }
+        else
+        {
+            camera.enabled = false;
         }
     }
-
+     */
     private void determineCameraState()
     {
 

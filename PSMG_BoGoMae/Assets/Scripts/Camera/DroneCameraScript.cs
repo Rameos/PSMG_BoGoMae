@@ -5,14 +5,18 @@ public class DroneCameraScript : MonoBehaviour {
 
     public Transform drone;
 
-
 	// Use this for initialization
 	void Start () {
         GameeventManager.droneIsActiveHandler += reactOnDroneIsActive;
 	}
+
+
+
+
 	
 	// Update is called once per frame
 	void Update () {
+
         if (GameObject.FindWithTag("Drone") != null)
         {
             transform.position = drone.position + new Vector3(0, -5, 0);
