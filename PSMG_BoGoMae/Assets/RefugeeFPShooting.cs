@@ -15,7 +15,6 @@ public class RefugeeFPShooting : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        crosshair.enabled = false;
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         GameeventManager.onShootClickedHandler += reactOnEnableShoot;
 	}
