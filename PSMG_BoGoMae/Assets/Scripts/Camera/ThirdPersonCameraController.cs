@@ -198,13 +198,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
         }
     }
 
-    private float getCrosshairXPosition()
+    public float getCrosshairXPosition()
     {
 
         return (gazeModel.posGazeLeft.x + gazeModel.posGazeRight.x) * 0.5f;
     }
 
-    private float getCrosshairYPosition()
+    public float getCrosshairYPosition()
     {
         return (gazeModel.posGazeLeft.y + gazeModel.posGazeRight.y) * 0.5f;
     }

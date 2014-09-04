@@ -19,6 +19,7 @@ TagManager:
   - Drone
   - Crosshair
   - BulletModell
+  - TeleportField
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

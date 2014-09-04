@@ -24,6 +24,8 @@ public class GameeventManager : MonoBehaviour {
     public static event onLookAroundClicked onLookAroundClickedHandler;
     public static event onShootClicked onShootClickedHandler;
 
+
+
     public static void onShootClicked(int counter)
     {
         if (onShootClickedHandler != null)
