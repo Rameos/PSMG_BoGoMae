@@ -55,9 +55,10 @@ public class DroneController : MonoBehaviour {
     void OnGUI()
     {
         
-        if(onTrapClicked) {
+      /*  if(onTrapClicked) {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
         }
+       */
     }
 
     private float getCrosshairXPosition()
@@ -84,16 +85,16 @@ public class DroneController : MonoBehaviour {
     
     private void movePlayerWithInput()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
             transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
             transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
     }
 
