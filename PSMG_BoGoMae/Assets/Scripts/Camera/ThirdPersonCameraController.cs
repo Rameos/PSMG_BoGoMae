@@ -216,9 +216,9 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
         float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
         xAxisWithLimit += inputXAxis * firstPersonLookSpeed;
+
         float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
         yAxisWithLimit += inputYAxis * firstPersonLookSpeed;
-
         xAxisWithLimit = Mathf.Clamp(xAxisWithLimit, xAxisMin, xAxisMax);
         yAxisWithLimit = Mathf.Clamp(yAxisWithLimit, yAxisMin, yAxisMax);
 

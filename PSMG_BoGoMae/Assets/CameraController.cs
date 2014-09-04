@@ -68,13 +68,11 @@ public class CameraController : MonoBehaviour {
             {
 
                 case CameraStates.FirstPerson:
-
                     rotateCamWithMouse();
 
                     break;
 
                 case CameraStates.Shooting:
-
                     rotateCamWithMouse();
 
                     break;
@@ -140,8 +138,10 @@ public class CameraController : MonoBehaviour {
 
     private void rotateCamWithGaze()
     {
+        
         float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
         xAxisWithLimit += inputXAxis * firstPersonLookSpeed;
+        Debug.Log(inputXAxis + " || " + xAxisWithLimit);
         float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
         yAxisWithLimit += inputYAxis * firstPersonLookSpeed;
 
