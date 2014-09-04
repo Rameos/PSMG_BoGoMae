@@ -17,8 +17,9 @@ public class DroneController : MonoBehaviour {
 
     private float moveForwardSpeed = 0;
     private float moveBackwardSpeed = 0;
-    private float turnSpeed = 10;
+    private float turnSpeed = 5;
     private float speed = 0;
+    private float decreaseSpeed = 0.05f;
 
  
 
@@ -117,7 +118,7 @@ public class DroneController : MonoBehaviour {
             }
             if (speed > 0)
             {
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
             }
         }
 
@@ -131,7 +132,8 @@ public class DroneController : MonoBehaviour {
             }
             if (speed < 0)
             {
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
+                Debug.Log(transform);
             }
         }
             
@@ -148,14 +150,14 @@ public class DroneController : MonoBehaviour {
         {
             if (speed < 0)
             {
-                speed += 0.01f;
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                speed += decreaseSpeed;
+                transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
             }
 
             if (speed > 0)
             {
-                speed -= 0.01f;
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                speed -= decreaseSpeed;
+                transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
             }
         }
 

@@ -47,6 +47,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 114: {fileID: 11400008}
   - 148: {fileID: 14800002}
+  - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Drone
@@ -295,6 +296,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eb0f723000f4dc4e9a03ff6322f3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f7737e19bc15b45bfef2d0fb5f4319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!124 &12400000
