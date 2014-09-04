@@ -15,8 +15,10 @@ public class DroneController : MonoBehaviour {
     private float crosshairWidth = 32;
     private float crosshairHeight = 32;
 
-    private float moveSpeed = 10;
+    private float moveForwardSpeed = 0;
+    private float moveBackwardSpeed = 0;
     private float turnSpeed = 10;
+    private float speed = 0;
 
  
 
@@ -27,13 +29,21 @@ public class DroneController : MonoBehaviour {
 
     void Update()
     {
-        movePlayerWithInput();
-        setTrap();
+        if (networkView.isMine)
+        {
+            movePlayerWithInput();
+            setTrap();
+        }
     }
 
     private void reactOnSetTrap()
     {
         onTrapClicked = true;
+    }
+
+    private void changeWeapon()
+    {
+
     }
 
     private void setTrap()
@@ -85,17 +95,62 @@ public class DroneController : MonoBehaviour {
     
     private void movePlayerWithInput()
     {
+    
+
         if (Input.GetKey(KeyCode.W))
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        {
+            if (speed < 30)
+            {
+                speed += 0.1f;
+            }
+            if (speed > 0)
+            {
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+        }
+
 
         if (Input.GetKey(KeyCode.S))
-            transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
+        {
+            Debug.Log("speed " + speed);
+            if (speed > -30)
+            {
+                speed += -0.1f;
+            }
+            if (speed < 0)
+            {
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+        }
+            
 
         if (Input.GetKey(KeyCode.A))
             transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.D))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+
+
+
+        if (Input.GetKey(KeyCode.W) == false || Input.GetKey(KeyCode.S) == false)
+        {
+            if (speed < 0)
+            {
+                speed += 0.01f;
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+
+            if (speed > 0)
+            {
+                speed -= 0.01f;
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+        }
+
+        
     }
+
+
+
 
 }

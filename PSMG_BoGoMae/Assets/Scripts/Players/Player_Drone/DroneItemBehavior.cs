@@ -8,9 +8,9 @@ public class DroneItemBehavior : MonoBehaviour {
     private float inventoryWidth = 500;
     private float inventoryHeight = 50;
 
-    private float trapButtonXposition = 425;
+    private float trapButtonXposition = 315;
     private float trapButtonYposition = 15;
-    private float trapButtonWidth = 240;
+    private float trapButtonWidth = 150;
     private float trapButtonHeight = 40;
 
 	// Use this for initialization
@@ -33,12 +33,20 @@ public class DroneItemBehavior : MonoBehaviour {
         {
             Application.LoadLevel("Refugee_TestLevel");
         }
-        
+
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
-        if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Nach Flüchtling suchen"))
+        if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 1"))
         {
-            GameeventManager.setTrap();
+           // GameeventManager.setTrap();
+        }
+        if (GUI.Button(new Rect(trapButtonXposition+160, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 2"))
+        {
+            // GameeventManager.setTrap();
+        }
+        if (GUI.Button(new Rect(trapButtonXposition+320, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 3"))
+        {
+            // GameeventManager.setTrap();
         }
     }
 }
