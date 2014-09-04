@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 114: {fileID: 11400008}
-  - 148: {fileID: 14800002}
+  - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Drone
@@ -67,7 +67,6 @@ GameObject:
   - 114: {fileID: 11400010}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400012}
-  - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: DroneCube
   m_TagString: Untagged
@@ -299,18 +298,6 @@ Behaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
 --- !u!148 &14800000
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 400006}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
---- !u!148 &14800002
 NetworkView:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
