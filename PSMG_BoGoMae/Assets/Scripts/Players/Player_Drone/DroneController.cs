@@ -20,8 +20,6 @@ public class DroneController : MonoBehaviour {
     private float turnSpeed = 10;
     private float speed = 0;
 
-    public float energy = 100;
-
  
 
     void Start()
@@ -63,10 +61,6 @@ public class DroneController : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.color = Color.green;
-        GUI.backgroundColor = Color.magenta;
-
-        GUI.Box(new Rect(Screen.width/2 + 200, Screen.height/2 -100, 100, 25), "Energy");
         
       /*  if(onTrapClicked) {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
