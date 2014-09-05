@@ -36,6 +36,7 @@ public class GazeInputFromAOI : MonoBehaviour
         {
             GUI.DrawTexture(AOI_Top.volume, texture_LeftAOI);
             GUI.DrawTexture(AOI_Down.volume, texture_RightAOI);
+
         }
     }
 
