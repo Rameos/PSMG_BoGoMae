@@ -7,8 +7,8 @@ public class ThirdPersonCharacter : MonoBehaviour {
 	[SerializeField] float airSpeed = 6;								// determines the max speed of the character while airborne
 	[SerializeField] float airControl = 2;								// determines the response speed of controlling the character while airborne
 	[Range(1,4)] [SerializeField] public float gravityMultiplier = 2;	// gravity modifier - often higher than natural gravity feels right for game characters
-	[SerializeField][Range(0.1f,3f)] float moveSpeedMultiplier = 1;	    // how much the move speed of the character will be multiplied by
-	[SerializeField][Range(0.1f,3f)] float animSpeedMultiplier = 1;	    // how much the animation of the character will be multiplied by
+	[SerializeField][Range(0.1f,3f)] float moveSpeedMultiplier = 2;	    // how much the move speed of the character will be multiplied by
+	[SerializeField][Range(0.1f,3f)] float animSpeedMultiplier = 2;	    // how much the animation of the character will be multiplied by
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 
 

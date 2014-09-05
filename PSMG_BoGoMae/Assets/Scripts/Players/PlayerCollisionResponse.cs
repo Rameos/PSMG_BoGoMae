@@ -28,6 +28,7 @@ public class PlayerCollisionResponse : MonoBehaviour
 
         if (collider.CompareTag("SpeedItem"))
         {
+            Destroy(collider.gameObject.light);
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;    
             Debug.Log("Collision with speeditem");

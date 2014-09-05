@@ -3,6 +3,11 @@ using System.Collections;
 
 public class ChangeItemInput : MonoBehaviour {
 
+    //textures
+    public Texture2D lookAroundIcon;
+    public Texture2D speedIcon;
+    public Texture2D shootIcon;
+
     private bool speedIsCollected = false;
     private bool speedIsUsed = false;
     private bool lookAroundIsUsed = false;
@@ -11,27 +16,28 @@ public class ChangeItemInput : MonoBehaviour {
     private int shootingCounter = 0;
 
     private float inventoryXposition = 300;
-    private float inventoryYposition = 10;
-    private float inventoryWidth = 1000;
-    private float inventoryHeight = 50;
+    private float inventoryYposition = Screen.height - 100f;
+    private float inventoryWidth = 300;
+    private float inventoryHeight = 72;
 
     private float scopeButtonXposition = 310;
-    private float scopeButtonYposition = 15;
-    private float scopeButtonWidth = 240;
-    private float scopeButtonHeight = 40;
+    private float scopeButtonYposition = Screen.height - 100f;
+    private float scopeButtonWidth = 64;
+    private float scopeButtonHeight = 64;
 
-    private float speedButtonXposition = 550;
-    private float speedButtonYposition = 15;
-    private float speedButtonWidth = 240;
-    private float speedButtonHeight = 40;
+    private float speedButtonXposition = 380;
+    private float speedButtonYposition = Screen.height - 100f;
+    private float speedButtonWidth = 64;
+    private float speedButtonHeight = 64;
 
-    private float shootButtonXposition = 790;
-    private float shootButtonYposition = 15;
-    private float shootButtonWidth = 240;
-    private float shootButtonHeight = 40;
+    private float shootButtonXposition = 450;
+    private float shootButtonYposition = Screen.height - 100f;
+    private float shootButtonWidth = 64;
+    private float shootButtonHeight = 64;
 
 	// Use this for initialization
 	void Start () {
+        Screen.lockCursor = true;
         GameeventManager.pickUpItemHandler += reactOnChangedItem;
 	}
 	
@@ -64,7 +70,7 @@ public class ChangeItemInput : MonoBehaviour {
     {
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
-        if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), "schießen"))
+        if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon) || Input.GetButton("ShootItem"))
         {
             shootingCounter++;
             GameeventManager.onShootClicked(shootingCounter);
@@ -73,9 +79,9 @@ public class ChangeItemInput : MonoBehaviour {
 
     private void UseLookAround()
     {
-        GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
+        //GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
-        if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), "umsehen on / off"))
+        if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), lookAroundIcon) || Input.GetButton("LookAroundItem"))
         {
             lookAroundCounter++;
             GameeventManager.onLookAroundClicked(lookAroundCounter);
@@ -86,7 +92,7 @@ public class ChangeItemInput : MonoBehaviour {
     {
         if (speedIsCollected && !speedIsUsed)
         {
-            if (GUI.Button(new Rect(speedButtonXposition, speedButtonYposition, speedButtonWidth, speedButtonHeight), "Speed"))
+            if (GUI.Button(new Rect(speedButtonXposition, speedButtonYposition, speedButtonWidth, speedButtonHeight), speedIcon) || Input.GetButton("SpeedItem"))
             {
                 GameeventManager.useSpeed();
                 speedIsUsed = true;

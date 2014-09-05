@@ -2612,7 +2612,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100130}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
   m_Name: 
@@ -2621,8 +2621,8 @@ MonoBehaviour:
   airSpeed: 10
   airControl: 5
   gravityMultiplier: 2
-  moveSpeedMultiplier: 1
-  animSpeedMultiplier: 1
+  moveSpeedMultiplier: 1.5
+  animSpeedMultiplier: 1.5
   advancedSettings:
     stationaryTurnSpeed: 180
     movingTurnSpeed: 360
@@ -2649,12 +2649,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea740e66c231fcc42b1b82bc5e7efc4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture_LeftAOI: {fileID: 2800000, guid: 9311518962cb0914ea0ea4131e42b3d7, type: 3}
-  texture_RightAOI: {fileID: 2800000, guid: abc828d9f1952aa41b8bd9f05fd9afa5, type: 3}
-  widthAOI: .449999988
-  texture_TopAOI: {fileID: 2800000, guid: 9311518962cb0914ea0ea4131e42b3d7, type: 3}
-  texture_DownAOI: {fileID: 2800000, guid: abc828d9f1952aa41b8bd9f05fd9afa5, type: 3}
-  heightAOI: .449999988
+  texture_LeftAOI: {fileID: 2800000, guid: 1e7a854514067d144bf61cc759e9629b, type: 3}
+  texture_RightAOI: {fileID: 2800000, guid: 4fae552b6c58fff44ad8d4f6357a57a1, type: 3}
+  widthAOI: .479999989
+  texture_TopAOI: {fileID: 2800000, guid: 1e7a854514067d144bf61cc759e9629b, type: 3}
+  texture_DownAOI: {fileID: 2800000, guid: 4fae552b6c58fff44ad8d4f6357a57a1, type: 3}
+  heightAOI: .479999989
   isAOIVisualisationOn: 1
 --- !u!114 &11400008
 MonoBehaviour:
@@ -2693,6 +2693,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34dc372fa2d1104dbc833d7cb27db7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookAroundIcon: {fileID: 2800000, guid: 290d446931ff7e74d99379124721b9cf, type: 3}
+  speedIcon: {fileID: 2800000, guid: e8a7688737c65e14888400d50fb2905b, type: 3}
+  shootIcon: {fileID: 2800000, guid: 32b7417b513fb5e459a2e18209fa0ca8, type: 3}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2717,7 +2720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: .200000003
   bulletPrefab: {fileID: 100002, guid: 6828005d076ee8e4bab321a783e84ed0, type: 2}
-  crosshair: {fileID: 0}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
