@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour {
         //Screen.lockCursor = true;
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
-        GameeventManager.onShootClickedHandler += reactOnEnableShoot;
+        GameeventManager.onEnableShootHandler += reactOnEnableShoot;
 
 	}
 
@@ -117,7 +117,7 @@ public class CameraController : MonoBehaviour {
             cameraState = CameraStates.FirstPerson;
         }
     }
-    private void reactOnEnableShoot(int counter)
+    private void reactOnEnableShoot()
     {
         inShooting = true;
     }

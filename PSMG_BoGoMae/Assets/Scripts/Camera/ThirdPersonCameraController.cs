@@ -66,7 +66,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         targetToFollow = GameObject.FindGameObjectWithTag("TargetToFollow").transform;
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
-        GameeventManager.onShootClickedHandler += reactOnEnableShoot;
+        GameeventManager.onEnableShootHandler += reactOnEnableShoot;
     }
 
 
@@ -178,16 +178,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
     }
 
 
-    private void reactOnEnableShoot(int counter)
+    private void reactOnEnableShoot()
     {
-        if (counter % 2 == 0)
-        {
-            inShooting = false;
-        }
-        else
-        {
-            inShooting = true;
-        }
+
+         inShooting = true;
+       
     }
 
     void OnGUI()

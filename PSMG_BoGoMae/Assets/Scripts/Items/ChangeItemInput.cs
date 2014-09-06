@@ -9,6 +9,8 @@ public class ChangeItemInput : MonoBehaviour {
     public Texture2D shootIcon;
 
     private bool speedIsCollected = false;
+    private bool rocketLauncherIsCollected = false;
+    private bool fernglasIsCollected = false;
     private bool speedIsUsed = false;
     private bool lookAroundIsUsed = false;
     private bool shootingIsUsed = false;
@@ -56,39 +58,67 @@ public class ChangeItemInput : MonoBehaviour {
         {
 
         }
+        if (id == Config.ROCKETLAUNCHER)
+        {
+            rocketLauncherIsCollected = true;
+        }
+        if (id == Config.FERNGLAS)
+        {
+            fernglasIsCollected = true;
+        }
 
     }
 
     void OnGUI()
     {
-        UseLookAround();
-        UseShooting();
-        UseSpeedItem();
+        DrawInventory();
+        DrawFernglasIcon();
+        DrawShootingIcon();
+        DrawSpeedIcon();
     }
 
-    private void UseShooting()
+    private void DrawInventory()
     {
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
+    }
 
-        if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon) || Input.GetButton("ShootItem"))
+    private void DrawShootingIcon()
+    {
+
+        if(true)
         {
-            shootingCounter++;
-            GameeventManager.onShootClicked(shootingCounter);
+            if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon) || Input.GetButtonUp("ShootItem"))
+            {
+                shootingCounter++;
+                Debug.Log("shotting counter: "+shootingCounter);
+                if (shootingCounter % 2 == 0)
+                {
+                    //GameeventManager.onDisableShoot();
+                }
+                else
+                {
+                    GameeventManager.onEnableShoot();
+                }
+            }
+
         }
     }
 
-    private void UseLookAround()
+    private void DrawFernglasIcon()
     {
         //GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
-
-        if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), lookAroundIcon) || Input.GetButton("LookAroundItem"))
+        if (fernglasIsCollected)
         {
-            lookAroundCounter++;
-            GameeventManager.onLookAroundClicked(lookAroundCounter);
+            if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), lookAroundIcon) || Input.GetButton("LookAroundItem"))
+            {
+                lookAroundCounter++;
+                GameeventManager.onLookAroundClicked(lookAroundCounter);
+            }
+
         }
     }
 
-    private void UseSpeedItem()
+    private void DrawSpeedIcon()
     {
         if (speedIsCollected && !speedIsUsed)
         {

@@ -8,7 +8,8 @@ public class Config
     public const string INSTANTIATE_DRONE = "Prefabs/Drone";
     public const string LEVEL = "Final_Scene";
 
-    public const int SCOPE = 0;
+    public const int FERNGLAS = 0;
     public const int SPEED = 1;
     public const int TRANSMITTER = 2;
+    public const int ROCKETLAUNCHER = 3;
 }

@@ -26,6 +26,24 @@ public class PlayerCollisionResponse : MonoBehaviour
             
         }
 
+        if (collider.CompareTag("RocketLauncherItem"))
+        {
+            Destroy(collider.gameObject.light);
+            Destroy(collider.gameObject);
+            collider.gameObject.renderer.enabled = false;
+            Debug.Log("Collision with rocketlauncher");
+            GameeventManager.pickUpItem(Config.ROCKETLAUNCHER);
+        }
+
+        if (collider.CompareTag("FernglasItem"))
+        {
+            Destroy(collider.gameObject.light);
+            Destroy(collider.gameObject);
+            collider.gameObject.renderer.enabled = false;
+            Debug.Log("Collision with fernglas");
+            GameeventManager.pickUpItem(Config.FERNGLAS);
+        }
+
         if (collider.CompareTag("SpeedItem"))
         {
             Destroy(collider.gameObject.light);
