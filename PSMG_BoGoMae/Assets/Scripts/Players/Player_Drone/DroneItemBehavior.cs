@@ -25,7 +25,9 @@ public class DroneItemBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("droneitem...");
         Screen.lockCursor = true;
+		DrawShootingIcon ();
 	
 	}
 	
@@ -80,7 +82,7 @@ public class DroneItemBehavior : MonoBehaviour {
 
     void OnGUI()
     {
-        DrawShootingIcon();
+        //DrawShootingIcon();
 
       /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
