@@ -90,6 +90,7 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<CameraController>().enabled = true;
         refugeePlayer.GetComponent<RefugeeMovement>().enabled = true;
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
+        refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
 	}
 	
