@@ -43,7 +43,7 @@ public class NetworkManager : MonoBehaviour
         
 		GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 500, 0));
         dronePlayer.GetComponent<DroneController>().enabled = true;
-        dronePlayer.transform.FindChild("Camera").gameObject.SetActive(true);
+        dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
         
         
         // droneplayer block auskommentieren, wenn man refugee testen möchte:
