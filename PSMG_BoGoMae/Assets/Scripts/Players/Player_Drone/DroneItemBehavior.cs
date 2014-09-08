@@ -13,15 +13,44 @@ public class DroneItemBehavior : MonoBehaviour {
     private float trapButtonWidth = 150;
     private float trapButtonHeight = 40;
 
+    private int droneShootingCounter = 0;
+
+
+
 	// Use this for initialization
 	void Start () {
+        Screen.lockCursor = true;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	changeWeapon();
 	}
+
+    void onGUI()
+    {
+        
+    }
+
+    void changeWeapon()
+    {
+        if (Input.GetButtonUp("DroneShoot"))
+        {
+            droneShootingCounter++;
+            Debug.Log("shotting counter: " + droneShootingCounter);
+            if (droneShootingCounter % 2 == 0)
+            {
+                Screen.lockCursor = true;
+                //GameeventManager.onDisableShoot();
+            }
+            else
+            {
+              //  GameeventManager.onEnableShoot();
+                Screen.lockCursor = false;
+            }
+        }
+    }
 
     void OnGUI()
     {
@@ -34,7 +63,7 @@ public class DroneItemBehavior : MonoBehaviour {
             Application.LoadLevel("Refugee_TestLevel");
         }
 
-        GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
+      /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
         if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 1"))
         {
@@ -48,5 +77,7 @@ public class DroneItemBehavior : MonoBehaviour {
         {
             // GameeventManager.setTrap();
         }
+       * 
+       * */
     }
 }
