@@ -37,8 +37,10 @@ public class ChangeItemInput : MonoBehaviour {
     private float shootButtonWidth = 64;
     private float shootButtonHeight = 64;
 
+
 	// Use this for initialization
 	void Start () {
+        Debug.Log("in Start() ChangeItemInput");
         Screen.lockCursor = true;
         GameeventManager.pickUpItemHandler += reactOnChangedItem;
 	}

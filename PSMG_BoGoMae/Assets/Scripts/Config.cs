@@ -6,6 +6,8 @@ public class Config
     public const int SPAWN_DRONE = 11;
     public const string INSTANTIATE_REFUGEE = "Prefabs/Player_Refugee";
     public const string INSTANTIATE_DRONE = "Prefabs/Drone";
+    public const string DRONE_CAMERA = "DroneCamera";
+    public const string REFUGEE_CAMERA = "Main Camera";
     public const string LEVEL = "Final_Scene";
 
     public const int FERNGLAS = 0;

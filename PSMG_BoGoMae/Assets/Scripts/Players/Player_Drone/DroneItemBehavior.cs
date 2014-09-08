@@ -4,7 +4,7 @@ using System.Collections;
 public class DroneItemBehavior : MonoBehaviour {
 
     private float inventoryXposition = 300;
-    private float inventoryYposition = 10;
+    private float inventoryYposition = Screen.height - 100f;
     private float inventoryWidth = 500;
     private float inventoryHeight = 50;
 
@@ -13,7 +13,13 @@ public class DroneItemBehavior : MonoBehaviour {
     private float trapButtonWidth = 150;
     private float trapButtonHeight = 40;
 
+    private float shootButtonXposition = 450;
+    private float shootButtonYposition = Screen.height - 100f;
+    private float shootButtonWidth = 64;
+    private float shootButtonHeight = 64;
+
     private int droneShootingCounter = 0;
+    public Texture2D shootIcon;
 
 
 
@@ -24,14 +30,12 @@ public class DroneItemBehavior : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	changeWeapon();
+	void Update () 
+    {
+	    changeWeapon();
 	}
 
-    void onGUI()
-    {
-        
-    }
+
 
     void changeWeapon()
     {
@@ -52,16 +56,31 @@ public class DroneItemBehavior : MonoBehaviour {
         }
     }
 
+    private void DrawShootingIcon()
+    {
+
+        if (true)
+        {
+            if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon) || Input.GetButtonUp("DroneShoot"))
+            {
+                droneShootingCounter++;
+                Debug.Log("shooting counter: " + droneShootingCounter);
+                if (droneShootingCounter % 2 == 0)
+                {
+                    //GameeventManager.onDisableShoot();
+                }
+                else
+                {
+                    GameeventManager.onEnableShoot();
+                }
+            }
+
+        }
+    }
+
     void OnGUI()
     {
-        
-        GUI.Box(new Rect(10, 10, 250, 90), "Player Menu");
-        
-
-        if (GUI.Button(new Rect(20, 40, 230, 20), "Flüchtling Ansicht"))
-        {
-            Application.LoadLevel("Refugee_TestLevel");
-        }
+        DrawShootingIcon();
 
       /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
