@@ -40,12 +40,14 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnServerInitialized()
 	{
-        /*
+        
 		GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 850, 0));
         dronePlayer.GetComponent<DroneController>().enabled = true;
         dronePlayer.transform.FindChild("Camera").gameObject.SetActive(true);
-        */
+        
         // droneplayer block auskommentieren, wenn man refugee testen möchte:
+        
+        /*
         GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 0));
         //refugeePlayer.GetComponent<ThirdPersonCharacter>().enabled = true;
         //refugeePlayer.GetComponent<ThirdPersonUserControl>().enabled = true;
@@ -54,6 +56,7 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<RefugeeMovement>().enabled = true;
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
+         * */
 	}
 	
 	
@@ -84,11 +87,10 @@ public class NetworkManager : MonoBehaviour
 	void OnConnectedToServer()
 	{
 		GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 1, 0));
-        refugeePlayer.GetComponent<ThirdPersonCharacter>().enabled = true;
-        refugeePlayer.GetComponent<ThirdPersonUserControl>().enabled = true;
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
-        refugeePlayer.GetComponent<ThirdPersonCharacter>().enabled = true;
+        refugeePlayer.GetComponent<RefugeeMovement>().enabled = true;
+        refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
 	}
 	
