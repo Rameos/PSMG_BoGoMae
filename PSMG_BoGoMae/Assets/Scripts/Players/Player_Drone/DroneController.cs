@@ -20,6 +20,7 @@ public class DroneController : MonoBehaviour {
     private float turnSpeed = 5;
     private float speed = 0;
     private float decreaseSpeed = 0.05f;
+    private float increaseSpeed = 0.15f;
 
  
 
@@ -105,21 +106,33 @@ public class DroneController : MonoBehaviour {
     {
         return Screen.height - Input.mousePosition.y;
     }
+
+    private void handleRotation()
+    {
+        if (Input.GetKey(KeyCode.A))
+            transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.D))
+            transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+    }
+
     
     private void movePlayerWithInput()
     {
-    
+
+        handleRotation();
 
         if (Input.GetKey(KeyCode.W))
         {
             if (speed < 30)
             {
-                speed += 0.1f;
+                speed += increaseSpeed;
             }
             if (speed > 0)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
             }
+            handleRotation();
         }
 
 
@@ -128,22 +141,15 @@ public class DroneController : MonoBehaviour {
             Debug.Log("speed " + speed);
             if (speed > -30)
             {
-                speed += -0.1f;
+                speed += -increaseSpeed;
             }
             if (speed < 0)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
                 Debug.Log(transform);
             }
+            handleRotation();
         }
-            
-
-        if (Input.GetKey(KeyCode.A))
-            transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.D))
-            transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
-
 
 
         if (Input.GetKey(KeyCode.W) == false || Input.GetKey(KeyCode.S) == false)
@@ -159,6 +165,7 @@ public class DroneController : MonoBehaviour {
                 speed -= decreaseSpeed;
                 transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
             }
+            handleRotation();
         }
 
         
