@@ -24,8 +24,8 @@ public class RefugeeFPShooting : MonoBehaviour {
         
         if(Input.GetMouseButtonDown(0) && inShooting && cooldownRemaining <= 0){
             Debug.Log("in fps update");
-            Instantiate(bulletPrefab, transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.position, Camera.main.transform.rotation);
-
+            //Instantiate(bulletPrefab, transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.position, Camera.main.transform.rotation);
+            Network.Instantiate(bulletPrefab, transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.position, Camera.main.transform.rotation, 0);
         }
 	}
     private void reactOnEnableShoot()

@@ -126,6 +126,7 @@ public class FirstPersonHeadBob : MonoBehaviour {
 
 
 		// Play audio clips based on leaving ground/landing and head bob cycle
+        /*
 		if (character.grounded )
 		{
 			if (!prevGrounded)
@@ -165,5 +166,6 @@ public class FirstPersonHeadBob : MonoBehaviour {
 			}
 			prevGrounded = false;
 		}
+         */
 	}
 }
