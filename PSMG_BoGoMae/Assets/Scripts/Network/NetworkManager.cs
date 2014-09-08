@@ -48,7 +48,7 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
-        
+       
         
         // droneplayer block auskommentieren, wenn man refugee testen möchte:
 
@@ -62,6 +62,7 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
         */
+
     }
 	
 	
