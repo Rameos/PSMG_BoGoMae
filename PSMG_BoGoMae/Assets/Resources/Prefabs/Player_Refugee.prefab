@@ -989,14 +989,16 @@ GameObject:
   - 33: {fileID: 3300000}
   - 136: {fileID: 13600000}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400004}
-  - 114: {fileID: 11400002}
   - 95: {fileID: 9500002}
   - 114: {fileID: 11400000}
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
+  - 143: {fileID: 14300000}
+  - 114: {fileID: 11400018}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400002}
   m_Layer: 9
   m_Name: Player_Refugee
   m_TagString: Refugee
@@ -2542,7 +2544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.70000005, z: 1}
+  m_LocalPosition: {x: 0, y: 1.70000005, z: .425793469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400182}
@@ -2703,7 +2705,7 @@ Animator:
   m_GameObject: {fileID: 100042}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2717,7 +2719,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100130}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
   m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -2756,13 +2758,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100130}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
+  m_Script: {fileID: 11500000, guid: 5eaf0c0d653bbbc428c13952c29759c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkByDefault: 0
-  lookInCameraDirection: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2771,30 +2771,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100130}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
+  m_Script: {fileID: 11500000, guid: 60bca8f58a0b8478e946e6e86658cb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 10
-  airSpeed: 10
-  airControl: 5
-  gravityMultiplier: 2
-  moveSpeedMultiplier: 1.5
-  animSpeedMultiplier: 1.5
-  advancedSettings:
-    stationaryTurnSpeed: 180
-    movingTurnSpeed: 360
-    headLookResponseSpeed: 2
-    crouchHeightFactor: .5
-    crouchChangeSpeed: 4
-    autoTurnThresholdAngle: 100
-    autoTurnSpeed: 2
-    zeroFrictionMaterial: {fileID: 13400000, guid: cf63880488ec29f43a759ecd9c6c5123,
-      type: 2}
-    highFrictionMaterial: {fileID: 13400000, guid: ae51c2b8a2d62f74a917726ce1c0af2c,
-      type: 2}
-    jumpRepeatDelayTime: .25
-    runCycleLegOffset: .200000003
-    groundStickyEffect: 5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2877,6 +2856,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: .200000003
   bulletPrefab: {fileID: 100006, guid: ff0b8dae8996b2c4f8915d1e30666b5f, type: 2}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100130}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab79d7f243824f5d9826bd83522c8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canControl: 1
+  useFixedUpdate: 1
+  movement:
+    maxForwardSpeed: 10
+    maxSidewaysSpeed: 10
+    maxBackwardsSpeed: 10
+    slopeSpeedMultiplier:
+      serializedVersion: 2
+      m_Curve:
+      - time: -90
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 90
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    maxGroundAcceleration: 30
+    maxAirAcceleration: 20
+    gravity: 10
+    maxFallSpeed: 20
+  jumping:
+    enabled: 1
+    baseHeight: 1
+    extraHeight: 4.0999999
+    perpAmount: 0
+    steepPerpAmount: .5
+  movingPlatform:
+    enabled: 1
+    movementTransfer: 2
+  sliding:
+    enabled: 1
+    slidingSpeed: 15
+    sidewaysControl: 1
+    speedControl: .400000006
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -2892,7 +2926,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 100130}
   m_Material: {fileID: 13400000, guid: cf63880488ec29f43a759ecd9c6c5123, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .300000012
   m_Height: 1.79999995
   m_Direction: 1
@@ -3126,6 +3160,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -4.85405326e-05, y: .0359373763, z: -.786436081}
     m_Extent: {x: .0888102353, y: .07253775, z: .0194401741}
   m_DirtyAABB: 0
+--- !u!143 &14300000
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100130}
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: .500000119
+  m_SlopeLimit: 45
+  m_StepOffset: .300000012
+  m_SkinWidth: .0799999982
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
