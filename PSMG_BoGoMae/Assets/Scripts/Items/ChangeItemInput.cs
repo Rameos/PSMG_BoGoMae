@@ -7,6 +7,7 @@ public class ChangeItemInput : MonoBehaviour {
     public Texture2D lookAroundIcon;
     public Texture2D speedIcon;
     public Texture2D shootIcon;
+    public Texture2D teleportIcon;
 
     private bool speedIsCollected = false;
     private bool rocketLauncherIsCollected = false;
@@ -14,6 +15,9 @@ public class ChangeItemInput : MonoBehaviour {
     private bool speedIsUsed = false;
     private bool lookAroundIsUsed = false;
     private bool shootingIsUsed = false;
+    private bool onTeleport = false;
+
+
     private int lookAroundCounter = 0;
     private int shootingCounter = 0;
     private int speedItemCounter = 0;
@@ -38,14 +42,22 @@ public class ChangeItemInput : MonoBehaviour {
     private float shootButtonWidth = 64;
     private float shootButtonHeight = 64;
 
+    private float teleportButtonXposition;
+    private float teleportButtonYposition = Screen.height - 100f;
+    private float teleportButtonWidth = 64;
+    private float teleportButtonHeight = 64;
+
     private Rect speedItemCounterGUIposition = new Rect(250f, 50f, 150f, 50f);
 	// Use this for initialization
 	void Start () {
         scopeButtonXposition = inventoryXposition;
         speedButtonXposition = inventoryXposition + speedButtonWidth;
         shootButtonXposition = inventoryXposition + (shootButtonWidth) * 2f;
+        teleportButtonXposition = inventoryXposition + (shootButtonWidth) *3f;
         Screen.lockCursor = true;
         GameeventManager.pickUpItemHandler += reactOnChangedItem;
+        GameeventManager.onTeleporterFieldHandler += reactOnTeleport;
+        GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
 	}
 	
 	// Update is called once per frame
@@ -70,6 +82,13 @@ public class ChangeItemInput : MonoBehaviour {
                 GameeventManager.useSpeed();
                 speedItemCounter--;
                 speedIsUsed = true;
+            }
+        }
+        if (onTeleport)
+        {
+            if (Input.GetButtonUp("Teleport"))
+            {
+
             }
         }
 
@@ -112,12 +131,23 @@ public class ChangeItemInput : MonoBehaviour {
 
     }
 
+    private void reactOnTeleport()
+    {
+        onTeleport = true;
+    }
+
+    private void reactOnTeleportLeft()
+    {
+        onTeleport = false;
+    }
+
     void OnGUI()
     {
         DrawInventory();
         DrawFernglasIcon();
         DrawShootingIcon();
         DrawSpeedIcon();
+        DrawTeleportIcon();
         if (speedItemCounter > 0)
         {
             GUI.Box(speedItemCounterGUIposition, "Speed-Items : " + speedItemCounter.ToString());
@@ -129,6 +159,19 @@ public class ChangeItemInput : MonoBehaviour {
     private void DrawInventory()
     {
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
+    }
+
+    private void DrawTeleportIcon()
+    {
+
+        if (onTeleport)
+        {
+            if (GUI.Button(new Rect(teleportButtonXposition, teleportButtonYposition, teleportButtonWidth, teleportButtonHeight), teleportIcon))
+            {
+
+            }
+
+        }
     }
 
     private void DrawShootingIcon()

@@ -41,9 +41,9 @@ public class NetworkManager : MonoBehaviour
 	void OnServerInitialized()
 	{
 
-        //InstantiateDrone();
+        InstantiateDrone();
 
-        InstantiateRefugee();
+        //InstantiateRefugee();
         
 
     }
@@ -69,6 +69,7 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
+        dronePlayer.transform.FindChild("DroneCamera").GetComponent<AudioListener>().enabled = true;
     }
 	
 	
@@ -99,6 +100,7 @@ public class NetworkManager : MonoBehaviour
 	void OnConnectedToServer()
 	{
         InstantiateRefugee();
+        //InstantiateDrone();
 	}
 	
 	

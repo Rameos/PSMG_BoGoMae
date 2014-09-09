@@ -1331,15 +1331,13 @@ GameObject:
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
   - 114: {fileID: 11400012}
-  - 114: {fileID: 11400010}
-  - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100176
 GameObject:
   m_ObjectHideFlags: 1
@@ -2248,7 +2246,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -53.0280914, y: 1.00016284, z: 344.830383}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 400042}
@@ -2778,17 +2776,6 @@ MonoBehaviour:
   jumpSpeed: 20
   upDownRange: 60
   camera: {fileID: 2000000}
---- !u!114 &11400010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a017f01ceb9fc84ea532986e4c3bfd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2803,17 +2790,7 @@ MonoBehaviour:
   lookAroundIcon: {fileID: 2800000, guid: 290d446931ff7e74d99379124721b9cf, type: 3}
   speedIcon: {fileID: 2800000, guid: e8a7688737c65e14888400d50fb2905b, type: 3}
   shootIcon: {fileID: 2800000, guid: 32b7417b513fb5e459a2e18209fa0ca8, type: 3}
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196122ed997c12f46b61edb0ebb183af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  teleportIcon: {fileID: 2800000, guid: 519b6ff14c722f242b1e7ce050b23836, type: 3}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1

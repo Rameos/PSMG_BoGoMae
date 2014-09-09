@@ -12,22 +12,35 @@ public class RefugeeMovement : MonoBehaviour
     private float speedItemDuration = 10f;
     private bool speedItemIsUsed = false;
     private Rect speedItemDurationGUIposition = new Rect(400f, 50f, 150f, 50f);
+    private bool onTeleport = false;
 
     // Use this for initialization
     void Start()
     {
         GameeventManager.useSpeedHandler += reactOnUseSpeedItem;
+        GameeventManager.onTeleporterFieldHandler += reactOnTeleportField;
+        GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
     }
 
 
 
+
     // Update is called once per frame
     void Update()
     {
-        MovementFromInput();
-        HandleSpeedItem();
+
+        if (onTeleport)
+        {
+            animator.speed = 0f;
+        }
+        else
+        {
+            animator.speed = 1f;
+            MovementFromInput();
+            HandleSpeedItem();
+        }
     }
 
     void OnGUI()
@@ -79,6 +92,16 @@ public class RefugeeMovement : MonoBehaviour
         speedItemDuration = 10f;
         speedItemIsUsed = true;
 
+    }
+
+    private void reactOnTeleportField()
+    {
+        onTeleport = true;
+    }
+
+    private void reactOnTeleportLeft()
+    {
+        onTeleport = false;
     }
 
 }

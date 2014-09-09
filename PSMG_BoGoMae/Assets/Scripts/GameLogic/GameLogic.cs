@@ -11,7 +11,6 @@ public class GameLogic : MonoBehaviour {
         GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
         GameeventManager.onGoalReachedHandler += reactOnGoalReached;
         transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
-        Debug.Log(transmitterCounter);
 	}
 	
 	// Update is called once per frame

@@ -12,6 +12,9 @@ public delegate void onLookAroundClicked(int counter);
 public delegate void onEnableShoot();
 public delegate void onDisableShoot();
 public delegate void onGoalReached();
+public delegate void onTeleporterField();
+public delegate void onTeleportLeft();
+public delegate void onTeleportPressed();
 
 public class GameeventManager : MonoBehaviour {
     
@@ -25,7 +28,33 @@ public class GameeventManager : MonoBehaviour {
     public static event onEnableShoot onEnableShootHandler;
     public static event onDisableShoot onDisableShootHandler;
     public static event onGoalReached onGoalReachedHandler;
+    public static event onTeleporterField onTeleporterFieldHandler;
+    public static event onTeleportLeft onTeleportLeftHandler;
+    public static event onTeleportPressed onTeleportPressedHandler;
 
+    public static void onTeleportPressed()
+    {
+        if (onTeleportPressedHandler != null)
+        {
+            onTeleportPressedHandler();
+        }
+    }
+
+    public static void onTeleportLeft()
+    {
+        if (onTeleportLeftHandler != null)
+        {
+            onTeleportLeftHandler();
+        }
+    }
+
+    public static void onTeleporterField()
+    {
+        if (onTeleporterFieldHandler != null)
+        {
+            onTeleporterFieldHandler();
+        }
+    }
 
     public static void onGoalReached()
     {

@@ -27,12 +27,15 @@ public class CameraController : MonoBehaviour {
     private CameraStates cameraState = CameraStates.FirstPerson;
     private float upDownLookRange = 60f;
     private float firstPersonLookSpeed = 1f;
+    private bool onTeleportField = false;
+    private bool setTeleportCamOnce = false;
 
     public enum CameraStates
     {
         FirstPerson,
         Shooting,
-        LookAround
+        LookAround,
+        onTeleport
 
     }
 
@@ -42,7 +45,8 @@ public class CameraController : MonoBehaviour {
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
         GameeventManager.onEnableShootHandler += reactOnEnableShoot;
-
+        GameeventManager.onTeleporterFieldHandler += reactOnTeleportField;
+        GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
 	}
 
 
@@ -83,26 +87,19 @@ public class CameraController : MonoBehaviour {
 
                     break;
 
+                case CameraStates.onTeleport:
+
+        
+
+                    break;
+
             }
         
     }
-    /*
-    void OnNetworkInstantiate(NetworkMessageInfo info)
-    {
-        Camera camera = GameObject.FindGameObjectWithTag("RefugeeCamera").camera;
-        if (networkView.isMine)
-        {
-            camera.enabled = true;
-        }
-        else
-        {
-            camera.enabled = false;
-        }
-    }
-     */
+
+
     private void determineCameraState()
     {
-
 
         if (inLookAround)
         {
@@ -112,11 +109,37 @@ public class CameraController : MonoBehaviour {
         {
             cameraState = CameraStates.Shooting;
         }
+        else if (onTeleportField)
+        {
+            cameraState = CameraStates.onTeleport;
+        }
         else
         {
             cameraState = CameraStates.FirstPerson;
         }
     }
+
+
+    private void reactOnTeleportField()
+    {
+        if (setTeleportCamOnce)
+        {
+
+        }
+        else
+        {
+            setCameraTopDownView();
+            setTeleportCamOnce = true;
+        }
+        onTeleportField = true;
+        //inLookAround = false;
+    }
+
+    private void reactOnTeleportLeft()
+    {
+        onTeleportField = false;
+    }
+
     private void reactOnEnableShoot()
     {
         inShooting = true;
@@ -125,6 +148,12 @@ public class CameraController : MonoBehaviour {
     private void reactOnEnableFirstPersonCamera(int counter)
     {
         inLookAround = true;
+    }
+
+    private void setCameraTopDownView()
+    {
+        camera.transform.position = new Vector3(0f, 850f, 0f);
+        camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
     private void rotateCamWithMouse()
@@ -138,10 +167,10 @@ public class CameraController : MonoBehaviour {
 
     private void rotateCamWithGaze()
     {
-        
+        Debug.Log("in Cam with gaze");
         float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
         xAxisWithLimit += inputXAxis * firstPersonLookSpeed;
-        Debug.Log(inputXAxis + " || " + xAxisWithLimit);
+        //Debug.Log(inputXAxis + " || " + xAxisWithLimit);
         float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
         yAxisWithLimit += inputYAxis * firstPersonLookSpeed;
 
@@ -150,4 +179,6 @@ public class CameraController : MonoBehaviour {
 
         camera.transform.rotation = Quaternion.Euler(xAxisWithLimit, yAxisWithLimit, 0);
     }
+
+
 }
