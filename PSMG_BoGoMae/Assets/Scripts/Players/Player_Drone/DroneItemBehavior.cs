@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DroneItemBehavior : MonoBehaviour {
+public class DroneItemBehavior : MonoBehaviour
+{
 
     private float inventoryXposition = 300;
     private float inventoryYposition = Screen.height - 100f;
@@ -20,22 +21,46 @@ public class DroneItemBehavior : MonoBehaviour {
 
     private int droneShootingCounter = 0;
     public Texture2D shootIcon;
+    private int droneShootingPressedCounter = 0;
 
 
-
-	// Use this for initialization
-	void Start () {
-		Debug.Log ("droneitem...");
-        Screen.lockCursor = true;
-		DrawShootingIcon ();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    // Use this for initialization
+    void Start()
     {
-	    changeWeapon();
-	}
+        Screen.lockCursor = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        DetectButtonPress();
+        EnableShoot();
+
+
+        //changeWeapon();
+    }
+
+    private void DetectButtonPress()
+    {
+        if (Input.GetButtonUp("DroneShoot"))
+        {
+            droneShootingPressedCounter++;
+        }
+
+    }
+
+    private void EnableShoot()
+    {
+        if (droneShootingPressedCounter % 2 == 0)
+        {
+            GameeventManager.onDisableShoot();
+        }
+        else
+        {
+            GameeventManager.onEnableShoot();
+        }
+
+    }
 
 
 
@@ -48,11 +73,11 @@ public class DroneItemBehavior : MonoBehaviour {
             if (droneShootingCounter % 2 == 0)
             {
                 Screen.lockCursor = true;
-                //GameeventManager.onDisableShoot();
+                GameeventManager.onDisableShoot();
             }
             else
             {
-              //  GameeventManager.onEnableShoot();
+                GameeventManager.onEnableShoot();
                 Screen.lockCursor = false;
             }
         }
@@ -63,13 +88,14 @@ public class DroneItemBehavior : MonoBehaviour {
 
         if (true)
         {
-            if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon) || Input.GetButtonUp("DroneShoot"))
+            if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon))
             {
+                //fuer mausklicks:
                 droneShootingCounter++;
                 Debug.Log("shooting counter: " + droneShootingCounter);
                 if (droneShootingCounter % 2 == 0)
                 {
-                    //GameeventManager.onDisableShoot();
+                    GameeventManager.onDisableShoot();
                 }
                 else
                 {
@@ -82,23 +108,23 @@ public class DroneItemBehavior : MonoBehaviour {
 
     void OnGUI()
     {
-        //DrawShootingIcon();
 
-      /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
+        DrawShootingIcon();
+        /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
-        if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 1"))
-        {
-           // GameeventManager.setTrap();
-        }
-        if (GUI.Button(new Rect(trapButtonXposition+160, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 2"))
-        {
-            // GameeventManager.setTrap();
-        }
-        if (GUI.Button(new Rect(trapButtonXposition+320, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 3"))
-        {
-            // GameeventManager.setTrap();
-        }
-       * 
-       * */
+          if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 1"))
+          {
+             // GameeventManager.setTrap();
+          }
+          if (GUI.Button(new Rect(trapButtonXposition+160, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 2"))
+          {
+              // GameeventManager.setTrap();
+          }
+          if (GUI.Button(new Rect(trapButtonXposition+320, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 3"))
+          {
+              // GameeventManager.setTrap();
+          }
+         * 
+         * */
     }
 }

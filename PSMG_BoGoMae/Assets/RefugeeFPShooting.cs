@@ -3,45 +3,94 @@ using System.Collections;
 
 public class RefugeeFPShooting : MonoBehaviour {
 
-    public float cooldown = 1f;
+    private float cooldown = 1.0f;
+    private int rocketsAmount = 0;
+    private int rocketsPerItemPickUp = 10;
     public GameObject bulletPrefab;
+    private Rect rocketsGUIposition = new Rect(100f, 50f, 150f, 50f);
 
-    private float cooldownRemaining = 0;
-    private GazeInputFromAOI gazeInput;
+    private float cooldownRemaining = 0f;
     private bool inShooting = false;
+    private bool cooldownOver = true;
+    private bool rocketsLeft = false;
 
 
     // Use this for initialization
 	void Start () {
-        gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         GameeventManager.onEnableShootHandler += reactOnEnableShoot;
         GameeventManager.onDisableShootHandler += reactOnDisableShoot;
+        GameeventManager.pickUpItemHandler += reactOnPickUpRocketLauncher;
 	}
+
 
 	
 	// Update is called once per frame
 	void Update () {
-        
-        if(Input.GetMouseButtonDown(0) && inShooting && cooldownRemaining <= 0){
-            Debug.Log("in fps update");
-            //Instantiate(bulletPrefab, transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.position, Camera.main.transform.rotation);
-            Network.Instantiate(bulletPrefab, transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.position, Camera.main.transform.rotation, 0);
+
+        CheckCooldown();
+        CheckRocketsLeft();
+        if(Input.GetMouseButtonDown(0) && inShooting && cooldownOver && rocketsLeft){
+            cooldown = 1.0f;
+            rocketsAmount--;
+            Network.Instantiate(bulletPrefab, transform.FindChild(Config.REFUGEE_CAMERA).FindChild("rocketLauncher").transform.position, Camera.main.transform.rotation, 0);
         }
 	}
+
+    void OnGUI()
+    {
+        if (inShooting)
+        {
+            GUI.Box(rocketsGUIposition, "Raketen: " + rocketsAmount.ToString());
+        }
+    }
+
+    private void CheckRocketsLeft()
+    {
+        if (rocketsAmount > 0)
+        {
+            rocketsLeft = true;
+        }
+        else
+        {
+            rocketsLeft = false;
+        }
+    }
+
+    private void CheckCooldown()
+    {
+        if (cooldown >= 0)
+        {
+            cooldown -= Time.deltaTime;
+            cooldownOver = false;
+
+        }
+        else
+        {
+            cooldownOver = true;
+        }
+
+        //Debug.Log(cooldown + "|| " +cooldownOver);
+    }
+
     private void reactOnEnableShoot()
     {
-
-        Debug.Log("in shooting true");
         inShooting = true;
-        transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.gameObject.SetActive(true);
-
+        transform.FindChild(Config.REFUGEE_CAMERA).FindChild("rocketLauncher").transform.gameObject.SetActive(true);
+        
     }
 
     private void reactOnDisableShoot()
     {
-
-        Debug.Log("in shooting false");
         inShooting = false;
-        transform.FindChild("Main Camera").FindChild("rocketLauncher").transform.gameObject.SetActive(false);
+        transform.FindChild(Config.REFUGEE_CAMERA).FindChild("rocketLauncher").transform.gameObject.SetActive(false);
     }
+
+    private void reactOnPickUpRocketLauncher(int itemType)
+    {
+        if (itemType == Config.ROCKETLAUNCHER)
+        {
+            rocketsAmount += rocketsPerItemPickUp;
+        }
+    }
+
 }

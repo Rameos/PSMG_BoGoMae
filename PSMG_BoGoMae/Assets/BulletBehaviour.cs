@@ -7,6 +7,7 @@ public class BulletBehaviour : MonoBehaviour {
     public float bulletSpeed = 30f;
     public float bulletDamage = 100f;
     public float explosionRadius = 3f;
+    public GameObject fireEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -32,13 +33,23 @@ public class BulletBehaviour : MonoBehaviour {
     {
         transform.Translate(transform.forward * bulletSpeed * Time.deltaTime, Space.World);
     }
-
+    
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("hit: " + collider.transform.gameObject);
+        Debug.Log("rakete collision mit: " + collider.gameObject);
+        Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
         Explode();
-    }
 
+    }
+    /*
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("rakete collision mit: " + collision.gameObject);
+        Network.Instantiate(fireEffect, collision.transform.position, Quaternion.identity, 0);
+        Explode();
+
+    }
+    */
     private void Explode()
     {
         Destroy(gameObject);

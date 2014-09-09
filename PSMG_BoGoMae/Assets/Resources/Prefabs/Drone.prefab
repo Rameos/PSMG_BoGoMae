@@ -14,11 +14,11 @@ GameObject:
   - 81: {fileID: 8100000}
   m_Layer: 0
   m_Name: DroneCamera
-  m_TagString: Untagged
+  m_TagString: DroneCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd527b9acda4d7418e89de20baf220a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
   bulletPrefab: {fileID: 100006, guid: ff0b8dae8996b2c4f8915d1e30666b5f, type: 2}
 --- !u!114 &11400006
 MonoBehaviour:

@@ -28,6 +28,7 @@ TagManager:
   - RocketLauncherItem
   - FernglasItem
   - Rocket
+  - Environment
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

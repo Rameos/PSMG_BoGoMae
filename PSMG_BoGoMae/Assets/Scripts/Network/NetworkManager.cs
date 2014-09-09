@@ -40,19 +40,16 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnServerInitialized()
 	{
-        
-		GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 300, 0));
 
-        dronePlayer.GetComponent<DroneController>().enabled = true;
-        dronePlayer.GetComponent<Energymanagement>().enabled = true;
-        dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
-        dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
-        dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
-       
-        
-        // droneplayer block auskommentieren, wenn man refugee testen möchte:
+        //InstantiateDrone();
 
-        /*
+        InstantiateRefugee();
+        
+
+    }
+
+    private void InstantiateRefugee()
+    {
         GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 0));
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
@@ -61,8 +58,17 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
-        */
 
+    }
+
+    private void InstantiateDrone()
+    {
+        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 300, 0));
+        dronePlayer.GetComponent<DroneController>().enabled = true;
+        dronePlayer.GetComponent<Energymanagement>().enabled = true;
+        dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
+        dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
+        dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
     }
 	
 	
@@ -92,14 +98,7 @@ public class NetworkManager : MonoBehaviour
 	
 	void OnConnectedToServer()
 	{
-		GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 0));
-        refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
-        refugeePlayer.GetComponent<CameraController>().enabled = true;
-        refugeePlayer.GetComponent<RefugeeMovement>().enabled = true;
-        refugeePlayer.GetComponent<CharacterController>().enabled = true;
-        refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
-        refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
-        refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
+        InstantiateRefugee();
 	}
 	
 	
