@@ -57,7 +57,15 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
-        refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
+
+        if (networkView.isMine)
+        {
+            refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
+        }
+        else
+        {
+            refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(false);
+        }
 
     }
 
@@ -68,7 +76,16 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
-        dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
+        
+
+        if (networkView.isMine)
+        {
+            dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
+        }
+        else
+        {
+            dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(false);
+        }
     }
 	
 	
