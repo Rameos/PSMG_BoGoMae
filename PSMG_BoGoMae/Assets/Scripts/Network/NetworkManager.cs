@@ -57,7 +57,7 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
-
+        refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
     }
 
     private void InstantiateDrone()
