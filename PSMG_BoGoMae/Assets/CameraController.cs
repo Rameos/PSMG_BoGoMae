@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
     public float mouseSensitivity = 5.0f;
     public float jumpSpeed = 50.0f;
@@ -25,10 +26,11 @@ public class CameraController : MonoBehaviour {
     private float yAxisMax = 360;
     private GazeInputFromAOI gazeInput;
     private CameraStates cameraState = CameraStates.FirstPerson;
-    private float upDownLookRange = 60f;
+    private float upDownLookRange = 80f;
     private float firstPersonLookSpeed = 1f;
     private bool onTeleportField = false;
     private bool setTeleportCamOnce = false;
+    private Vector3 defaultCameraPosition;
 
     public enum CameraStates
     {
@@ -39,62 +41,64 @@ public class CameraController : MonoBehaviour {
 
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //Screen.lockCursor = true;
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
         GameeventManager.onEnableShootHandler += reactOnEnableShoot;
         GameeventManager.onTeleporterFieldHandler += reactOnTeleportField;
         GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
-	}
+    }
 
 
-	
-	// Update is called once per frame
-	void Update () {
 
-            determineCameraState();
+    // Update is called once per frame
+    void Update()
+    {
 
-            if (Input.GetButton("Jump"))
-            {
-                verticalVelocity = jumpSpeed;
-            }
+        determineCameraState();
 
-        
+        if (Input.GetButton("Jump"))
+        {
+            verticalVelocity = jumpSpeed;
+        }
 
-	}
+
+
+    }
 
     void LateUpdate()
     {
 
-            switch (cameraState)
-            {
+        switch (cameraState)
+        {
 
-                case CameraStates.FirstPerson:
-                    rotateCamWithMouse();
+            case CameraStates.FirstPerson:
+                rotateCamWithMouse();
+                defaultCameraPosition = camera.transform.position;
+                break;
 
-                    break;
+            case CameraStates.Shooting:
+                rotateCamWithMouse();
 
-                case CameraStates.Shooting:
-                    rotateCamWithMouse();
+                break;
 
-                    break;
+            case CameraStates.LookAround:
 
-                case CameraStates.LookAround:
+                rotateCamWithGaze();
 
-                    rotateCamWithGaze();
+                break;
 
-                    break;
+            case CameraStates.onTeleport:
 
-                case CameraStates.onTeleport:
+                Debug.Log("in CameraStates.onteleport!");
 
-        
+                break;
 
-                    break;
+        }
 
-            }
-        
     }
 
 
@@ -103,18 +107,22 @@ public class CameraController : MonoBehaviour {
 
         if (inLookAround)
         {
+            Debug.Log("determineCameraState: lookAround: " + inLookAround);
             cameraState = CameraStates.LookAround;
         }
         else if (inShooting)
         {
+            Debug.Log("determineCameraState: inshooting: " + inShooting);
             cameraState = CameraStates.Shooting;
         }
         else if (onTeleportField)
         {
+            Debug.Log("determineCameraState: onteleportfield: " + onTeleportField);
             cameraState = CameraStates.onTeleport;
         }
         else
         {
+            Debug.Log("determineCameraState: else zweig: ");
             cameraState = CameraStates.FirstPerson;
         }
     }
@@ -138,6 +146,7 @@ public class CameraController : MonoBehaviour {
     private void reactOnTeleportLeft()
     {
         onTeleportField = false;
+        setCameraFirstPersonView();
     }
 
     private void reactOnEnableShoot()
@@ -152,8 +161,18 @@ public class CameraController : MonoBehaviour {
 
     private void setCameraTopDownView()
     {
+        //transform.FindChild("Main Camera").camera.enabled = false;
+        //transform.FindChild("TopDownCamera").camera.enabled = true;
         camera.transform.position = new Vector3(0f, 850f, 0f);
         camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+    }
+
+    private void setCameraFirstPersonView()
+    {
+        //transform.FindChild("Main Camera").camera.enabled = true;
+        //camera = transform.FindChild("Main Camera").camera;
+        //transform.FindChild("TopDownCamera").camera.enabled = false;
+        camera.transform.position = defaultCameraPosition;
     }
 
     private void rotateCamWithMouse()

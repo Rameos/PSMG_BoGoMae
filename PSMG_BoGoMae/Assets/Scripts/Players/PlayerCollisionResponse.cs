@@ -20,12 +20,11 @@ public class PlayerCollisionResponse : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-
         if (collider.CompareTag("Goal"))
         {
             Debug.Log("collision with goal");
             GameeventManager.onGoalReached();
-
+            
         }
 
         if (collider.CompareTag("RocketLauncherItem"))

@@ -29,6 +29,7 @@ TagManager:
   - FernglasItem
   - Rocket
   - Environment
+  - TopDownCamera
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

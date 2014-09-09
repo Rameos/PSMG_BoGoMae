@@ -38,6 +38,7 @@ public class RefugeeMovement : MonoBehaviour
         else
         {
             animator.speed = 1f;
+            Debug.Log("in react on teleport left, animator.speed: " + animator.speed);
             MovementFromInput();
             HandleSpeedItem();
         }
@@ -101,6 +102,7 @@ public class RefugeeMovement : MonoBehaviour
 
     private void reactOnTeleportLeft()
     {
+
         onTeleport = false;
     }
 

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChangeItemInput : MonoBehaviour {
+public class ChangeItemInput : MonoBehaviour
+{
 
     //textures
     public Texture2D lookAroundIcon;
@@ -48,23 +49,25 @@ public class ChangeItemInput : MonoBehaviour {
     private float teleportButtonHeight = 64;
 
     private Rect speedItemCounterGUIposition = new Rect(250f, 50f, 150f, 50f);
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         scopeButtonXposition = inventoryXposition;
         speedButtonXposition = inventoryXposition + speedButtonWidth;
         shootButtonXposition = inventoryXposition + (shootButtonWidth) * 2f;
-        teleportButtonXposition = inventoryXposition + (shootButtonWidth) *3f;
+        teleportButtonXposition = inventoryXposition + (shootButtonWidth) * 3f;
         Screen.lockCursor = true;
         GameeventManager.pickUpItemHandler += reactOnChangedItem;
         GameeventManager.onTeleporterFieldHandler += reactOnTeleport;
         GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         DetectButtonPress();
         EnableShoot();
-	}
+    }
 
     private void DetectButtonPress()
     {
@@ -177,12 +180,12 @@ public class ChangeItemInput : MonoBehaviour {
     private void DrawShootingIcon()
     {
 
-        if(rocketLauncherIsCollected)
+        if (rocketLauncherIsCollected)
         {
             if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon))
             {
                 shootingCounter++;
-                Debug.Log("shotting counter: "+shootingCounter);
+                Debug.Log("shotting counter: " + shootingCounter);
                 if (shootingCounter % 2 == 0)
                 {
                     GameeventManager.onDisableShoot();

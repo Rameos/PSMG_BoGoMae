@@ -16,8 +16,9 @@ public delegate void onTeleporterField();
 public delegate void onTeleportLeft();
 public delegate void onTeleportPressed();
 
-public class GameeventManager : MonoBehaviour {
-    
+public class GameeventManager : MonoBehaviour
+{
+
     public static event pickUpItem pickUpItemHandler;
     public static event useSpeed useSpeedHandler;
     public static event setTrap setTrapHandler;
@@ -86,7 +87,7 @@ public class GameeventManager : MonoBehaviour {
         if (onLookAroundClickedHandler != null)
         {
             onLookAroundClickedHandler(counter);
-            
+
         }
     }
 
