@@ -17,7 +17,10 @@ public class HasHealth : MonoBehaviour {
 
     private void Die()
     {
-        Debug.Log("in die");
+        if (gameObject.tag == "Transmitter")
+        {
+            GameeventManager.transmitterDestroyd();
+        }
         Destroy(gameObject);
     }
 }

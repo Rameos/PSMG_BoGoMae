@@ -22,7 +22,8 @@ public class PlayerCollisionResponse : MonoBehaviour
     {
         if (collider.CompareTag("Goal"))
         {
-            Debug.Log("Ziel erreicht, Flüchtling gewinnt");
+            Debug.Log("collision with goal");
+            GameeventManager.onGoalReached();
             
         }
 
@@ -31,7 +32,6 @@ public class PlayerCollisionResponse : MonoBehaviour
             Destroy(collider.gameObject.light);
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;
-            Debug.Log("Collision with rocketlauncher");
             GameeventManager.pickUpItem(Config.ROCKETLAUNCHER);
         }
 
@@ -40,7 +40,6 @@ public class PlayerCollisionResponse : MonoBehaviour
             Destroy(collider.gameObject.light);
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;
-            Debug.Log("Collision with fernglas");
             GameeventManager.pickUpItem(Config.FERNGLAS);
         }
 
@@ -49,21 +48,10 @@ public class PlayerCollisionResponse : MonoBehaviour
             Destroy(collider.gameObject.light);
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;    
-            Debug.Log("Collision with speeditem");
             GameeventManager.pickUpItem(Config.SPEED);
         }
-
-        if (collider.CompareTag("Transmitter"))
-        {
-            Debug.Log("Collision with transmitter");
-            GameeventManager.transmitterCollected();
-        }
     }
 
-    void ItemCollected(string blablabla)
-    {
-        Debug.Log("Test");
-    }
 }
     
 

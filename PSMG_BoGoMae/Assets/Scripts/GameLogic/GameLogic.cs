@@ -8,8 +8,10 @@ public class GameLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameeventManager.transmitterIsCollectedHandler += reactOnTransmitterCollected;
+        GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
+        GameeventManager.onGoalReachedHandler += reactOnGoalReached;
         transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
+        Debug.Log(transmitterCounter);
 	}
 	
 	// Update is called once per frame
@@ -17,12 +19,18 @@ public class GameLogic : MonoBehaviour {
 	
 	}
 
-    private void reactOnTransmitterCollected()
+    private void reactOnGoalReached()
     {
+        Debug.Log("Flüchtling erreicht Ziel, Sieg, hurra!");
+    }
+
+    private void reactOnTransmitterDestroyd()
+    {
+        Debug.Log("in react on transmitter destroyd");
         transmitterCounter--;
         if (transmitterCounter == 0)
         {
-            Debug.Log("Refugee hat gewonnen | alle transmitter eingesammelt");
+            Debug.Log("Refugee hat gewonnen | alle transmitter kaputt");
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Collections;
 public class BulletBehaviour : MonoBehaviour {
 
     private float bulletLifespan = 5.0f;
-    public float bulletSpeed = 30f;
-    public float bulletDamage = 100f;
-    public float explosionRadius = 3f;
+    private float bulletSpeed = 400f;
+    private float bulletDamage = 50f;
+    private float explosionRadius = 3f;
     public GameObject fireEffect;
 
 	// Use this for initialization
@@ -57,9 +57,11 @@ public class BulletBehaviour : MonoBehaviour {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in colliders)
         {
+
             HasHealth hasHealth = collider.GetComponent<HasHealth>();
             if (hasHealth != null)
             {
+                Debug.Log("in hasHealth()");
                 hasHealth.ReceiveDamage(bulletDamage);
             }
         }

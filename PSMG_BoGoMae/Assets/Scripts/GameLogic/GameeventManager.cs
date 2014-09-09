@@ -7,11 +7,11 @@ public delegate void useSpeed();
 public delegate void setTrap();
 public delegate void refugeeIsActive();
 public delegate void droneIsActive();
-public delegate void transmitterCollected();
+public delegate void transmitterDestroyd();
 public delegate void onLookAroundClicked(int counter);
 public delegate void onEnableShoot();
 public delegate void onDisableShoot();
-
+public delegate void onGoalReached();
 
 public class GameeventManager : MonoBehaviour {
     
@@ -20,10 +20,20 @@ public class GameeventManager : MonoBehaviour {
     public static event setTrap setTrapHandler;
     public static event refugeeIsActive refugeeIsActiveHandler;
     public static event droneIsActive droneIsActiveHandler;
-    public static event transmitterCollected transmitterIsCollectedHandler;
+    public static event transmitterDestroyd transmitterIsDestroydHandler;
     public static event onLookAroundClicked onLookAroundClickedHandler;
     public static event onEnableShoot onEnableShootHandler;
     public static event onDisableShoot onDisableShootHandler;
+    public static event onGoalReached onGoalReachedHandler;
+
+
+    public static void onGoalReached()
+    {
+        if (onGoalReachedHandler != null)
+        {
+            onGoalReachedHandler();
+        }
+    }
 
     public static void onDisableShoot()
     {
@@ -51,11 +61,11 @@ public class GameeventManager : MonoBehaviour {
         }
     }
 
-    public static void transmitterCollected()
+    public static void transmitterDestroyd()
     {
-        if (transmitterIsCollectedHandler != null)
+        if (transmitterIsDestroydHandler != null)
         {
-            transmitterIsCollectedHandler();
+            transmitterIsDestroydHandler();
         }
     }
 
