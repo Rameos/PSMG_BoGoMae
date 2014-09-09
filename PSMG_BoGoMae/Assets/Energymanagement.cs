@@ -50,8 +50,8 @@ public class Energymanagement : MonoBehaviour {
         GUI.Box(new Rect(Screen.width / 2 + 200, Screen.height / 2 - 100, energy, 25), "" , rectStyle);
         */
 
-        GUI.Box(new Rect(Screen.width / 2 + 200, Screen.height / 2 - 100, 100, 25), "Energy:" + Mathf.Round(energy) + "/" + maxEnergy);
-        GUI.Box(new Rect(Screen.width / 2 + 200, Screen.height / 2 - 100, energy, 25), "");
+        GUI.Box(new Rect(Screen.width / 2 -50, 10, 100, 25), "Energy:" + Mathf.Round(energy) + "/" + maxEnergy);
+        GUI.Box(new Rect(Screen.width / 2 -50, 10, energy, 25), "");
     }
 
 
