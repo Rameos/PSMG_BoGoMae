@@ -16,6 +16,8 @@ public delegate void onTeleporterField();
 public delegate void onTeleportLeft();
 public delegate void onTeleportPressed();
 public delegate void droneFiredARocket();
+public delegate void enableSound();
+
 
 public class GameeventManager : MonoBehaviour
 {
@@ -34,6 +36,15 @@ public class GameeventManager : MonoBehaviour
     public static event onTeleportLeft onTeleportLeftHandler;
     public static event onTeleportPressed onTeleportPressedHandler;
     public static event droneFiredARocket onDroneFiredARocketHandler;
+    public static event enableSound onEnableSoundHandler;
+
+    public static void enableSound()
+    {
+        if (onEnableSoundHandler != null)
+        {
+            onEnableSoundHandler();
+        }
+    }
 
     public static void droneFiredARocket()
     {
