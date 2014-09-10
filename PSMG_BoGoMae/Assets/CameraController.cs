@@ -32,6 +32,8 @@ public class CameraController : MonoBehaviour
     private bool setTeleportCamOnce = false;
     private Vector3 defaultCameraPosition;
 
+    public bool soundEnabled = false;
+
     public enum CameraStates
     {
         FirstPerson,
@@ -65,8 +67,20 @@ public class CameraController : MonoBehaviour
             verticalVelocity = jumpSpeed;
         }
 
+        if (Input.GetButtonDown("Sound"))
+        {
+            reactOnEnableSound();
 
+        }
 
+    }
+
+    void OnGUI()
+    {
+        if (soundEnabled)
+        {
+            GUI.Box(new Rect(100, 10, 100, 50), "Sound an");
+        }
     }
 
     void LateUpdate()
@@ -101,6 +115,27 @@ public class CameraController : MonoBehaviour
 
     }
 
+    private void reactOnEnableSound()
+    {
+        soundEnabled = !soundEnabled;
+        Debug.Log("Sound: " + soundEnabled.ToString());
+        playSoundIfEnabled();
+
+    }
+
+    private void playSoundIfEnabled()
+    {
+        AudioSource sound = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+        if (soundEnabled)
+        {
+            sound.audio.Play();
+            Debug.Log(sound);
+        }
+        else
+        {
+            sound.Stop();
+        }
+    }
 
     private void determineCameraState()
     {
