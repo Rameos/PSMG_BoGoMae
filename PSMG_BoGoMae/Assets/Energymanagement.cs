@@ -25,6 +25,20 @@ public class Energymanagement : MonoBehaviour {
         
 	}
 
+    public float Energy
+    {
+        get { return energy; }
+        set
+        {
+            if (value < 0)
+                energy = 0f;
+            else
+            {
+                energy = value;
+            }
+        }
+    }
+
     void OnGUI()
     {
         GUI.color = Color.white;

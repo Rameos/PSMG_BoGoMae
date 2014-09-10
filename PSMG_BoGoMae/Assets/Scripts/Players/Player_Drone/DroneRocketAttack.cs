@@ -4,7 +4,8 @@ using System.Collections;
 public class DroneRocketAttack : MonoBehaviour {
 
     private float cooldown = 1.0f;
-    private int rocketsAmount = 10;
+    private float energyRocketCosts = 40f;
+    private int EnergyAmount = 10;
     private int rocketsPerItemPickUp = 10;
     public GameObject bulletPrefab;
     private Rect rocketsGUIposition = new Rect(100f, 50f, 150f, 50f);
@@ -12,15 +13,17 @@ public class DroneRocketAttack : MonoBehaviour {
     private float cooldownRemaining = 0f;
     private bool inShooting = false;
     private bool cooldownOver = true;
-    private bool rocketsLeft = false;
+    private bool energyLeft = false;
     private Camera droneCamera;
     private Vector3 spawnPointRocketleft;
     private Vector3 spawnPointRocketRight;
+    private Energymanagement energymanagment;
 
 
     // Use this for initialization
     void Start()
     {
+        energymanagment = GetComponent<Energymanagement>();
         GameeventManager.onEnableShootHandler += reactOnEnableShoot;
         GameeventManager.onDisableShootHandler += reactOnDisableShoot;
         droneCamera = GameObject.FindGameObjectWithTag(Config.DRONE_CAMERA_TAG).camera;
@@ -32,14 +35,13 @@ public class DroneRocketAttack : MonoBehaviour {
     void Update()
     {
         CheckCooldown();
-        CheckRocketsLeft();
+        CheckEnergyLeft();
         spawnPointRocketleft = droneCamera.transform.position + new Vector3(-20f, 0f, 0f);
         spawnPointRocketRight = droneCamera.transform.position + new Vector3(20f, 0f, 0f);
-
-        if (Input.GetMouseButtonDown(0) && inShooting && cooldownOver && rocketsLeft)
+        if (Input.GetMouseButtonDown(0) && inShooting && cooldownOver && energyLeft)
         {
             cooldown = 1.0f;
-            rocketsAmount--;
+            energymanagment.Energy = energymanagment.Energy - energyRocketCosts;
             Network.Instantiate(bulletPrefab, spawnPointRocketleft, droneCamera.transform.rotation, 0);
             Network.Instantiate(bulletPrefab, spawnPointRocketRight, droneCamera.transform.rotation, 0);
         }
@@ -48,19 +50,19 @@ public class DroneRocketAttack : MonoBehaviour {
     {
         if (inShooting)
         {
-            GUI.Box(rocketsGUIposition, "Raketen: " + rocketsAmount.ToString());
+            GUI.Box(rocketsGUIposition, "Raketen: " + EnergyAmount.ToString());
         }
     }
 
-    private void CheckRocketsLeft()
+    private void CheckEnergyLeft()
     {
-        if (rocketsAmount > 0)
+        if (energymanagment.Energy > energyRocketCosts)
         {
-            rocketsLeft = true;
+            energyLeft = true;
         }
         else
         {
-            rocketsLeft = false;
+            energyLeft = false;
         }
     }
 
@@ -95,7 +97,7 @@ public class DroneRocketAttack : MonoBehaviour {
     {
         if (itemType == Config.ROCKETLAUNCHER)
         {
-            rocketsAmount += rocketsPerItemPickUp;
+            EnergyAmount += rocketsPerItemPickUp;
         }
     }
 }
