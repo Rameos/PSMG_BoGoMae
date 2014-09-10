@@ -4,7 +4,7 @@ using System.Collections;
 public class DroneRocketAttack : MonoBehaviour {
 
     private float cooldown = 1.0f;
-    private float energyRocketCosts = 5f;
+    private float energyRocketCosts = 40f;
     private int EnergyAmount = 10;
     private int rocketsPerItemPickUp = 10;
     public GameObject bulletPrefab;
@@ -19,8 +19,6 @@ public class DroneRocketAttack : MonoBehaviour {
     private Vector3 spawnPointRocketRight;
     private Energymanagement energymanagment;
 
-    private bool soundEnabled;
-
 
     // Use this for initialization
     void Start()
@@ -29,8 +27,6 @@ public class DroneRocketAttack : MonoBehaviour {
         GameeventManager.onEnableShootHandler += reactOnEnableShoot;
         GameeventManager.onDisableShootHandler += reactOnDisableShoot;
         droneCamera = GameObject.FindGameObjectWithTag(Config.DRONE_CAMERA_TAG).camera;
-
-
 
     }
 
@@ -48,24 +44,10 @@ public class DroneRocketAttack : MonoBehaviour {
             energymanagment.Energy = energymanagment.Energy - energyRocketCosts;
             Network.Instantiate(bulletPrefab, spawnPointRocketleft, droneCamera.transform.rotation, 0);
             Network.Instantiate(bulletPrefab, spawnPointRocketRight, droneCamera.transform.rotation, 0);
-
-          //  soundEnabled = droneCamera.GetComponent<DroneController>().soundEnabled;
-            // if(soundEnabled)
-            if (true)
-            {
-                // besser in Rocket-Explosion
-                AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
-                AudioClip audio = (AudioClip)(Resources.Load("Explosion 1"));
-              //  sound.clip = audio;
-                sound.PlayOneShot(audio);
-
-            }
-
         }
     }
     void OnGUI()
     {
-
         if (inShooting)
         {
             GUI.Box(rocketsGUIposition, "Raketen: " + EnergyAmount.ToString());
