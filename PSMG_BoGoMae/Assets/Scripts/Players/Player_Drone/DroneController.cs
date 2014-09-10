@@ -22,7 +22,7 @@ public class DroneController : MonoBehaviour {
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
 
-    public bool soundEnabled = false;
+    public static bool soundEnabled = false;
 
     void Start()
     {

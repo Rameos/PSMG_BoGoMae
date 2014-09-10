@@ -47,9 +47,9 @@ public class DroneRocketAttack : MonoBehaviour {
             Network.Instantiate(bulletPrefab, spawnPointRocketleft, droneCamera.transform.rotation, 0);
             Network.Instantiate(bulletPrefab, spawnPointRocketRight, droneCamera.transform.rotation, 0);
 
-            // soundEnabled = droneCamera.GetComponent<DroneController>.soundEnabled;
-            // if (soundEnabled)
-            if (true)
+            soundEnabled = DroneController.soundEnabled;
+             if (soundEnabled)
+          //  if (true)
             {
                 // besser in Rocket Explosion testen !!!!!!!!!!!!!!!!!
                 AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
