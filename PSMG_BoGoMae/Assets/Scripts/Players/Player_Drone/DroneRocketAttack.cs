@@ -19,6 +19,8 @@ public class DroneRocketAttack : MonoBehaviour {
     private Vector3 spawnPointRocketRight;
     private Energymanagement energymanagment;
 
+    private bool soundEnabled;
+
 
     // Use this for initialization
     void Start()
@@ -44,6 +46,16 @@ public class DroneRocketAttack : MonoBehaviour {
             energymanagment.Energy = energymanagment.Energy - energyRocketCosts;
             Network.Instantiate(bulletPrefab, spawnPointRocketleft, droneCamera.transform.rotation, 0);
             Network.Instantiate(bulletPrefab, spawnPointRocketRight, droneCamera.transform.rotation, 0);
+
+            // soundEnabled = droneCamera.GetComponent<DroneController>.soundEnabled;
+            // if (soundEnabled)
+            if (true)
+            {
+                // besser in Rocket Explosion testen !!!!!!!!!!!!!!!!!
+                AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
+                AudioClip audio = (AudioClip)(Resources.Load("Explosion 1"));
+                sound.PlayOneShot(audio);
+            }
         }
     }
     void OnGUI()
