@@ -170,7 +170,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 777bc185d3784954aabec0e276d9329a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -240,6 +240,7 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   trap: {fileID: 0}
   trapSpawnPosition: {fileID: 0}
+  soundEnabled: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

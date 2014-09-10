@@ -22,7 +22,7 @@ public class DroneController : MonoBehaviour {
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
 
- 
+    public bool soundEnabled = false;
 
     void Start()
     {
@@ -47,6 +47,12 @@ public class DroneController : MonoBehaviour {
 
          movePlayerWithInput();
          setTrap();
+
+         if (Input.GetButtonDown("Sound"))
+         {
+             reactOnEnableSound();
+
+         }
         
     }
 
@@ -78,11 +84,36 @@ public class DroneController : MonoBehaviour {
 
     void OnGUI()
     {
-        
+        if (soundEnabled)
+        {
+            GUI.Box(new Rect(100, 10, 100, 50), "Sound an");
+        }
       /*  if(onTrapClicked) {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
         }
        */
+    }
+
+    private void reactOnEnableSound()
+    {
+        soundEnabled = !soundEnabled;
+        Debug.Log("Sound: " + soundEnabled.ToString());
+        playSoundIfEnabled();
+
+    }
+
+    private void playSoundIfEnabled()
+    {
+        AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
+        if (soundEnabled)
+        {
+            sound.audio.Play();
+            Debug.Log(sound);
+        }
+        else
+        {
+            sound.Stop();
+        }
     }
 
     private float getCrosshairXPosition()
