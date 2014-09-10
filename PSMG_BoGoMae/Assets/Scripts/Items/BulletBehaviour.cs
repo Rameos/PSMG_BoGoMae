@@ -9,6 +9,8 @@ public class BulletBehaviour : MonoBehaviour {
     private float explosionRadius = 3f;
     public GameObject fireEffect;
 
+    private bool soundEnabled;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -39,6 +41,16 @@ public class BulletBehaviour : MonoBehaviour {
         Debug.Log("rakete collision mit: " + collider.gameObject);
         Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
         Explode();
+
+        soundEnabled = DroneController.soundEnabled;
+        if (soundEnabled)
+        //  if (true)
+        {
+            // besser in Rocket Explosion testen !!!!!!!!!!!!!!!!!
+            AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
+            AudioClip audio = (AudioClip)(Resources.Load("Explosion 1"));
+            sound.PlayOneShot(audio);
+        }
 
     }
     /*
