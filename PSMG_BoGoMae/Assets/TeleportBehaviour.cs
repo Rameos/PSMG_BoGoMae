@@ -7,8 +7,6 @@ public class TeleportBehaviour : MonoBehaviour
     private int activateEyeTracker = 1;
     private int deactivateEyeTracker = 2;
     private bool onTeleporter = false;
-    private float crosshairWidth = 32;
-    private float crosshairHeight = 32;
     public Texture2D crosshair;
     private Vector3 refugeeTeleportPositionTo;
     private GameObject refugee;
