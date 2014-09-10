@@ -4,7 +4,7 @@ using System.Collections;
 public class DroneRocketAttack : MonoBehaviour {
 
     private float cooldown = 1.0f;
-    private float energyRocketCosts = 40f;
+    private float energyRocketCosts = 30f;
     private int EnergyAmount = 10;
     private int rocketsPerItemPickUp = 10;
     public GameObject bulletPrefab;
@@ -46,13 +46,7 @@ public class DroneRocketAttack : MonoBehaviour {
             Network.Instantiate(bulletPrefab, spawnPointRocketRight, droneCamera.transform.rotation, 0);
         }
     }
-    void OnGUI()
-    {
-        if (inShooting)
-        {
-            GUI.Box(rocketsGUIposition, "Raketen: " + EnergyAmount.ToString());
-        }
-    }
+
 
     private void CheckEnergyLeft()
     {

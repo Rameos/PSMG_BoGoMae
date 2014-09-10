@@ -122,7 +122,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Debug.Log("determineCameraState: else zweig: ");
+
             cameraState = CameraStates.FirstPerson;
         }
     }

@@ -16,6 +16,7 @@ public delegate void onTeleporterField();
 public delegate void onTeleportLeft();
 public delegate void onTeleportPressed();
 public delegate void droneFiredARocket();
+public delegate void droneSetSlowTrap();
 
 public class GameeventManager : MonoBehaviour
 {
@@ -34,6 +35,15 @@ public class GameeventManager : MonoBehaviour
     public static event onTeleportLeft onTeleportLeftHandler;
     public static event onTeleportPressed onTeleportPressedHandler;
     public static event droneFiredARocket onDroneFiredARocketHandler;
+    public static event droneSetSlowTrap onDroneSetSlowTrapHandler;
+
+    public static void droneSetSlowTrap()
+    {
+        if (onDroneSetSlowTrapHandler != null)
+        {
+            onDroneSetSlowTrapHandler();
+        }
+    }
 
     public static void droneFiredARocket()
     {

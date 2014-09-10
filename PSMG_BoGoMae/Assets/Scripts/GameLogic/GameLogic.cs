@@ -3,21 +3,29 @@ using System.Collections;
 
 public class GameLogic : MonoBehaviour {
 
-
+    private RefugeeMovement refugeeMovement;
     private int transmitterCounter;
 
 	// Use this for initialization
 	void Start () {
         GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
         GameeventManager.onGoalReachedHandler += reactOnGoalReached;
+        GameeventManager.onDroneSetSlowTrapHandler += reactOnSlowTrap;
         transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
         Debug.Log(transmitterCounter);
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+    private void reactOnSlowTrap()
+    {
+        GameObject refugee = GameObject.FindGameObjectWithTag("Refugee").gameObject;
+        refugeeMovement = refugee.GetComponent<RefugeeMovement>();
+        refugeeMovement.setMovement();
+    }
 
     private void reactOnGoalReached()
     {

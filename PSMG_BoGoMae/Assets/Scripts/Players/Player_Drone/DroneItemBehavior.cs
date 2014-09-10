@@ -22,12 +22,16 @@ public class DroneItemBehavior : MonoBehaviour
     private int droneShootingCounter = 0;
     public Texture2D shootIcon;
     private int droneShootingPressedCounter = 0;
-
+    private string rocketsActivatedOrDeactivated;
+    private Rect rocketsStatusGUIposition = new Rect(Screen.width / 2 - 200, 10, 150, 25);
+    private RefugeeMovement refugeeMovement;
 
     // Use this for initialization
     void Start()
     {
+
         Screen.lockCursor = true;
+
     }
 
     // Update is called once per frame
@@ -46,6 +50,10 @@ public class DroneItemBehavior : MonoBehaviour
         {
             droneShootingPressedCounter++;
         }
+        if (Input.GetButtonUp("DroneTrap"))
+        {
+            GameeventManager.droneSetSlowTrap();
+        }
 
     }
 
@@ -54,15 +62,17 @@ public class DroneItemBehavior : MonoBehaviour
         if (droneShootingPressedCounter % 2 == 0)
         {
             GameeventManager.onDisableShoot();
+            rocketsActivatedOrDeactivated = "deaktiviert";
         }
         else
         {
             GameeventManager.onEnableShoot();
+            rocketsActivatedOrDeactivated = "aktiviert";
         }
 
     }
 
-
+    /*
 
     void changeWeapon()
     {
@@ -82,28 +92,25 @@ public class DroneItemBehavior : MonoBehaviour
             }
         }
     }
-
+    */
     private void DrawShootingIcon()
     {
 
-        if (true)
-        {
-            if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon))
-            {
-                //fuer mausklicks:
-                droneShootingCounter++;
-                Debug.Log("shooting counter: " + droneShootingCounter);
-                if (droneShootingCounter % 2 == 0)
-                {
-                    GameeventManager.onDisableShoot();
-                }
-                else
-                {
-                    GameeventManager.onEnableShoot();
-                }
-            }
 
+        if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon))
+        {
+            // theoretisch für maus klicks
+            if (droneShootingCounter % 2 == 0)
+            {
+                GameeventManager.onDisableShoot();
+            }
+            else
+            {
+                GameeventManager.onEnableShoot();
+            }
         }
+        GUI.Box(rocketsStatusGUIposition, "Raketen: " + rocketsActivatedOrDeactivated);
+
     }
 
     void OnGUI()

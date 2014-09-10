@@ -13,6 +13,8 @@ public class RefugeeMovement : MonoBehaviour
     private bool speedItemIsUsed = false;
     private Rect speedItemDurationGUIposition = new Rect(400f, 50f, 150f, 50f);
     private bool onTeleport = false;
+    private Vector3 curVel = Vector3.zero;
+    private float friction = 0.4f;
 
     // Use this for initialization
     void Start()
@@ -20,9 +22,11 @@ public class RefugeeMovement : MonoBehaviour
         GameeventManager.useSpeedHandler += reactOnUseSpeedItem;
         GameeventManager.onTeleporterFieldHandler += reactOnTeleportField;
         GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
+
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
     }
+
 
 
 
@@ -31,7 +35,11 @@ public class RefugeeMovement : MonoBehaviour
     void Update()
     {
         MovementFromInput();
-        HandleSpeedItem();
+        if (speedItemIsUsed)
+        {
+            HandleSpeedItem();
+
+        }
         /*if (onTeleport)
         {
             animator.SetFloat("Forward", 0f);
@@ -45,6 +53,8 @@ public class RefugeeMovement : MonoBehaviour
             HandleSpeedItem();
         }*/
     }
+
+
 
     void OnGUI()
     {
@@ -79,8 +89,15 @@ public class RefugeeMovement : MonoBehaviour
         }
     }
 
+    public void setMovement()
+    {
+        Debug.Log("in set movement");
+        movementSpeed = 1f;
+    }
+
     private void MovementFromInput()
     {
+
         float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
         float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed;
         Vector3 speed = new Vector3(sideSpeed, 0, forwardSpeed);
@@ -107,5 +124,12 @@ public class RefugeeMovement : MonoBehaviour
 
         onTeleport = false;
     }
+
+    private void reactOnSlowTrap()
+    {
+        Debug.Log("in react ");
+        movementSpeed = 1f;
+    }
+
 
 }
