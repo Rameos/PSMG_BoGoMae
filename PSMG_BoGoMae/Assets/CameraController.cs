@@ -138,9 +138,9 @@ public class CameraController : MonoBehaviour
         {
             setCameraTopDownView();
             setTeleportCamOnce = true;
+            onTeleportField = true;
         }
-        onTeleportField = true;
-        //inLookAround = false;
+
     }
 
     private void reactOnTeleportLeft()
