@@ -28,10 +28,12 @@ public class HasHealth : MonoBehaviour
             GameeventManager.transmitterDestroyd();
         }
 
-        if (gameObject.tag == Config.REFUGEE_TAG)
+        if (gameObject.tag == Config.REFUGEE_TAG || gameObject.tag == Config.DRONE_TAG)
         {
 			GameeventManager.playerDied(gameObject);
         }
+
+
     }
 
 
