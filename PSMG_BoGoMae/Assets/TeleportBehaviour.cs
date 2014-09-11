@@ -7,7 +7,7 @@ public class TeleportBehaviour : MonoBehaviour
     private int activateEyeTracker = 1;
     private int deactivateEyeTracker = 2;
     private bool onTeleporter = false;
-    private Rect gazeTexturePosition = new Rect(Screen.width / 2, Screen.height, 500f, 100f);
+    private Rect gazeTexturePosition = new Rect(0f, 0f, Screen.width, 250f);
     public Texture2D crosshair;
     public Texture2D gazeTexture;
     private Vector3 refugeeTeleportPositionTo;
@@ -16,6 +16,9 @@ public class TeleportBehaviour : MonoBehaviour
     private float xAxisWithLimit;
     private float yAxisWithLimit;
     private GazeInputFromAOI gazeInput;
+    private float widthAOI;
+    private float heightAOI;
+    private AOI AOI_Top;
 
 
     // Use this for initialization
@@ -33,13 +36,13 @@ public class TeleportBehaviour : MonoBehaviour
         {
 
             GameeventManager.onTeleporterField();
-            float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
+            /*float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
             xAxisWithLimit += inputXAxis * 1f;
 
             float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
             yAxisWithLimit += inputYAxis * 1f; ;
-            Debug.Log("eye x: " + xAxisWithLimit + "||" + "eye y: " + yAxisWithLimit);
-            camera.transform.position = new Vector3(xAxisWithLimit, camera.transform.position.y, yAxisWithLimit);
+            */
+            camera.transform.position = new Vector3(camera.transform.position.x +gazeInput.getCameraXPositionWithGaze(), camera.transform.position.y, camera.transform.position.z + gazeInput.getCameraYPositionWithGaze());
             lookForTeleportPosition();
             teleport();
         }
@@ -49,11 +52,23 @@ public class TeleportBehaviour : MonoBehaviour
     {
         if (onTeleporter)
         {
-            GUI.Box(new Rect(gazeTexturePosition), gazeTexture);
+           // GUI.DrawTexture(gazeTexturePosition, gazeTexture);
         }
     }
 
+    private float cameraPositionFromGaze()
+    {
+        Vector3 actualEyePosition = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+        float speed = 0;
 
+        //Top
+        if (AOI_Top.volume.Contains(actualEyePosition))
+        {
+            speed ++;
+        }
+
+        return speed;
+    }
 
 
     void OnTriggerEnter(Collider collider)
@@ -67,11 +82,20 @@ public class TeleportBehaviour : MonoBehaviour
             camera = refugee.transform.FindChild("Main Camera").camera;
 
             onTeleporter = true;
+            calculateAOI();
         }
         else
         {
             onTeleporter = false;
         }
+    }
+
+    private void calculateAOI()
+    {
+        Rect topVolume = new Rect(0, 0, Screen.width, 250f);
+        Vector3 topStart = Vector3.zero;
+        Vector3 topEnd = new Vector3(Screen.width, 0, 0);
+        AOI_Top = new AOI(topVolume, topStart, topEnd);
     }
 
     void OnTriggerExit(Collider collider)

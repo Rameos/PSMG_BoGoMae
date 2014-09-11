@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 2800000, guid: ee327e230fb940e4ea79a9eb32736884, type: 3}
-  gazeTexture: {fileID: 0}
+  gazeTexture: {fileID: 2800000, guid: 1e7a854514067d144bf61cc759e9629b, type: 3}
 --- !u!65 &61655949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2528,6 +2528,10 @@ Prefab:
       propertyPath: m_Center.x
       value: -.00400000019
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 988b6b20878670443ad7fdd8c3f81a3c, type: 2}
+      propertyPath: gazeTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 1e7a854514067d144bf61cc759e9629b, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 988b6b20878670443ad7fdd8c3f81a3c, type: 2}
   m_RootGameObject: {fileID: 2022687161}

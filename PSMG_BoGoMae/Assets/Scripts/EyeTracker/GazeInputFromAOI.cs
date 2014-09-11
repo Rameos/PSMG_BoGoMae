@@ -140,5 +140,46 @@ public class GazeInputFromAOI : MonoBehaviour
 
         return speed;
     }
+    public float getCameraXPositionWithGaze()
+    {
+        Vector3 actualEyePosition = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+        float pos = 0;
+
+        //Left
+        if (AOI_Left.volume.Contains(actualEyePosition))
+        {
+            pos--;
+        }
+
+        //Right
+        else if (AOI_Right.volume.Contains(actualEyePosition))
+        {
+            pos++;
+        }
+
+        return pos;
+    }
+
+    public float getCameraYPositionWithGaze()
+    {
+        Vector3 actualEyePosition = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+        float pos = 0;
+
+        //Top
+        if (AOI_Top.volume.Contains(actualEyePosition))
+        {
+            pos++;
+        }
+
+            //Down
+        else if (AOI_Down.volume.Contains(actualEyePosition))
+        {
+            pos--;
+        }
+
+
+
+        return pos;
+    }
 }
 
