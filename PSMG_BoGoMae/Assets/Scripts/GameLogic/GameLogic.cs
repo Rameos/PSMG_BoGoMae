@@ -12,7 +12,7 @@ public class GameLogic : MonoBehaviour
     {
         GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
         GameeventManager.onGoalReachedHandler += reactOnGoalReached;
-		GameeventManager.onPlayerDiedHandler += reactOnPlayerDied;
+        GameeventManager.onPlayerDiedHandler += reactOnPlayerDied;
         transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
         Debug.Log(transmitterCounter);
     }
@@ -39,16 +39,18 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-	private void reactOnPlayerDied(GameObject gameObject){
-		Debug.Log (gameObject.name);
-		networkView.RPC("PlayerDied", RPCMode.All, "Test");
-		}
+    private void reactOnPlayerDied(GameObject gameObject)
+    {
+        Debug.Log(gameObject.name);
+        networkView.RPC("PlayerDied", RPCMode.All, "Test");
+    }
 
 
 
-	[RPC]
-	public void PlayerDied(string message){
-		Debug.Log (message + " isClient: " + Network.isClient + " isServer: " + Network.isServer);
-		
-	}
+    [RPC]
+    public void PlayerDied(string message)
+    {
+        Debug.Log(message + " isClient: " + Network.isClient + " isServer: " + Network.isServer);
+
+    }
 }
