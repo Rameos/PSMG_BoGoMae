@@ -1,30 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameLogic : MonoBehaviour {
+public class GameLogic : MonoBehaviour
+{
 
     private RefugeeMovement refugeeMovement;
     private int transmitterCounter;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
         GameeventManager.onGoalReachedHandler += reactOnGoalReached;
-        GameeventManager.onDroneSetSlowTrapHandler += reactOnSlowTrap;
         transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
         Debug.Log(transmitterCounter);
-	}
+    }
 
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-    private void reactOnSlowTrap()
+
+    // Update is called once per frame
+    void Update()
     {
-        GameObject refugee = GameObject.FindGameObjectWithTag("Refugee").gameObject;
-        refugeeMovement = refugee.GetComponent<RefugeeMovement>();
-        refugeeMovement.setMovement();
+
     }
 
     private void reactOnGoalReached()
@@ -42,8 +38,4 @@ public class GameLogic : MonoBehaviour {
         }
     }
 
-	[RPC]
-	public void PlayerDied(string message){
-		Debug.Log ("client:" + Network.isClient + " server: " + Network.isServer);
-		}
 }

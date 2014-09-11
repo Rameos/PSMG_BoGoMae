@@ -56,18 +56,17 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<RefugeeMovement>().enabled = true;
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
-		refugeePlayer.GetComponent<HasHealth> ().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
         refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
     }
 
     private void InstantiateDrone()
     {
-        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 500, 0));
+        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(-30, 500, 0));
         dronePlayer.GetComponent<DroneController>().enabled = true;
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
-		dronePlayer.GetComponent<HasHealth> ().enabled = true;
+        dronePlayer.GetComponent<HasHealth>().enabled = true;
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
     }
