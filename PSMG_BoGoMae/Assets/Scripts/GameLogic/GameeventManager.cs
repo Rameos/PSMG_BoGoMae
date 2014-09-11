@@ -43,9 +43,9 @@ public class GameeventManager : MonoBehaviour
     public static event enableSound onEnableSoundHandler;
 	public static event playerDied onPlayerDiedHandler;
 
-	public static void playerDied(){
+	public static void playerDied(GameObject gameObject){
 		if (onPlayerDiedHandler != null) {
-			onPlayerDiedHandler();
+			onPlayerDiedHandler(gameObject);
 				}
 	}
 
