@@ -5,7 +5,7 @@ public class Energymanagement : MonoBehaviour {
 
     private float energy = 10;
     private float maxEnergy = 100;
-    private float energyIncreaseFactor = 1;
+    private float energyIncreaseFactor = 50;
 
     private static Texture2D rectTexture;
     private static GUIStyle rectStyle;
