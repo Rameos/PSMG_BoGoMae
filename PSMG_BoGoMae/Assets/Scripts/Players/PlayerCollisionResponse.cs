@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerCollisionResponse : MonoBehaviour
 {
+    private bool soundEnabled;
+
 
     // Use this for initialization
     void Start()
@@ -16,6 +18,17 @@ public class PlayerCollisionResponse : MonoBehaviour
         
 
 
+    }
+
+    private void PlayItemCollectedSound()
+    {
+        soundEnabled = CameraController.soundEnabled;
+        if (soundEnabled)
+        {
+            AudioSource sound = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+            AudioClip audio = (AudioClip)(Resources.Load("Item aufheben"));
+            sound.PlayOneShot(audio);
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -33,6 +46,7 @@ public class PlayerCollisionResponse : MonoBehaviour
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;
             GameeventManager.pickUpItem(Config.ROCKETLAUNCHER);
+            PlayItemCollectedSound();
         }
 
         if (collider.CompareTag("FernglasItem"))
@@ -41,6 +55,7 @@ public class PlayerCollisionResponse : MonoBehaviour
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;
             GameeventManager.pickUpItem(Config.FERNGLAS);
+            PlayItemCollectedSound();
         }
 
         if (collider.CompareTag("SpeedItem"))
@@ -49,6 +64,7 @@ public class PlayerCollisionResponse : MonoBehaviour
             Destroy(collider.gameObject);
             collider.gameObject.renderer.enabled = false;    
             GameeventManager.pickUpItem(Config.SPEED);
+            PlayItemCollectedSound();
         }
     }
 

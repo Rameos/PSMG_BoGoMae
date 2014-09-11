@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
     private bool setTeleportCamOnce = false;
     private Vector3 defaultCameraPosition;
 
-    public bool soundEnabled = false;
+    public static bool soundEnabled = false;
 
     public enum CameraStates
     {
