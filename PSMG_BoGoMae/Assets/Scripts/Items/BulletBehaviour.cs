@@ -36,10 +36,20 @@ public class BulletBehaviour : MonoBehaviour {
     
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("rakete collision mit: " + collider.gameObject);
         Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
+        if (collider.gameObject.tag == Config.TRANSMITTER_TAG)
+        {
+            HasHealth hasHealth = collider.gameObject.GetComponent<HasHealth>();
+            Debug.Log("hashHealt object: " + hasHealth);
+            hasHealth.ReceiveDamage(bulletDamage);
+        }
         Explode();
 
+    }
+
+    private void Explode()
+    {
+        Destroy(gameObject);
     }
     /*
     void OnCollisionEnter(Collision collision)
@@ -50,9 +60,10 @@ public class BulletBehaviour : MonoBehaviour {
 
     }
     */
+
+    /*
     private void Explode()
     {
-		Debug.Log ("in HasHealth.Explode()");
         Destroy(gameObject);
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         Debug.Log (colliders.Length);
@@ -67,5 +78,5 @@ public class BulletBehaviour : MonoBehaviour {
                 hasHealth.ReceiveDamage(bulletDamage * damageRatio);
             }
         }
-    }
+    }*/
 }
