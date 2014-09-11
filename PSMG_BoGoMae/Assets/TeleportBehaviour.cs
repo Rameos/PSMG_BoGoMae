@@ -7,6 +7,7 @@ public class TeleportBehaviour : MonoBehaviour
     private int activateEyeTracker = 1;
     private int deactivateEyeTracker = 2;
     private bool onTeleporter = false;
+    private Rect gazeTexturePosition;
     public Texture2D crosshair;
     private Vector3 refugeeTeleportPositionTo;
     private GameObject refugee;
@@ -41,6 +42,11 @@ public class TeleportBehaviour : MonoBehaviour
             lookForTeleportPosition();
             teleport();
         }
+    }
+
+    void OnGUI()
+    {
+
     }
 
 
