@@ -34,24 +34,24 @@ public class RefugeeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovementFromInput();
         if (speedItemIsUsed)
         {
             HandleSpeedItem();
 
         }
-        /*if (onTeleport)
+        if (onTeleport)
         {
-            animator.SetFloat("Forward", 0f);
-            //animator.CrossFade("idle");
+
         }
         else
         {
-            //animator.speed = 1f;
-            Debug.Log("in react on teleport left, animator.speed: " + animator.speed);
             MovementFromInput();
-            HandleSpeedItem();
-        }*/
+            if (speedItemIsUsed)
+            {
+                HandleSpeedItem();
+
+            }
+        }
     }
 
 
