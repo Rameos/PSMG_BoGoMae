@@ -107,7 +107,7 @@ public class CameraController : MonoBehaviour
 
             case CameraStates.onTeleport:
 
-                Debug.Log("in CameraStates.onteleport!");
+
 
                 break;
 
