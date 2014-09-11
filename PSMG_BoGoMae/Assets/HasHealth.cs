@@ -3,41 +3,31 @@ using System.Collections;
 
 public class HasHealth : MonoBehaviour
 {
-    void Start()
-    {
-    }
+		void Start ()
+		{
+		}
 
-    public float hitPoints = 100f;
+		public float hitPoints = 100f;
 
-    public void ReceiveDamage(float damageAmount)
-    {
-        Debug.Log(this + "|| " + damageAmount);
-        hitPoints -= damageAmount;
-        if (hitPoints <= 0)
-        {
-            Die();
-        }
-    }
+		public void ReceiveDamage (float damageAmount)
+		{
+				Debug.Log (this + "|| " + damageAmount);
+				hitPoints -= damageAmount;
+				if (hitPoints <= 0) {
+						Die ();
+				}
+		}
 
-    private void Die()
-    {
-        Destroy(gameObject);
+		private void Die ()
+		{
+				Destroy (gameObject);
 
-        if (gameObject.tag == Config.TRANSMITTER_TAG)
-        {
-            GameeventManager.transmitterDestroyd();
-        }
-
-        if (gameObject.tag == Config.REFUGEE_TAG || gameObject.tag == Config.DRONE_TAG)
-        {
-			GameeventManager.playerDied(gameObject);
-        }
-
-
-    }
-
-
-
-//in gamelogic triggern
-
+				if (gameObject.tag == Config.TRANSMITTER_TAG) {
+						GameeventManager.transmitterDestroyd ();
+				} else if (gameObject.tag == Config.REFUGEE_TAG) {
+						GameeventManager.playerDied (gameObject);
+				} else if (gameObject.tag == Config.DRONE_TAG) {
+						GameeventManager.playerDied (gameObject);
+				}
+		}
 }
