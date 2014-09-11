@@ -142,17 +142,17 @@ public class CameraController : MonoBehaviour
 
         if (inLookAround)
         {
-            Debug.Log("determineCameraState: lookAround: " + inLookAround);
+            //Debug.Log("determineCameraState: lookAround: " + inLookAround);
             cameraState = CameraStates.LookAround;
         }
         else if (inShooting)
         {
-            Debug.Log("determineCameraState: inshooting: " + inShooting);
+            //Debug.Log("determineCameraState: inshooting: " + inShooting);
             cameraState = CameraStates.Shooting;
         }
         else if (onTeleportField)
         {
-            Debug.Log("determineCameraState: onteleportfield: " + onTeleportField);
+            //Debug.Log("determineCameraState: onteleportfield: " + onTeleportField);
             cameraState = CameraStates.onTeleport;
         }
         else
