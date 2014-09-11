@@ -26,15 +26,17 @@ public class TeleportBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (onTeleporter)
         {
 
             GameeventManager.onTeleporterField();
             float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
-            xAxisWithLimit += inputXAxis * 2f;
+            xAxisWithLimit += inputXAxis * 1f;
 
             float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
-            yAxisWithLimit += inputYAxis * 2f; ;
+            yAxisWithLimit += inputYAxis * 1f; ;
+            Debug.Log("eye x: " + xAxisWithLimit + "||" + "eye y: " + yAxisWithLimit);
             camera.transform.position = new Vector3(xAxisWithLimit, camera.transform.position.y, yAxisWithLimit);
             lookForTeleportPosition();
             teleport();
