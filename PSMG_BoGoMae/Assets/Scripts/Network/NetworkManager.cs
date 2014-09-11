@@ -64,7 +64,7 @@ public class NetworkManager : MonoBehaviour
 
     private void InstantiateDrone()
     {
-        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(0, 500, 0));
+        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(-30, 500, 0));
         dronePlayer.GetComponent<DroneController>().enabled = true;
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
