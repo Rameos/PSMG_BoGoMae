@@ -44,16 +44,16 @@ public class GameLogic : MonoBehaviour
 		private void reactOnPlayerDied (GameObject gameObject)
 		{
 				Debug.Log (gameObject.name);
-				networkView.RPC ("PlayerDied", RPCMode.All, gameObject);
+				networkView.RPC ("PlayerDied", RPCMode.All, gameObject.tag);
 		}
 
 		[RPC]
-		public void PlayerDied (GameObject gameObject)
+		public void PlayerDied (string gameOjectTag)
 		{
 				//Debug.Log (" isClient: " + Network.isClient + " isServer: " + Network.isServer);
-				if (gameObject.tag == Config.DRONE_TAG) {
+				if (gameOjectTag == Config.DRONE_TAG) {
 					Debug.Log("Drone died");
-				} else if (gameObject.tag == Config.REFUGEE_TAG) {
+				} else if (gameOjectTag == Config.REFUGEE_TAG) {
 					Debug.Log("Refugee died");
 				}
 		}
