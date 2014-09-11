@@ -7,6 +7,8 @@ public class GameLogic : MonoBehaviour
 
 		private RefugeeMovement refugeeMovement;
 		private int transmitterCounter;
+		private string deadPlayer;
+		private string winner;
 
 		// Use this for initialization
 		void Start ()
@@ -50,12 +52,18 @@ public class GameLogic : MonoBehaviour
 		[RPC]
 		public void PlayerDied (string gameOjectTag)
 		{
-				//Debug.Log (" isClient: " + Network.isClient + " isServer: " + Network.isServer);
 				if (gameOjectTag == Config.DRONE_TAG) {
-					Debug.Log("Drone died");
+					deadPlayer = gameOjectTag;
+					winner = "Refugee";
 				} else if (gameOjectTag == Config.REFUGEE_TAG) {
-					Debug.Log("Refugee died");
+					deadPlayer = gameOjectTag;
+					winner = "Drone";
 				}
 		}
 
+		void onGUI(){
+		if (deadPlayer != null) {
+			GUI.Label(new Rect(10, 10, 100, 20), winner + " won the game, " + deadPlayer + " lost!");
+				}
+		}
 }

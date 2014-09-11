@@ -29,6 +29,5 @@ public class HasHealth : MonoBehaviour
 						Debug.Log ("gameObject: Drone");
 						GameeventManager.playerDied (gameObject);
 				}
-				Destroy (gameObject);
 		}
 }
