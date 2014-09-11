@@ -41,4 +41,9 @@ public class GameLogic : MonoBehaviour {
             Debug.Log("Refugee hat gewonnen | alle transmitter kaputt");
         }
     }
+
+	[RPC]
+	public void PlayerDied(string message){
+		Debug.Log ("client:" + Network.isClient + " server: " + Network.isServer);
+		}
 }

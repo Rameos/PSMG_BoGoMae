@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.2458191, y: 1.00280213, z: 364.229431}
+  m_LocalPosition: {x: -50.2458191, y: 564.466919, z: 485.743774}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -176,7 +176,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,9 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e858ba97bedc5cc4dbae5591c59b4769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 200
-  bulletDamage: 100
-  explosionRadius: 3
   fireEffect: {fileID: 100000, guid: 7b277829b0b4991f100024a80dbc5c14, type: 2}
 --- !u!136 &13600000
 CapsuleCollider:
@@ -201,10 +197,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 5}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

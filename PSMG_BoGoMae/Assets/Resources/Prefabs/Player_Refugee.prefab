@@ -996,6 +996,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 9
   m_Name: Player_Refugee
   m_TagString: Refugee
@@ -2842,7 +2843,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9500004
 Animator:
   serializedVersion: 3
@@ -2857,7 +2857,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2880,6 +2879,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaf0c0d653bbbc428c13952c29759c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daedbdb58cbcbe2418e0eb4d88099f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 100
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2913,6 +2924,7 @@ MonoBehaviour:
   jumpSpeed: 20
   upDownRange: 60
   camera: {fileID: 2000000}
+  soundEnabled: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
