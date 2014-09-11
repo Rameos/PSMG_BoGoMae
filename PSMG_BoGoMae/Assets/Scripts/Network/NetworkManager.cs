@@ -69,7 +69,7 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
         dronePlayer.GetComponent<HasHealth>().enabled = true;
-        refugeePlayer.GetComponent<GameLogic>().enabled = true;
+        dronePlayer.GetComponent<GameLogic>().enabled = true;
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
     }

@@ -12,7 +12,6 @@ public class GameLogic : MonoBehaviour
     {
         GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
         GameeventManager.onGoalReachedHandler += reactOnGoalReached;
-        GameeventManager.onDroneSetSlowTrapHandler += reactOnSlowTrap;
         transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
         Debug.Log(transmitterCounter);
     }
