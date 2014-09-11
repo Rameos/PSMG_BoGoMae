@@ -36,15 +36,32 @@ public class BulletBehaviour : MonoBehaviour {
     
     void OnTriggerEnter(Collider collider)
     {
+        string gameObjectTag = collider.gameObject.tag;
+        GameObject gameObject = collider.gameObject;
+
         Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
-        if (collider.gameObject.tag == Config.TRANSMITTER_TAG)
+
+        if (gameObjectTag == Config.TRANSMITTER_TAG)
         {
-            HasHealth hasHealth = collider.gameObject.GetComponent<HasHealth>();
-            Debug.Log("hashHealt object: " + hasHealth);
-            hasHealth.ReceiveDamage(bulletDamage);
+            addDamageToGameObject(gameObject);
         }
+        else if (gameObjectTag == Config.REFUGEE_TAG)
+        {
+            addDamageToGameObject(gameObject);
+        }
+        else if (gameObjectTag == Config.DRONE_TAG)
+        {
+            addDamageToGameObject(gameObject);
+        }
+        
         Explode();
 
+    }
+
+    private void addDamageToGameObject(GameObject gameObject)
+    {
+        HasHealth hasHealth = gameObject.GetComponent<HasHealth>();
+        hasHealth.ReceiveDamage(bulletDamage);
     }
 
     private void Explode()

@@ -12,6 +12,8 @@ public class Config
     public const string LEVEL = "Final_Scene";
     public const string ENVIRONMENT_TAG = "Environment";
     public const string TRANSMITTER_TAG = "Transmitter";
+    public const string REFUGEE_TAG = "Refugee";
+    public const string DRONE_TAG = "Drone";
 
     public const int FERNGLAS = 0;
     public const int SPEED = 1;
