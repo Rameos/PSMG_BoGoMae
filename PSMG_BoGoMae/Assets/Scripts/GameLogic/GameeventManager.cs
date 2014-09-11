@@ -18,6 +18,7 @@ public delegate void onTeleportPressed();
 public delegate void droneFiredARocket();
 public delegate void droneSetSlowTrap();
 public delegate void enableSound();
+public delegate void playerDied(GameObject gameObject);
 
 
 
@@ -40,6 +41,13 @@ public class GameeventManager : MonoBehaviour
     public static event droneFiredARocket onDroneFiredARocketHandler;
     public static event droneSetSlowTrap onDroneSetSlowTrapHandler;
     public static event enableSound onEnableSoundHandler;
+	public static event playerDied onPlayerDiedHandler;
+
+	public static void playerDied(){
+		if (onPlayerDiedHandler != null) {
+			onPlayerDiedHandler();
+				}
+	}
 
     public static void droneSetSlowTrap()
     {

@@ -30,14 +30,12 @@ public class HasHealth : MonoBehaviour
 
         if (gameObject.tag == Config.REFUGEE_TAG)
         {
-            networkView.RPC("PlayerDied", RPCMode.All, "Test");
+			GameeventManager.playerDied(gameObject);
         }
     }
 
-	[RPC]
-	public void PlayerDied(string message){
-		Debug.Log (message + " isClient: " + Network.isClient + " isServer: " + Network.isServer);
 
-	}
+
+//in gamelogic triggern
 
 }
