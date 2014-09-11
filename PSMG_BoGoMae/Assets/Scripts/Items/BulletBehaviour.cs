@@ -5,7 +5,7 @@ public class BulletBehaviour : MonoBehaviour {
 
     private float bulletLifespan = 5.0f;
     private float bulletSpeed = 400f;
-    private float bulletDamage = 50f;
+    private float bulletDamage = 100f;
     private float explosionRadius = 3f;
     public GameObject fireEffect;
 
@@ -52,16 +52,16 @@ public class BulletBehaviour : MonoBehaviour {
     */
     private void Explode()
     {
+		Debug.Log ("in HasHealth.Explode()");
         Destroy(gameObject);
-
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+		Debug.Log (colliders.Length);
         foreach (Collider collider in colliders)
         {
-
             HasHealth hasHealth = collider.GetComponent<HasHealth>();
+			Debug.Log(hasHealth);
             if (hasHealth != null)
             {
-                Debug.Log("in hasHealth()");
                 hasHealth.ReceiveDamage(bulletDamage);
             }
         }

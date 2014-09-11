@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HasHealth : MonoBehaviour
 {
+	void Start(){
+		}
 
 		public float hitPoints = 100f;
 
@@ -22,6 +24,7 @@ public class HasHealth : MonoBehaviour
 				}
 				Destroy (gameObject);
 				if (gameObject.tag == "Refugee") {
+					Debug.Log("HasHealth Destroy");
 						networkView.RPC ("PlayerDied", RPCMode.All, "Test");
 				}
 		}
