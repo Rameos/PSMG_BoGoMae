@@ -23,10 +23,12 @@ public class HasHealth : MonoBehaviour
 				if (gameObject.tag == Config.TRANSMITTER_TAG) {
 						GameeventManager.transmitterDestroyd ();
 				} else if (gameObject.tag == Config.REFUGEE_TAG) {
+						Debug.Log ("gameObject: Refugee");
 						GameeventManager.playerDied (gameObject);
 				} else if (gameObject.tag == Config.DRONE_TAG) {
+						Debug.Log ("gameObject: Drone");
 						GameeventManager.playerDied (gameObject);
 				}
-		Destroy (gameObject);
+				Destroy (gameObject);
 		}
 }
