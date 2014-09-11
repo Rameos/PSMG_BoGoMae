@@ -55,14 +55,16 @@ public class BulletBehaviour : MonoBehaviour {
 		Debug.Log ("in HasHealth.Explode()");
         Destroy(gameObject);
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-		Debug.Log (colliders.Length);
+        Debug.Log (colliders.Length);
         foreach (Collider collider in colliders)
         {
             HasHealth hasHealth = collider.GetComponent<HasHealth>();
 			Debug.Log(hasHealth);
             if (hasHealth != null)
             {
-                hasHealth.ReceiveDamage(bulletDamage);
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                float damageRatio = 1f * (distance / explosionRadius);
+                hasHealth.ReceiveDamage(bulletDamage * damageRatio);
             }
         }
     }
