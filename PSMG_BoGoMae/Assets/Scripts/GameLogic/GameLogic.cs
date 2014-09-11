@@ -38,4 +38,9 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+	[RPC]
+	public void PlayerDied(string message){
+		Debug.Log (message + " isClient: " + Network.isClient + " isServer: " + Network.isServer);
+		}
+
 }
