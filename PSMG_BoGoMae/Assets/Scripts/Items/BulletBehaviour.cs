@@ -63,12 +63,20 @@ public class BulletBehaviour : MonoBehaviour {
 
     private void PlayExplosionSound()
     {
-        soundEnabled = DroneController.soundEnabled;
-        if (soundEnabled)
-        //  if (true)
+        AudioSource sound = null;
+        if (Network.isClient)
         {
-            // besser in Rocket Explosion testen !!!!!!!!!!!!!!!!!
-            AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
+            sound = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+            soundEnabled = CameraController.soundEnabled;
+        }
+        else
+        {
+            sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
+            soundEnabled = DroneController.soundEnabled;
+        }
+
+        if (soundEnabled)
+        {
             AudioClip audio = (AudioClip)(Resources.Load("Explosion 1"));
             sound.PlayOneShot(audio);
         }
