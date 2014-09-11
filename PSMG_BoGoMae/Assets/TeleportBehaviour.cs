@@ -7,8 +7,9 @@ public class TeleportBehaviour : MonoBehaviour
     private int activateEyeTracker = 1;
     private int deactivateEyeTracker = 2;
     private bool onTeleporter = false;
-    private Rect gazeTexturePosition;
+    private Rect gazeTexturePosition = new Rect(Screen.width / 2, Screen.height, 500f, 100f);
     public Texture2D crosshair;
+    public Texture2D gazeTexture;
     private Vector3 refugeeTeleportPositionTo;
     private GameObject refugee;
     private Camera camera;
@@ -46,7 +47,10 @@ public class TeleportBehaviour : MonoBehaviour
 
     void OnGUI()
     {
-
+        if (onTeleporter)
+        {
+            GUI.Box(new Rect(gazeTexturePosition), gazeTexture);
+        }
     }
 
 
