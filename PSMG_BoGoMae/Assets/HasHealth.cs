@@ -20,8 +20,6 @@ public class HasHealth : MonoBehaviour
 
 		private void Die ()
 		{
-				Destroy (gameObject);
-
 				if (gameObject.tag == Config.TRANSMITTER_TAG) {
 						GameeventManager.transmitterDestroyd ();
 				} else if (gameObject.tag == Config.REFUGEE_TAG) {
@@ -29,5 +27,6 @@ public class HasHealth : MonoBehaviour
 				} else if (gameObject.tag == Config.DRONE_TAG) {
 						GameeventManager.playerDied (gameObject);
 				}
+		Destroy (gameObject);
 		}
 }
