@@ -31,6 +31,8 @@ public class CameraController : MonoBehaviour
     private bool onTeleportField = false;
     private bool setTeleportCamOnce = false;
     private Vector3 defaultCameraPosition;
+    private bool active = false;
+    private bool inactive = true;
 
     public static bool soundEnabled = false;
 
@@ -91,25 +93,24 @@ public class CameraController : MonoBehaviour
 
             case CameraStates.FirstPerson:
                 rotateCamWithMouse();
-                deactivateXRay();
+                setXRay(inactive);
                 //defaultCameraPosition = camera.transform.position;
                 break;
 
             case CameraStates.Shooting:
                 rotateCamWithMouse();
-                deactivateXRay();
+                setXRay(inactive);
 
                 break;
 
             case CameraStates.LookAround:
                 rotateCamWithGaze();
-                activateXRay();
+                setXRay(active);
                 break;
 
             case CameraStates.onTeleport:
 
-                deactivateXRay();
-
+                setXRay(inactive);
 
                 break;
 
@@ -117,16 +118,12 @@ public class CameraController : MonoBehaviour
 
     }
 
-    private void activateXRay()
+    private void setXRay(bool state)
     {
         GameObject buildings = GameObject.FindGameObjectWithTag(Config.BUILDINGS_TAG);
-
+        buildings.gameObject.renderer.enabled = state;
     }
 
-    private void deactivateXRay()
-    {
-        throw new System.NotImplementedException();
-    }
 
     private void reactOnEnableSound()
     {

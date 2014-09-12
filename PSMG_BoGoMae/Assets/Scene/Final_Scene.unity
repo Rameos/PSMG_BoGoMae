@@ -6258,6 +6258,18 @@ Prefab:
       propertyPath: m_TagString
       value: Buildings
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 7afa9d273109c4f4796a2d06d564b851, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 7afa9d273109c4f4796a2d06d564b851, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 7afa9d273109c4f4796a2d06d564b851, type: 3}
+      propertyPath: m_UseLightProbes
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7afa9d273109c4f4796a2d06d564b851, type: 3}
   m_RootGameObject: {fileID: 225934376}

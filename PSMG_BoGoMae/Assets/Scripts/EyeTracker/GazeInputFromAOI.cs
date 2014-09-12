@@ -18,8 +18,9 @@ public class GazeInputFromAOI : MonoBehaviour
     [SerializeField]
     private float heightAOI;
 
-    [SerializeField]
-    private bool isAOIVisualisationOn = true;
+    private bool isAOIVisualisationOn = false;
+    private bool active = true;
+    private bool inactive = false;
 
     private AOI AOI_Top;
     private AOI AOI_Down;
@@ -46,6 +47,31 @@ public class GazeInputFromAOI : MonoBehaviour
     void Start()
     {
         calculateAOI();
+        GameeventManager.onTeleporterFieldHandler += reactOnTeleport;
+        GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
+        GameeventManager.onLookAroundClickedHandler += reactOnLookAround;
+    }
+
+    private void reactOnTeleport()
+    {
+        setDrawTextures(active);
+    }
+
+    private void reactOnTeleportLeft()
+    {
+        setDrawTextures(inactive);
+    }
+
+    private void reactOnLookAround(int counter)
+    {
+        if (counter % 2 == 0)
+        {
+            setDrawTextures(inactive);
+        }
+        else
+        {
+            setDrawTextures(active);
+        }
     }
 
     /// <summary>
@@ -54,6 +80,11 @@ public class GazeInputFromAOI : MonoBehaviour
     void Update()
     {
         calculateAOI();
+    }
+
+    private void setDrawTextures(bool state)
+    {
+        isAOIVisualisationOn = state;
     }
 
     /// <summary>
