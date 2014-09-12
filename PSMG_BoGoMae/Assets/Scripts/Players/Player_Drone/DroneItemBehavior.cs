@@ -3,24 +3,29 @@ using System.Collections;
 
 public class DroneItemBehavior : MonoBehaviour
 {
+    public Texture2D shootIcon;
+    public Texture2D upIcon;
+    public Texture2D downIcon;
+    public Texture2D lupeIcon;
+    public Texture2D slowIcon;
 
-    private float inventoryXposition = 300;
+    private float iconDistance = 4f;
+    private float inventoryXposition = (Screen.width/2)-170f;
     private float inventoryYposition = Screen.height - 100f;
-    private float inventoryWidth = 500;
-    private float inventoryHeight = 50;
+    private float inventoryWidth = 340;
+    private float inventoryHeight = 68;
 
-    private float trapButtonXposition = 315;
-    private float trapButtonYposition = 15;
-    private float trapButtonWidth = 150;
-    private float trapButtonHeight = 40;
+    private float iconWidth = 64;
+    private float iconHeight = 64;
+    private float iconYposition = Screen.height - 98f;
 
-    private float shootButtonXposition = 450;
-    private float shootButtonYposition = Screen.height - 100f;
-    private float shootButtonWidth = 64;
-    private float shootButtonHeight = 64;
+    private float slowIconXposition;
+    private float shootIconXposition;
+    private float showIconXposition;
+    private float upIconXposition;
+    private float downIconXposition;
 
     private int droneShootingCounter = 0;
-    public Texture2D shootIcon;
     private int droneShootingPressedCounter = 0;
     private string rocketsActivatedOrDeactivated;
     private Rect rocketsStatusGUIposition = new Rect(Screen.width / 2 - 200, 10, 150, 25);
@@ -33,6 +38,11 @@ public class DroneItemBehavior : MonoBehaviour
     void Start()
     {
         energymanagment = GetComponent<Energymanagement>();
+        downIconXposition = inventoryXposition + iconDistance;
+        upIconXposition = downIconXposition + iconWidth + iconDistance;
+        showIconXposition = upIconXposition + iconWidth + iconDistance;
+        slowIconXposition = showIconXposition + iconWidth + iconDistance;
+        shootIconXposition = slowIconXposition + iconWidth + iconDistance;
         Screen.lockCursor = true;
 
     }
@@ -121,30 +131,26 @@ public class DroneItemBehavior : MonoBehaviour
         }
     }
     */
-    private void DrawShootingIcon()
+    private void DrawIcon(float xPosition, float yPosition, float width, float height, Texture2D icon)
     {
 
 
-        if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon))
+        if (GUI.Button(new Rect(xPosition, yPosition, width, height), icon))
         {
-            // theoretisch für maus klicks
-            if (droneShootingCounter % 2 == 0)
-            {
-                GameeventManager.onDisableShoot();
-            }
-            else
-            {
-                GameeventManager.onEnableShoot();
-            }
+
         }
-        GUI.Box(rocketsStatusGUIposition, "Raketen: " + rocketsActivatedOrDeactivated);
+        
 
     }
 
     void OnGUI()
     {
-
-        DrawShootingIcon();
+        GUI.Box(rocketsStatusGUIposition, "Raketen: " + rocketsActivatedOrDeactivated);
+        DrawIcon(downIconXposition, iconYposition, iconWidth, iconHeight, downIcon);
+        DrawIcon(upIconXposition, iconYposition, iconWidth, iconHeight, upIcon);
+        DrawIcon(showIconXposition, iconYposition, iconWidth, iconHeight, lupeIcon);
+        DrawIcon(slowIconXposition, iconYposition, iconWidth, iconHeight, slowIcon);
+        DrawIcon(shootIconXposition, iconYposition, iconWidth, iconHeight, shootIcon);
         //DrawNotEnoughEnergy();
         /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
