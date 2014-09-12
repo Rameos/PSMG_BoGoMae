@@ -73,7 +73,7 @@ public class GameLogic : MonoBehaviour
         transmitterCounter--;
         if (transmitterCounter == 0)
         {
-            Debug.Log("Refugee hat gewonnen | alle transmitter kaputt");
+            // alle transmitter kaputt, drohne abstürzen lassen
         }
     }
 
