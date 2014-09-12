@@ -4,8 +4,9 @@ using System.Collections;
 public class TeleportBehaviour : MonoBehaviour
 {
 
-    private int activateEyeTracker = 1;
-    private int deactivateEyeTracker = 2;
+    private float gazeSpeed = 1f;
+    private bool showNoWeaponText = false;
+    private bool inShooting = false;
     private bool onTeleporter = false;
     private Rect gazeTexturePosition = new Rect(0f, 0f, Screen.width, 250f);
     public Texture2D crosshair;
@@ -24,15 +25,33 @@ public class TeleportBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        GameeventManager.onEnableShootHandler += reactOnEnableShoot;
+        GameeventManager.onDisableShootHandler += reactOnDisableShoot;
     }
 
+    private void reactOnDisableShoot()
+    {
+        inShooting = false;
+        showNoWeaponText = false;
+    }
 
+    private void reactOnEnableShoot()
+    {
+        inShooting = true;
+    }
+
+    void OnGUI()
+    {
+        if (showNoWeaponText)
+        {
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 400f, 200f), "Mit gezückter Waffe betritt man keinen Teleporter!");
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
-
-        if (onTeleporter)
+        if (onTeleporter && !inShooting)
         {
 
             GameeventManager.onTeleporterField();
@@ -42,19 +61,17 @@ public class TeleportBehaviour : MonoBehaviour
             float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
             yAxisWithLimit += inputYAxis * 1f; ;
             */
-            camera.transform.position = new Vector3(camera.transform.position.x +gazeInput.getCameraXPositionWithGaze(), camera.transform.position.y, camera.transform.position.z + gazeInput.getCameraYPositionWithGaze());
+            refugee.transform.FindChild("Main Camera").gameObject.SetActive(false);
+            refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(true);
+            camera = refugee.transform.FindChild("TopDownCamera").camera;
+            camera.transform.position = new Vector3(camera.transform.position.x + gazeInput.getCameraXPositionWithGaze() * gazeSpeed, camera.transform.position.y, camera.transform.position.z + gazeInput.getCameraYPositionWithGaze() * gazeSpeed);
             lookForTeleportPosition();
             teleport();
         }
+
     }
 
-    void OnGUI()
-    {
-        if (onTeleporter)
-        {
-           // GUI.DrawTexture(gazeTexturePosition, gazeTexture);
-        }
-    }
+
 
     private float cameraPositionFromGaze()
     {
@@ -64,7 +81,7 @@ public class TeleportBehaviour : MonoBehaviour
         //Top
         if (AOI_Top.volume.Contains(actualEyePosition))
         {
-            speed ++;
+            speed++;
         }
 
         return speed;
@@ -75,14 +92,24 @@ public class TeleportBehaviour : MonoBehaviour
     {
         if (collider.gameObject.tag == Tags.REFUGEE)
         {
-            refugee = GameObject.FindGameObjectWithTag("Refugee").gameObject;
-            gazeInput = refugee.gameObject.GetComponent<GazeInputFromAOI>();
-            //refugee.transform.FindChild("Main Camera").camera.enabled = false;
-            //refugee.transform.FindChild("TopDownCamera").camera.enabled = true;
-            camera = refugee.transform.FindChild("Main Camera").camera;
+            if (inShooting)
+            {
+                showNoWeaponText = true;
+            }
+            else
+            {
+                refugee = GameObject.FindGameObjectWithTag("Refugee").gameObject;
+                gazeInput = refugee.gameObject.GetComponent<GazeInputFromAOI>();
+                //refugee.transform.FindChild("Main Camera").camera.enabled = false;
+                //refugee.transform.FindChild("TopDownCamera").camera.enabled = true;
+                //camera = refugee.transform.FindChild("Main Camera").camera;
 
-            onTeleporter = true;
-            calculateAOI();
+                refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(true);
+                camera = refugee.transform.FindChild("TopDownCamera").gameObject.camera;
+                camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                onTeleporter = true;
+                calculateAOI();
+            }
         }
         else
         {
@@ -100,7 +127,16 @@ public class TeleportBehaviour : MonoBehaviour
 
     void OnTriggerExit(Collider collider)
     {
+        if (inShooting)
+        {
 
+        }
+        else
+        {
+            GameeventManager.onTeleportLeft();
+            refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
+            refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
+        }
         if (collider.gameObject.tag == Tags.REFUGEE)
         {
             onTeleporter = false;
@@ -114,11 +150,13 @@ public class TeleportBehaviour : MonoBehaviour
 
         Vector3 refugeeTeleportPositionFrom = refugee.transform.position;
 
-        /*Ray ray = Camera.main.ScreenPointToRay(camera.transform.position);
+        Ray ray = camera.ScreenPointToRay(camera.transform.position);
         if (Physics.Raycast(ray, out hit))
         {
-            refugeeTeleportPositionTo = new Vector3(hit.transform.position.x, 2f, hit.transform.position.z);
-        }*/
+            Vector3 teleportPosition = camera.transform.position;
+
+
+        }
 
         refugeeTeleportPositionTo = new Vector3(camera.transform.position.x, 2f, camera.transform.position.z);
 
@@ -132,7 +170,10 @@ public class TeleportBehaviour : MonoBehaviour
             Debug.Log("refugee" + refugee);
             Debug.Log("position: " + refugeeTeleportPositionTo);
             refugee.transform.position = refugeeTeleportPositionTo;
-            GameeventManager.onTeleportLeft();
+            refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
+            refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
+            camera = refugee.transform.FindChild("Main Camera").camera;
+
         }
     }
 

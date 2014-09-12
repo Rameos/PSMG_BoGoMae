@@ -20,8 +20,8 @@ public class CameraController : MonoBehaviour
 
     private float xAxisWithLimit;
     private float yAxisWithLimit;
-    private float xAxisMin = -30;
-    private float xAxisMax = 30;
+    private float xAxisMin = -80;
+    private float xAxisMax = 80;
     private float yAxisMin = -360;
     private float yAxisMax = 360;
     private GazeInputFromAOI gazeInput;
@@ -50,10 +50,10 @@ public class CameraController : MonoBehaviour
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
         GameeventManager.onEnableShootHandler += reactOnEnableShoot;
+        GameeventManager.onDisableShootHandler += reactOnDisableShoot;
         GameeventManager.onTeleporterFieldHandler += reactOnTeleportField;
         GameeventManager.onTeleportLeftHandler += reactOnTeleportLeft;
     }
-
 
 
     // Update is called once per frame
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
 
             case CameraStates.FirstPerson:
                 rotateCamWithMouse();
-                defaultCameraPosition = camera.transform.position;
+                //defaultCameraPosition = camera.transform.position;
                 break;
 
             case CameraStates.Shooting:
@@ -142,17 +142,17 @@ public class CameraController : MonoBehaviour
 
         if (inLookAround)
         {
-            //Debug.Log("determineCameraState: lookAround: " + inLookAround);
+
             cameraState = CameraStates.LookAround;
         }
         else if (inShooting)
         {
-            //Debug.Log("determineCameraState: inshooting: " + inShooting);
+
             cameraState = CameraStates.Shooting;
         }
         else if (onTeleportField)
         {
-            //Debug.Log("determineCameraState: onteleportfield: " + onTeleportField);
+
             cameraState = CameraStates.onTeleport;
         }
         else
@@ -165,15 +165,15 @@ public class CameraController : MonoBehaviour
 
     private void reactOnTeleportField()
     {
+        onTeleportField = true;
         if (setTeleportCamOnce)
         {
 
         }
         else
         {
-            setCameraTopDownView();
+            //setCameraTopDownView();
             setTeleportCamOnce = true;
-            onTeleportField = true;
         }
 
     }
@@ -181,7 +181,7 @@ public class CameraController : MonoBehaviour
     private void reactOnTeleportLeft()
     {
         onTeleportField = false;
-        setCameraFirstPersonView();
+        //setCameraFirstPersonView();
     }
 
     private void reactOnEnableShoot()
@@ -189,9 +189,22 @@ public class CameraController : MonoBehaviour
         inShooting = true;
     }
 
+
+    private void reactOnDisableShoot()
+    {
+        inShooting = false;
+    }
+
     private void reactOnEnableFirstPersonCamera(int counter)
     {
-        inLookAround = true;
+        if (counter % 2 == 0)
+        {
+            inLookAround = false;
+        }
+        else
+        {
+            inLookAround = true;
+        }
     }
 
     private void setCameraTopDownView()
@@ -204,10 +217,11 @@ public class CameraController : MonoBehaviour
 
     private void setCameraFirstPersonView()
     {
+        Debug.Log("determineCameraState: onteleportfield: " + onTeleportField);
         //transform.FindChild("Main Camera").camera.enabled = true;
         //camera = transform.FindChild("Main Camera").camera;
         //transform.FindChild("TopDownCamera").camera.enabled = false;
-        camera.transform.position = defaultCameraPosition;
+        camera.transform.position = new Vector3(0f, 2f, 0.42f);
     }
 
     private void rotateCamWithMouse()
@@ -232,6 +246,7 @@ public class CameraController : MonoBehaviour
         yAxisWithLimit = Mathf.Clamp(yAxisWithLimit, yAxisMin, yAxisMax);
 
         camera.transform.rotation = Quaternion.Euler(xAxisWithLimit, yAxisWithLimit, 0);
+        transform.rotation = Quaternion.Euler(0, yAxisWithLimit, 0);
     }
 
 

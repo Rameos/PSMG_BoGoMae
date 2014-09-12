@@ -14,7 +14,7 @@ public class ChangeItemInput : MonoBehaviour
     private bool rocketLauncherIsCollected = false;
     private bool fernglasIsCollected = false;
     private bool speedIsUsed = false;
-    private bool lookAroundIsUsed = false;
+    private bool fernglasIsUsed = false;
     private bool shootingIsUsed = false;
     private bool onTeleport = false;
 
@@ -87,11 +87,12 @@ public class ChangeItemInput : MonoBehaviour
                 speedIsUsed = true;
             }
         }
-        if (onTeleport)
+        if (fernglasIsCollected)
         {
-            if (Input.GetButtonUp("Teleport"))
+            if (Input.GetButtonUp("LookAroundItem"))
             {
-
+                lookAroundCounter++;
+                GameeventManager.onLookAroundClicked(lookAroundCounter);
             }
         }
 
@@ -204,7 +205,7 @@ public class ChangeItemInput : MonoBehaviour
         //GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
         if (fernglasIsCollected)
         {
-            if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), lookAroundIcon) || Input.GetButton("LookAroundItem"))
+            if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), lookAroundIcon))
             {
                 lookAroundCounter++;
                 GameeventManager.onLookAroundClicked(lookAroundCounter);
