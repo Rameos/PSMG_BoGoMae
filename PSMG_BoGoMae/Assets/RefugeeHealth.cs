@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RefugeeHealth : MonoBehaviour {
 
-    private float health = 10;
+    private float health = 100;
     private float maxHealth = 100;
     private float healthIncreaseFactor = 1;
 

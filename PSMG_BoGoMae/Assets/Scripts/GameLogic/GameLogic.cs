@@ -29,8 +29,10 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Countdown();
-
+        if (Network.connections.Length == 1)
+        {
+            Countdown();
+        }
     }
 
 
