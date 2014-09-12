@@ -6254,6 +6254,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 40000
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7afa9d273109c4f4796a2d06d564b851, type: 3}
+      propertyPath: m_TagString
+      value: Buildings
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7afa9d273109c4f4796a2d06d564b851, type: 3}
   m_RootGameObject: {fileID: 225934376}
@@ -9374,7 +9378,7 @@ GameObject:
   - 64: {fileID: 2138539245}
   m_Layer: 0
   m_Name: Buildings
-  m_TagString: Untagged
+  m_TagString: Buildings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

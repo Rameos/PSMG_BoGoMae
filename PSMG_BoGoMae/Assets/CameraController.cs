@@ -91,28 +91,41 @@ public class CameraController : MonoBehaviour
 
             case CameraStates.FirstPerson:
                 rotateCamWithMouse();
+                deactivateXRay();
                 //defaultCameraPosition = camera.transform.position;
                 break;
 
             case CameraStates.Shooting:
                 rotateCamWithMouse();
+                deactivateXRay();
 
                 break;
 
             case CameraStates.LookAround:
-
                 rotateCamWithGaze();
-
+                activateXRay();
                 break;
 
             case CameraStates.onTeleport:
 
+                deactivateXRay();
 
 
                 break;
 
         }
 
+    }
+
+    private void activateXRay()
+    {
+        GameObject buildings = GameObject.FindGameObjectWithTag(Config.BUILDINGS_TAG);
+
+    }
+
+    private void deactivateXRay()
+    {
+        throw new System.NotImplementedException();
     }
 
     private void reactOnEnableSound()
