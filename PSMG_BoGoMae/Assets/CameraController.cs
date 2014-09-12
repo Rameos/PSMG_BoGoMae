@@ -120,8 +120,11 @@ public class CameraController : MonoBehaviour
 
     private void setXRay(bool state)
     {
-        GameObject buildings = GameObject.FindGameObjectWithTag(Config.BUILDINGS_TAG);
-        buildings.gameObject.renderer.enabled = state;
+        GameObject[] buildings = GameObject.FindGameObjectsWithTag(Config.BUILDINGS_TAG);
+        for (int i = 0; i < buildings.Length; i++)
+        {
+            buildings[i].gameObject.renderer.enabled = state;
+        }
     }
 
 

@@ -10,6 +10,22 @@ public class ChangeItemInput : MonoBehaviour
     public Texture2D shootIcon;
     public Texture2D teleportIcon;
 
+    private float iconDistance = 4f;
+    private float inventoryXposition = (Screen.width / 2) - 170f;
+    private float inventoryYposition = Screen.height - 100f;
+    private float inventoryWidth = 272;
+    private float inventoryHeight = 68;
+
+    private float iconWidth = 64;
+    private float iconHeight = 64;
+    private float iconYposition = Screen.height - 98f;
+
+    private float lookAroundIconXposition;
+    private float speedIconXposition;
+    private float shootIconXposition;
+    private float teleportIconXposition;
+
+
     private bool speedIsCollected = false;
     private bool rocketLauncherIsCollected = false;
     private bool fernglasIsCollected = false;
@@ -23,10 +39,7 @@ public class ChangeItemInput : MonoBehaviour
     private int shootingCounter = 0;
     private int speedItemCounter = 0;
 
-    private float inventoryXposition = (Screen.width / 2) - 150f;
-    private float inventoryYposition = Screen.height - 100f;
-    private float inventoryWidth = 300;
-    private float inventoryHeight = 72;
+
 
     private float scopeButtonXposition;
     private float scopeButtonYposition = Screen.height - 100f;
@@ -52,10 +65,10 @@ public class ChangeItemInput : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        scopeButtonXposition = inventoryXposition;
-        speedButtonXposition = inventoryXposition + speedButtonWidth;
-        shootButtonXposition = inventoryXposition + (shootButtonWidth) * 2f;
-        teleportButtonXposition = inventoryXposition + (shootButtonWidth) * 3f;
+        lookAroundIconXposition = inventoryXposition + iconDistance;
+        speedIconXposition = lookAroundIconXposition + iconWidth + iconDistance;
+        shootIconXposition = speedIconXposition + iconWidth + iconDistance;
+        teleportIconXposition = shootIconXposition + iconWidth + iconDistance;
         Screen.lockCursor = true;
         GameeventManager.pickUpItemHandler += reactOnChangedItem;
         GameeventManager.onTeleporterFieldHandler += reactOnTeleport;
@@ -148,82 +161,43 @@ public class ChangeItemInput : MonoBehaviour
     void OnGUI()
     {
         DrawInventory();
-        DrawFernglasIcon();
-        DrawShootingIcon();
-        DrawSpeedIcon();
-        DrawTeleportIcon();
+        if (fernglasIsCollected)
+        {
+            DrawIcon(lookAroundIconXposition, iconYposition, iconWidth, iconHeight, lookAroundIcon);
+        }
+        if (speedIsCollected && speedItemCounter > 0)
+        {
+            DrawIcon(speedIconXposition, iconYposition, iconWidth, iconHeight, speedIcon);
+        }
+        if (rocketLauncherIsCollected)
+        {
+            DrawIcon(shootIconXposition, iconYposition, iconWidth, iconHeight, shootIcon);
+        }
+        if (onTeleport)
+        {
+            DrawIcon(teleportIconXposition, iconYposition, iconWidth, iconHeight, teleportIcon);
+        }
         if (speedItemCounter > 0)
         {
             GUI.Box(speedItemCounterGUIposition, "Speed-Items : " + speedItemCounter.ToString());
         }
     }
 
+    private void DrawIcon(float xPosition, float yPosition, float width, float height, Texture2D icon)
+    {
 
+
+        if (GUI.Button(new Rect(xPosition, yPosition, width, height), icon))
+        {
+
+        }
+
+
+    }
 
     private void DrawInventory()
     {
         GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
     }
 
-    private void DrawTeleportIcon()
-    {
-
-        if (onTeleport)
-        {
-            if (GUI.Button(new Rect(teleportButtonXposition, teleportButtonYposition, teleportButtonWidth, teleportButtonHeight), teleportIcon))
-            {
-
-            }
-
-        }
-    }
-
-    private void DrawShootingIcon()
-    {
-
-        if (rocketLauncherIsCollected)
-        {
-            if (GUI.Button(new Rect(shootButtonXposition, shootButtonYposition, shootButtonWidth, shootButtonHeight), shootIcon))
-            {
-                shootingCounter++;
-                Debug.Log("shotting counter: " + shootingCounter);
-                if (shootingCounter % 2 == 0)
-                {
-                    GameeventManager.onDisableShoot();
-                }
-                else
-                {
-                    GameeventManager.onEnableShoot();
-                }
-            }
-
-        }
-    }
-
-    private void DrawFernglasIcon()
-    {
-        //GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
-        if (fernglasIsCollected)
-        {
-            if (GUI.Button(new Rect(scopeButtonXposition, scopeButtonYposition, scopeButtonWidth, scopeButtonHeight), lookAroundIcon))
-            {
-                lookAroundCounter++;
-                GameeventManager.onLookAroundClicked(lookAroundCounter);
-            }
-
-        }
-    }
-
-    private void DrawSpeedIcon()
-    {
-        if (speedIsCollected && speedItemCounter > 0)
-        {
-            if (GUI.Button(new Rect(speedButtonXposition, speedButtonYposition, speedButtonWidth, speedButtonHeight), speedIcon))
-            {
-                GameeventManager.useSpeed();
-                speedIsUsed = true;
-            }
-
-        }
-    }
 }
