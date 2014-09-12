@@ -22,6 +22,7 @@ public class HasHealth : MonoBehaviour
 		{
 				if (gameObject.tag == Config.TRANSMITTER_TAG) {
 						GameeventManager.transmitterDestroyd ();
+						Destroy(gameObject);
 				} else if (gameObject.tag == Config.REFUGEE_TAG) {
 						Debug.Log ("gameObject: Refugee");
 						GameeventManager.playerDied (gameObject);

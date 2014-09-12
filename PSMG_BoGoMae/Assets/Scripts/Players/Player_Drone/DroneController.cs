@@ -15,9 +15,9 @@ public class DroneController : MonoBehaviour {
     private float crosshairWidth = 32;
     private float crosshairHeight = 32;
 
-    private float moveForwardSpeed = 0;
-    private float moveBackwardSpeed = 0;
-    private float turnSpeed = 5;
+    private float moveForwardSpeed = 50;
+    private float moveBackwardSpeed = 50;
+    private float turnSpeed = 10;
     private float speed = 0;
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
@@ -156,7 +156,7 @@ public class DroneController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            if (speed < 30)
+            if (speed < moveForwardSpeed)
             {
                 speed += increaseSpeed;
             }
@@ -170,8 +170,8 @@ public class DroneController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.S))
         {
-            Debug.Log("speed " + speed);
-            if (speed > -30)
+            //Debug.Log("speed " + speed);
+            if (speed > -moveForwardSpeed)
             {
                 speed += -increaseSpeed;
             }
@@ -199,6 +199,16 @@ public class DroneController : MonoBehaviour {
             }
             handleRotation();
         }
+
+		if (Input.GetKey (KeyCode.Q)) {
+			transform.Translate(Vector3.down * 50 * Time.deltaTime, transform);
+		}
+
+		if (Input.GetKey (KeyCode.E)) {
+			if(transform.position.y < 3000){
+				transform.Translate(Vector3.up * 50 * Time.deltaTime, transform);
+			}
+		}
 
         
     }
