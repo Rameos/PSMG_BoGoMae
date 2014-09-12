@@ -1,26 +1,50 @@
 fileFormatVersion: 2
-guid: 7afa9d273109c4f4796a2d06d564b851
+guid: a231b65ef401b254c94a4c9877b3edec
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Buildings
-    100002: Camera
-    100004: //RootNode
-    100006: Ground
-    100008: Lamp
-    400000: Buildings
-    400002: Camera
-    400004: //RootNode
-    400006: Ground
-    400008: Lamp
-    2300000: Buildings
-    2300002: Ground
-    3300000: Buildings
-    3300002: Ground
-    4300000: Ground
-    4300002: Buildings
-    6400000: Buildings
-    6400002: Ground
+    100000: Buildings-big-towers
+    100002: Buildings-down
+    100004: Buildings-left
+    100006: Buildings-right
+    100008: Buildings-top
+    100010: Camera
+    100012: //RootNode
+    100014: Ground
+    100016: Lamp
+    400000: Buildings-big-towers
+    400002: Buildings-down
+    400004: Buildings-left
+    400006: Buildings-right
+    400008: Buildings-top
+    400010: Camera
+    400012: //RootNode
+    400014: Ground
+    400016: Lamp
+    2300000: Buildings-big-towers
+    2300002: Buildings-down
+    2300004: Buildings-left
+    2300006: Buildings-right
+    2300008: Buildings-top
+    2300010: Ground
+    3300000: Buildings-big-towers
+    3300002: Buildings-down
+    3300004: Buildings-left
+    3300006: Buildings-right
+    3300008: Buildings-top
+    3300010: Ground
+    4300000: Buildings-big-towers
+    4300002: Buildings-left
+    4300004: Buildings-down
+    4300006: Buildings-right
+    4300008: Ground
+    4300010: Buildings-top
+    6400000: Buildings-big-towers
+    6400002: Buildings-down
+    6400004: Buildings-left
+    6400006: Buildings-right
+    6400008: Buildings-top
+    6400010: Ground
     7400000: Default Take
     9500000: //RootNode
   materials:
