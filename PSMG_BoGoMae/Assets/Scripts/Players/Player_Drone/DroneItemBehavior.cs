@@ -49,10 +49,13 @@ public class DroneItemBehavior : MonoBehaviour
         if (Input.GetButtonUp("DroneShoot"))
         {
             droneShootingPressedCounter++;
-        }
-        if (Input.GetButtonUp("DroneTrap"))
+        }else if (Input.GetButtonUp("DroneSlowTrap"))
         {
             GameeventManager.droneSetSlowTrap();
+        }
+        else if (Input.GetButtonUp("DroneShowEnemy"))
+        {
+            GameeventManager.droneShowEnemy();
         }
 
     }

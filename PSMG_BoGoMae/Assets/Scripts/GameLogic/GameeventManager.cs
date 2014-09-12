@@ -19,6 +19,7 @@ public delegate void droneFiredARocket();
 public delegate void droneSetSlowTrap();
 public delegate void enableSound();
 public delegate void playerDied(GameObject gameObject);
+public delegate void droneShowEnemy();
 
 
 
@@ -41,13 +42,24 @@ public class GameeventManager : MonoBehaviour
     public static event droneFiredARocket onDroneFiredARocketHandler;
     public static event droneSetSlowTrap onDroneSetSlowTrapHandler;
     public static event enableSound onEnableSoundHandler;
-	public static event playerDied onPlayerDiedHandler;
+    public static event playerDied onPlayerDiedHandler;
+    public static event droneShowEnemy onShowEnemyHandler;
 
-	public static void playerDied(GameObject gameObject){
-		if (onPlayerDiedHandler != null) {
-			onPlayerDiedHandler(gameObject);
-				}
-	}
+    public static void droneShowEnemy()
+    {
+        if (onShowEnemyHandler != null)
+        {
+            onShowEnemyHandler();
+        }
+    }
+
+    public static void playerDied(GameObject gameObject)
+    {
+        if (onPlayerDiedHandler != null)
+        {
+            onPlayerDiedHandler(gameObject);
+        }
+    }
 
     public static void droneSetSlowTrap()
     {
@@ -73,7 +85,7 @@ public class GameeventManager : MonoBehaviour
         {
             onDroneFiredARocketHandler();
         }
-}
+    }
 
     public static void onTeleportPressed()
     {

@@ -15,12 +15,12 @@ public class GameLogic : MonoBehaviour
 		{
 				GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
 				GameeventManager.onGoalReachedHandler += reactOnGoalReached;
+                GameeventManager.onDroneSetSlowTrapHandler += reactOnSetSlowTrap;
+                GameeventManager.onShowEnemyHandler += reactOnShowEnemy;
 				GameeventManager.onPlayerDiedHandler += reactOnPlayerDied;
 				transmitterCounter = GameObject.FindGameObjectsWithTag ("Transmitter").Length;
 				Debug.Log (transmitterCounter);
 		}
-
-
 
 		// Update is called once per frame
 		void Update ()
@@ -48,6 +48,20 @@ public class GameLogic : MonoBehaviour
 				Debug.Log ("GameLogic.reactOnPlayerDied: " + gameObject.name);
 				networkView.RPC ("PlayerDied", RPCMode.All, gameObject.tag);
 		}
+
+
+        private void reactOnSetSlowTrap()
+        {
+            float speed = 1f;
+            GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+            refugee.GetComponent<RefugeeMovement>().setMovementSpeedTo(speed);
+        }
+
+
+        private void reactOnShowEnemy()
+        {
+            //leuchtkegel in refugee script anzeigen
+        }
 
 		[RPC]
 		public void PlayerDied (string gameOjectTag)

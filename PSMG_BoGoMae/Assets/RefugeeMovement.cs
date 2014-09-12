@@ -89,10 +89,10 @@ public class RefugeeMovement : MonoBehaviour
         }
     }
 
-    public void setMovement()
+    public void setMovementSpeedTo(float speed)
     {
         Debug.Log("in set movement");
-        movementSpeed = 1f;
+        movementSpeed = speed;
     }
 
     private void MovementFromInput()
