@@ -4,11 +4,12 @@ using System.Collections;
 public class GameLogic : MonoBehaviour
 {
 
-
+        private float gameTime = 500f;
 		private RefugeeMovement refugeeMovement;
 		private int transmitterCounter;
 		private string deadPlayer = null;
 		private string winner = null;
+        private Rect gameTimeGUIPosition = new Rect(Screen.width-200f, 50f, 150f, 100f);
 
 		// Use this for initialization
 		void Start ()
@@ -25,9 +26,21 @@ public class GameLogic : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-
+            Countdown();
 
 		}
+
+
+
+        void OnGui()
+        {
+            GUI.Box(gameTimeGUIPosition, "Speed-Boost Zeit: " + gameTime.ToString("0"));
+        }
+
+        private void Countdown()
+        {
+            gameTime -= Time.deltaTime;
+        }
 
 		private void reactOnGoalReached ()
 		{
