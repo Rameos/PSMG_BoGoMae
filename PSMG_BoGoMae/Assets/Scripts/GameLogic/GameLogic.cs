@@ -13,6 +13,7 @@ public class GameLogic : MonoBehaviour
     private string deadPlayer = null;
     private string winner = null;
     private Rect gameTimeGUIPosition = new Rect(Screen.width - 200f, 50f, 150f, 25f);
+    private bool showRefugeeTrace = false;
 
     // Use this for initialization
     void Start()
@@ -93,6 +94,7 @@ public class GameLogic : MonoBehaviour
     private void reactOnShowEnemy()
     {
         //leuchtkegel in refugee script anzeigen
+        networkView.RPC("ShowRefugeeTrace", RPCMode.All, null);
     }
 
     [RPC]
@@ -111,6 +113,24 @@ public class GameLogic : MonoBehaviour
             deadPlayer = gameOjectTag;
             winner = "Drone";
         }
+    }
+
+    [RPC]
+    public void ShowRefugeeTrace()
+    {
+        showRefugeeTrace = !showRefugeeTrace;  
+        GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+ 
+        if (showRefugeeTrace)
+        {
+            // evtl nach kurzer zeit wieder deaktivieren
+            refugee.transform.FindChild("TraceLight").gameObject.SetActive(true);
+        }
+        else
+        {
+            refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
+        }
+              
     }
 
     [RPC]
