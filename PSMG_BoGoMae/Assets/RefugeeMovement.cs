@@ -9,9 +9,13 @@ public class RefugeeMovement : MonoBehaviour
     private float movementSpeed = 50f;
     private float movementSpeedDefault = 50f;
     private float movementSpeedWithItem = 150f;
+    private float movementSpeedSlowed;
     private float speedItemDuration = 10f;
+    private float slowItemDuration = 0f;
     private bool speedItemIsUsed = false;
+    private bool slowItemIsUsed = false;
     private Rect speedItemDurationGUIposition = new Rect(400f, 50f, 150f, 50f);
+    private Rect slowItemDurationGUIposition = new Rect(550f, 50f, 150f, 50f);
     private bool onTeleport = false;
     private Vector3 curVel = Vector3.zero;
     private float friction = 0.4f;
@@ -39,6 +43,10 @@ public class RefugeeMovement : MonoBehaviour
             HandleSpeedItem();
 
         }
+        if (slowItemIsUsed)
+        {
+            HandleSlowItem();
+        }
         if (onTeleport)
         {
 
@@ -62,6 +70,10 @@ public class RefugeeMovement : MonoBehaviour
         {
             GUI.Box(speedItemDurationGUIposition, "Speed-Boost Zeit: " + speedItemDuration.ToString("0"));
         }
+        if (slowItemIsUsed && slowItemDuration > 0)
+        {
+            GUI.Box(slowItemDurationGUIposition, "Slow Effect: " + slowItemDuration.ToString("0"));
+        }
     }
 
     private void HandleSpeedItem()
@@ -74,6 +86,20 @@ public class RefugeeMovement : MonoBehaviour
         else
         {
             movementSpeed = movementSpeedDefault;
+        }
+    }
+
+    private void HandleSlowItem()
+    {
+        CheckSlowItemDuration();
+        if (slowItemIsUsed && slowItemDuration > 0)
+        {
+            movementSpeed = movementSpeedSlowed;
+        }
+        else
+        {
+            movementSpeed = movementSpeedDefault;
+            slowItemIsUsed = false;
         }
     }
 
@@ -91,8 +117,21 @@ public class RefugeeMovement : MonoBehaviour
 
     public void setMovementSpeedTo(float speed)
     {
-        Debug.Log("in set movement");
-        movementSpeed = speed;
+        slowItemIsUsed = true;
+        slowItemDuration += 10f;
+        movementSpeedSlowed = speed;
+    }
+
+    private void CheckSlowItemDuration()
+    {
+        if (slowItemDuration >= 0)
+        {
+            slowItemDuration -= Time.deltaTime;
+        }
+        else
+        {
+            slowItemDuration = 0;
+        }
     }
 
     private void MovementFromInput()
@@ -123,12 +162,6 @@ public class RefugeeMovement : MonoBehaviour
     {
 
         onTeleport = false;
-    }
-
-    private void reactOnSlowTrap()
-    {
-        Debug.Log("in react ");
-        movementSpeed = 1f;
     }
 
 

@@ -25,11 +25,14 @@ public class DroneItemBehavior : MonoBehaviour
     private string rocketsActivatedOrDeactivated;
     private Rect rocketsStatusGUIposition = new Rect(Screen.width / 2 - 200, 10, 150, 25);
     private RefugeeMovement refugeeMovement;
+    private Energymanagement energymanagment;
+    private float energyCostsForSlowing = 50f;
+    private bool notEnoughEnergy = false;
 
     // Use this for initialization
     void Start()
     {
-
+        energymanagment = GetComponent<Energymanagement>();
         Screen.lockCursor = true;
 
     }
@@ -49,15 +52,37 @@ public class DroneItemBehavior : MonoBehaviour
         if (Input.GetButtonUp("DroneShoot"))
         {
             droneShootingPressedCounter++;
+
         }else if (Input.GetButtonUp("DroneSlowTrap"))
         {
-            GameeventManager.droneSetSlowTrap();
+            if (EnergyLeft())
+            {
+                notEnoughEnergy = false;
+                energymanagment.Energy = energymanagment.Energy - energyCostsForSlowing;
+                GameeventManager.droneSetSlowTrap();
+            }
+            else
+            {
+                notEnoughEnergy = true;
+            }
         }
         else if (Input.GetButtonUp("DroneShowEnemy"))
         {
             GameeventManager.droneShowEnemy();
         }
 
+    }
+
+    private bool EnergyLeft()
+    {
+        if (energymanagment.Energy >= energyCostsForSlowing)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void EnableShoot()
@@ -120,6 +145,7 @@ public class DroneItemBehavior : MonoBehaviour
     {
 
         DrawShootingIcon();
+        //DrawNotEnoughEnergy();
         /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 
           if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 1"))
@@ -136,5 +162,13 @@ public class DroneItemBehavior : MonoBehaviour
           }
          * 
          * */
+    }
+
+    private void DrawNotEnoughEnergy()
+    {
+        if (notEnoughEnergy)
+        {
+            GUI.Label(new Rect(10, 10, 300, 20), "Not enough Energy!");
+        }
     }
 }

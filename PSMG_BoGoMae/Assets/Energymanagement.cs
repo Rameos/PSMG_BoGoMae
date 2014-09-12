@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Energymanagement : MonoBehaviour {
 
-    private float energy = 10;
-    private float maxEnergy = 100;
-    private float energyIncreaseFactor = 50;
+    private float energy = 10f;
+    private float maxEnergy = 100f;
+    private float energyIncreaseFactor = 10f;
 
     private static Texture2D rectTexture;
     private static GUIStyle rectStyle;
