@@ -7,8 +7,8 @@ public class GameLogic : MonoBehaviour
 
 		private RefugeeMovement refugeeMovement;
 		private int transmitterCounter;
-		private string deadPlayer = "";
-		private string winner = "";
+		private string deadPlayer = null;
+		private string winner = null;
 
 		// Use this for initialization
 		void Start ()
@@ -52,9 +52,7 @@ public class GameLogic : MonoBehaviour
 
         private void reactOnSetSlowTrap()
         {
-            float speed = 1f;
-            GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
-            refugee.GetComponent<RefugeeMovement>().setMovementSpeedTo(speed);
+				networkView.RPC ("SlowDownRefugee", RPCMode.All, null);
         }
 
 
@@ -78,9 +76,20 @@ public class GameLogic : MonoBehaviour
 				}
 		}
 
+		[RPC]
+		public void SlowDownRefugee ()
+		{
+			Debug.Log ("RPC SlowDownRefugee");
+
+			float speed = 1f;
+			GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+			refugee.GetComponent<RefugeeMovement>().setMovementSpeedTo(speed);
+
+		}
+
 		void OnGUI ()
 		{
-				if (deadPlayer != "") {
+				if (deadPlayer != null) {
 					GUI.Label (new Rect (10, 10, 300, 20), winner + " won the game, " + deadPlayer + " lost!");
 				}
 		}
