@@ -21,6 +21,7 @@ public class DroneController : MonoBehaviour {
     private float speed = 0;
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
+	private float upAndDownSpeed = 100f;
 
     public static bool soundEnabled = false;
 
@@ -201,12 +202,12 @@ public class DroneController : MonoBehaviour {
         }
 
 		if (Input.GetKey (KeyCode.Q)) {
-			transform.Translate(Vector3.down * 50 * Time.deltaTime, transform);
+			transform.Translate(Vector3.down * upAndDownSpeed * Time.deltaTime, transform);
 		}
 
 		if (Input.GetKey (KeyCode.E)) {
 			if(transform.position.y < 3000){
-				transform.Translate(Vector3.up * 50 * Time.deltaTime, transform);
+				transform.Translate(Vector3.up * upAndDownSpeed * Time.deltaTime, transform);
 			}
 		}
 
