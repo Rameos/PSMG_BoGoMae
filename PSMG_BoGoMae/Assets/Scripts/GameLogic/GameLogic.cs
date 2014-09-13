@@ -146,10 +146,12 @@ public class GameLogic : MonoBehaviour
 						gameTimeString = "0:00";
 						GUI.Box (gameTimeGUIPosition, "Zeit: " + gameTimeString);
 						GUI.Label (new Rect (10, 10, 300, 20), "Time is over! Drone won the game, Refugee lost!");
+						Application.LoadLevel("DroneWon");
 				}
 
 				if (deadPlayer != null) {
 						GUI.Label (new Rect (10, 10, 300, 20), winner + " won the game, " + deadPlayer + " lost!");
+						Application.LoadLevel("RefugeeWon");
 				}
 		}
 }
