@@ -36,13 +36,13 @@ public class DroneRocketAttack : MonoBehaviour {
     {
         CheckCooldown();
         CheckEnergyLeft();
-        spawnPointRocketleft = droneCamera.transform.position + new Vector3(-20f, 0f, 0f);
-        spawnPointRocketRight = droneCamera.transform.position + new Vector3(20f, 0f, 0f);
+//        spawnPointRocketleft = droneCamera.transform.position + new Vector3(-20f, 0f, 0f);
+        spawnPointRocketRight = droneCamera.transform.position + new Vector3(0f, 0f, 0f);
         if (Input.GetMouseButtonDown(0) && inShooting && cooldownOver && energyLeft)
         {
             cooldown = 1.0f;
             energymanagment.Energy = energymanagment.Energy - energyRocketCosts;
-            Network.Instantiate(bulletPrefab, spawnPointRocketleft, droneCamera.transform.rotation, 0);
+//            Network.Instantiate(bulletPrefab, spawnPointRocketleft, droneCamera.transform.rotation, 0);
             Network.Instantiate(bulletPrefab, spawnPointRocketRight, droneCamera.transform.rotation, 0);
         }
     }
