@@ -25,7 +25,7 @@ public class NetworkManager : MonoBehaviour
 			{
 				for (int i = 0; i < hostList.Length; i++)
 				{
-					if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+					if (GUI.Button(new Rect(100, 400 + (150 * i), 300, 100), hostList[i].gameName))
 						JoinServer(hostList[i]);
 				}
 			}
@@ -41,9 +41,9 @@ public class NetworkManager : MonoBehaviour
 	void OnServerInitialized()
 	{
 
-        InstantiateDrone();
+//        InstantiateDrone();
 
-//        InstantiateRefugee();
+        InstantiateRefugee();
         
 
     }
@@ -57,9 +57,10 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<RefugeeMovement>().enabled = true;
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
-        refugeePlayer.GetComponent<ChangeItemInput>().enabled = true;        
+        refugeePlayer.GetComponent<ChangeItemInput>().enabled = true; 
         //refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
-        refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
+		refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
+		GameObject.Find ("Menu-Camera").camera.gameObject.SetActive (false);
     }
 
     private void InstantiateDrone()
