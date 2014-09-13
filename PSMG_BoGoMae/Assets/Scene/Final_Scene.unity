@@ -12,7 +12,7 @@ SceneSettings:
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: .5, g: .5, b: .5, a: 1}
   m_FogMode: 3
   m_FogDensity: .00100000005
@@ -1711,7 +1711,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &367478429
 Transform:
   m_ObjectHideFlags: 0
@@ -2442,7 +2441,7 @@ Light:
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4.42999983
+  m_Intensity: .899999976
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2711,7 +2710,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &514652108
 Transform:
   m_ObjectHideFlags: 0
@@ -3156,7 +3154,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &624705172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3544,7 +3541,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &713227684
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,7 +3625,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &739054072
 GameObject:
   m_ObjectHideFlags: 0
@@ -4731,7 +4726,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &977255908
 Prefab:
   m_ObjectHideFlags: 0
@@ -4904,7 +4898,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1006697439
 GameObject:
   m_ObjectHideFlags: 0
@@ -6397,7 +6390,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1217004604
 GameObject:
   m_ObjectHideFlags: 0
@@ -7202,7 +7194,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1480263735
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,7 +7314,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1492487091
 GameObject:
   m_ObjectHideFlags: 0
@@ -7813,7 +7803,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &1594961054
 Transform:
   m_ObjectHideFlags: 0
@@ -8923,7 +8912,7 @@ Light:
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
+  m_Intensity: 1.20000005
   m_Range: 7471.02832
   m_SpotAngle: 66
   m_CookieSize: 10
@@ -9080,7 +9069,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1981749529
 GameObject:
   m_ObjectHideFlags: 0
@@ -9351,7 +9339,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &2029406243
 GameObject:
   m_ObjectHideFlags: 0
