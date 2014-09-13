@@ -4432,8 +4432,8 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 8
-  m_Range: 39.4692535
+  m_Intensity: 7.30000019
+  m_Range: 54.2016602
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -4444,7 +4444,7 @@ Light:
     m_Softness: 4
     m_SoftnessFade: 1
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
+  m_DrawHalo: 1
   m_ActuallyLightmapped: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -4464,7 +4464,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 739757460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.6748505, y: -2547.91943, z: 352.83194}
+  m_LocalPosition: {x: -32.6528854, y: -2565.73462, z: 355.15387}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5283,7 +5283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856734218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -52.9472656, y: -2563.59766, z: 349.171631}
+  m_LocalPosition: {x: -49.6874199, y: -2571.44629, z: 346.989014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8836,7 +8836,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1381062433}
   m_LocalRotation: {x: 0, y: -.980277836, z: 0, w: -.197624341}
-  m_LocalPosition: {x: -53.0779114, y: -2570.33203, z: 367.417633}
+  m_LocalPosition: {x: -53.0779114, y: -2579.26074, z: 367.417633}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 819732589}
@@ -10728,7 +10728,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c6b10b5308bea884f8705d2e74fdb60a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
