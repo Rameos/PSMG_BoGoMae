@@ -128,7 +128,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void reactOnEnableSound()
+    public void reactOnEnableSound()
     {
         soundEnabled = !soundEnabled;
         Debug.Log("Sound: " + soundEnabled.ToString());
