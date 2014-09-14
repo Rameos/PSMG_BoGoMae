@@ -18,6 +18,7 @@ public class HasHealth : MonoBehaviour
         if (health < maxHealth)
         {
             health += healthIncreaseFactor * Time.deltaTime;
+            
         }
     }
 

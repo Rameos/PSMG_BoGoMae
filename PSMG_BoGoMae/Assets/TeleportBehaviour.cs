@@ -51,6 +51,10 @@ public class TeleportBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Network.isServer)
+        {
+            return;
+        }
         if (onTeleporter && !inShooting)
         {
 
