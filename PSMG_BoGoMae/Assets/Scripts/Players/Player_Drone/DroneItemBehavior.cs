@@ -32,6 +32,7 @@ public class DroneItemBehavior : MonoBehaviour
     private RefugeeMovement refugeeMovement;
     private Energymanagement energymanagment;
     private float energyCostsForSlowing = 50f;
+    private float energyCostsForShowRefugee = 80;
     private bool notEnoughEnergy = false;
 
     // Use this for initialization
@@ -65,7 +66,7 @@ public class DroneItemBehavior : MonoBehaviour
 
         }else if (Input.GetButtonUp("DroneSlowTrap"))
         {
-            if (EnergyLeft())
+            if (EnergyLeft(energyCostsForSlowing))
             {
                 notEnoughEnergy = false;
                 energymanagment.Energy = energymanagment.Energy - energyCostsForSlowing;
@@ -78,14 +79,24 @@ public class DroneItemBehavior : MonoBehaviour
         }
         else if (Input.GetButtonUp("DroneShowEnemy"))
         {
-            GameeventManager.droneShowEnemy();
+
+            if (EnergyLeft(energyCostsForShowRefugee))
+            {
+                notEnoughEnergy = false;
+                energymanagment.Energy = energymanagment.Energy - energyCostsForShowRefugee;
+                GameeventManager.droneShowEnemy();
+            }
+            else
+            {
+                notEnoughEnergy = true;
+            } 
         }
 
     }
 
-    private bool EnergyLeft()
+    private bool EnergyLeft(float itemCosts)
     {
-        if (energymanagment.Energy >= energyCostsForSlowing)
+        if (energymanagment.Energy >= itemCosts)
         {
             return true;
         }
