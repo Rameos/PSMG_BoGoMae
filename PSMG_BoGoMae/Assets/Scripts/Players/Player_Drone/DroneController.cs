@@ -23,7 +23,7 @@ public class DroneController : MonoBehaviour {
     private float increaseSpeed = 0.15f;
 	private float upAndDownSpeed = 150f;
 
-    public static bool soundEnabled = false;
+    public static bool soundEnabled = true;
 
 
     void Start()
@@ -202,7 +202,9 @@ public class DroneController : MonoBehaviour {
         }
 
 		if (Input.GetKey (KeyCode.Q)) {
+			if(transform.position.y > 10){
 			transform.Translate(Vector3.down * upAndDownSpeed * Time.deltaTime, transform);
+			}
 		}
 
 		if (Input.GetKey (KeyCode.E)) {
