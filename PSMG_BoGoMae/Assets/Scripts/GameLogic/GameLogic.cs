@@ -13,6 +13,7 @@ public class GameLogic : MonoBehaviour
 		private string deadPlayer = null;
 		private string winner = null;
 		private Rect gameTimeGUIPosition = new Rect (Screen.width - 200f, 50f, 150f, 25f);
+		private bool showMenu = false;
 		private bool showRefugeeTrace = false;
 
 		// Use this for initialization
@@ -33,12 +34,29 @@ public class GameLogic : MonoBehaviour
 				if (Network.connections.Length == 1) {
 						Countdown ();
 				}
-                if (showRefugeeTrace)
-                {
-                    showRefugeeTraceWhileLeftEyeClosed();
-                }
+				if (showRefugeeTrace) {
+						showRefugeeTraceWhileLeftEyeClosed ();
+				}
+				ShowMenu ();
 		}
 
+		private void ShowMenu ()
+		{
+				if (Input.GetKeyDown (KeyCode.Escape)) {
+						showMenu = !showMenu;
+				}
+
+				if (Input.GetKeyDown (KeyCode.B)) {
+						if (Network.isClient)
+								Application.LoadLevel ("DroneWon");
+						if (Network.isServer)
+								Application.LoadLevel ("RefugeeWon");
+				} else if (Input.GetKeyDown (KeyCode.F)) {
+						showMenu = !showMenu;
+				}
+        
+		}
+    
 		private void Countdown ()
 		{
 				gameTime -= Time.deltaTime;
@@ -122,7 +140,7 @@ public class GameLogic : MonoBehaviour
 				showRefugeeTrace = !showRefugeeTrace;  
 				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
 
- /*
+				/*
 				if (showRefugeeTrace) {
 						// evtl nach kurzer zeit wieder deaktivieren
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
@@ -133,24 +151,21 @@ public class GameLogic : MonoBehaviour
               */
 		}
 
-        private void showRefugeeTraceWhileLeftEyeClosed()
-        {
+		private void showRefugeeTraceWhileLeftEyeClosed ()
+		{
 
-            GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
-            if (gazeModel.diamLeftEye == 0)
-            {
-                refugee.transform.FindChild("TraceLight").gameObject.SetActive(true);
-                Debug.Log("show == true");
+				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
+				if (gazeModel.diamLeftEye == 0) {
+						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
+						Debug.Log ("show == true");
 
-            }
-            else
-            {
-                refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
+				} else {
+						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
 
-            }
+				}
 
             
-        }
+		}
 
 		[RPC]
 		public void SlowDownRefugee ()
@@ -182,6 +197,18 @@ public class GameLogic : MonoBehaviour
 						} else if (deadPlayer == Config.DRONE_TAG) {
 								Application.LoadLevel ("RefugeeWon");
 						}
+				}
+				if (showMenu) {
+						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 50), "B: Beenden")) {
+				if (Network.isClient)
+					Application.LoadLevel ("DroneWon");
+				if (Network.isServer)
+					Application.LoadLevel ("RefugeeWon");
+            }
+            if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "F: Fortsetzen")) {
+								showMenu = !showMenu;
+						}
+            
 				}
 		}
 }

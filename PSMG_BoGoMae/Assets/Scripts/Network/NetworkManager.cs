@@ -64,10 +64,9 @@ public class NetworkManager : MonoBehaviour
 	{
 
         InstantiateDrone();
-
+		
        // InstantiateRefugee();
-        
-
+		
     }
 
     private void InstantiateRefugee()
