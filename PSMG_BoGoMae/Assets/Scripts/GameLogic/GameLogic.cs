@@ -45,8 +45,18 @@ public class GameLogic : MonoBehaviour
 				if (Input.GetKeyDown (KeyCode.Escape)) {
 						showMenu = !showMenu;
 				}
-		}
 
+				if (Input.GetKeyDown (KeyCode.B)) {
+						if (Network.isClient)
+								Application.LoadLevel ("DroneWon");
+						if (Network.isServer)
+								Application.LoadLevel ("RefugeeWon");
+				} else if (Input.GetKeyDown (KeyCode.F)) {
+						showMenu = !showMenu;
+				}
+        
+		}
+    
 		private void Countdown ()
 		{
 				gameTime -= Time.deltaTime;
@@ -189,13 +199,13 @@ public class GameLogic : MonoBehaviour
 						}
 				}
 				if (showMenu) {
-						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 50), "Beenden")) {
-								if (Network.isClient)
-										Application.LoadLevel ("DroneWon");
-								if (Network.isServer)
-										Application.LoadLevel ("RefugeeWon");
-						}
-						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "Fortsetzen")) {
+						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 50), "B: Beenden")) {
+				if (Network.isClient)
+					Application.LoadLevel ("DroneWon");
+				if (Network.isServer)
+					Application.LoadLevel ("RefugeeWon");
+            }
+            if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "F: Fortsetzen")) {
 								showMenu = !showMenu;
 						}
             
