@@ -5,29 +5,49 @@ public class NetworkManager : MonoBehaviour
 {
 	private const string typeName = "PSMGHideAndSeek_christoph";
 	private const string gameName = "HideAndSeekRoom_christoph";
+    private AudioSource sound;
+
+    private AudioClip audio;
 	
 	private bool isRefreshingHostList = false;
 	private HostData[] hostList;
     GameObject menuCamera;
 	
 	//public GameObject playerPrefab;
+
+    void Start()
+    {
+       sound  = GameObject.FindGameObjectWithTag("MenuCamera").GetComponent<AudioSource>();
+       audio = (AudioClip)(Resources.Load("Menue"));
+    }
 	
 	void OnGUI()
 	{
 		if (!Network.isClient && !Network.isServer)
 		{
-			if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
-				StartServer();
-			
-			if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
-				RefreshHostList();
+            if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
+            {
+                sound.PlayOneShot(audio);
+                StartServer();
+            }
+
+
+            if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
+            {
+                sound.PlayOneShot(audio);
+                RefreshHostList();
+
+            }
 			
 			if (hostList != null)
 			{
 				for (int i = 0; i < hostList.Length; i++)
 				{
-					if (GUI.Button(new Rect(100, 400 + (150 * i), 300, 100), hostList[i].gameName))
+                    if (GUI.Button(new Rect(100, 400 + (150 * i), 300, 100), hostList[i].gameName)) 
+                    {
+                        sound.PlayOneShot(audio);
 						JoinServer(hostList[i]);
+                    }
 				}
 			}
 		}
