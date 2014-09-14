@@ -34,6 +34,7 @@ public class DroneItemBehavior : MonoBehaviour
     private float energyCostsForSlowing = 50f;
     private float energyCostsForShowRefugee = 80;
     private bool notEnoughEnergy = false;
+    private bool showBlinkNotification = false;
 
     // Use this for initialization
     void Start()
@@ -77,9 +78,9 @@ public class DroneItemBehavior : MonoBehaviour
                 notEnoughEnergy = true;
             }
         }
-        else if (/*(Input.GetButtonUp("DroneShowEnemy")*/gazeModel.diamLeftEye == 0)
+        else if (Input.GetButtonUp("DroneShowEnemy"))
         {
-
+            showBlinkNotification = true;
             if (EnergyLeft(energyCostsForShowRefugee))
             {
                 notEnoughEnergy = false;
@@ -89,6 +90,7 @@ public class DroneItemBehavior : MonoBehaviour
             else
             {
                 notEnoughEnergy = true;
+                showBlinkNotification = false;
             } 
         }
 
@@ -162,6 +164,10 @@ public class DroneItemBehavior : MonoBehaviour
         DrawIcon(showIconXposition, iconYposition, iconWidth, iconHeight, lupeIcon);
         DrawIcon(slowIconXposition, iconYposition, iconWidth, iconHeight, slowIcon);
         DrawIcon(shootIconXposition, iconYposition, iconWidth, iconHeight, shootIcon);
+        if (showBlinkNotification)
+        {
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 400f, 100f), "linkes Auge geschlossen halten, um Flüchtling Position anzuzeigen");
+        }
         //DrawNotEnoughEnergy();
         /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
 

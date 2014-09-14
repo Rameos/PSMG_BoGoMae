@@ -9284,6 +9284,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1381062434}
+  - 95: {fileID: 1381062435}
   m_Layer: 9
   m_Name: Ethan
   m_TagString: Untagged
@@ -9306,6 +9307,21 @@ Transform:
   - {fileID: 1226931868}
   m_Father: {fileID: 0}
   m_RootOrder: 23
+--- !u!95 &1381062435
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1381062433}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+  m_Controller: {fileID: 9100000, guid: e7f4a0b1d59a50c47a250d8209424ea3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1403050857
 GameObject:
   m_ObjectHideFlags: 0
@@ -11911,8 +11927,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1851308877}
   m_LocalRotation: {x: .642474592, y: -.396811575, z: -.197310299, w: .625168562}
-  m_LocalPosition: {x: -17.6535454, y: -2545.73486, z: 403.160767}
-  m_LocalScale: {x: 400, y: 400, z: 400}
+  m_LocalPosition: {x: -23.316288, y: -2550.61987, z: 402.099762}
+  m_LocalScale: {x: 800, y: 800, z: 800}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 26
