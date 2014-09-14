@@ -161,7 +161,6 @@ public class GameLogic : MonoBehaviour
 
 				} else {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
-
 				}
 
             
