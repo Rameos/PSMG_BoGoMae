@@ -86,16 +86,16 @@ public class DroneItemBehavior : MonoBehaviour
         else if (Input.GetButtonUp("DroneShowEnemy"))
         {
             showBlinkNotification = true;
-            if (EnergyLeft(energyCostsForShowRefugee))
+            if (EnergyLeft(energyCostsForShowRefugee) && gazeModel.diamLeftEye == 0)
             {
                 notEnoughEnergy = false;
                 energymanagment.Energy = energymanagment.Energy - energyCostsForShowRefugee;
                 GameeventManager.droneShowEnemy();
+				showBlinkNotification = false;
             }
             else
             {
                 notEnoughEnergy = true;
-                showBlinkNotification = false;
             } 
         }
 
