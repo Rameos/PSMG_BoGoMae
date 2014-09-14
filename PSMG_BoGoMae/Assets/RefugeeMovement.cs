@@ -118,7 +118,7 @@ public class RefugeeMovement : MonoBehaviour
     public void setMovementSpeedTo(float speed)
     {
         slowItemIsUsed = true;
-        slowItemDuration += 10f;
+        slowItemDuration += 5f;
         movementSpeedSlowed = speed;
     }
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class GameLogic : MonoBehaviour
 {
 
-		private float gameTime = 480f;
+		private float gameTime = 540f;
 		private string gameTimeString;
 		private float minutes;
 		private float seconds;
