@@ -94,6 +94,7 @@ public class CameraController : MonoBehaviour
             case CameraStates.FirstPerson:
                 rotateCamWithMouse();
                 setXRay(inactive);
+
                 //defaultCameraPosition = camera.transform.position;
                 break;
 
@@ -105,7 +106,14 @@ public class CameraController : MonoBehaviour
 
             case CameraStates.LookAround:
                 rotateCamWithGaze();
-                setXRay(active);
+                if (gazeModel.diamLeftEye == 0)
+                {
+                    setXRay(active);
+                }
+                else
+                {
+                    setXRay(inactive);
+                }
                 break;
 
             case CameraStates.onTeleport:
