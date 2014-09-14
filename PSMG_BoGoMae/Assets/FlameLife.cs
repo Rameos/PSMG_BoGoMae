@@ -5,7 +5,7 @@ public class FlameLife : MonoBehaviour {
     private float flameLife = 8f;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
