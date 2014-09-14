@@ -3,8 +3,8 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour
 {
-	private const string typeName = "PSMGHideAndSeek_christoph";
-	private const string gameName = "HideAndSeekRoom_christoph";
+	private const string typeName = "PSMGHideAndSeek";
+	private const string gameName = "LAUFENDES SPIEL";
     private AudioSource sound;
 
     private AudioClip audio;
