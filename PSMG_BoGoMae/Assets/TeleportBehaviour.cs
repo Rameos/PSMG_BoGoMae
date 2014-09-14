@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TeleportBehaviour : MonoBehaviour
 {
-
+    public Texture2D noWeaponTexture;
     private float gazeSpeed = 1f;
     private bool showNoWeaponText = false;
     private bool inShooting = false;
@@ -44,7 +44,7 @@ public class TeleportBehaviour : MonoBehaviour
     {
         if (showNoWeaponText)
         {
-            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 400f, 200f), "Mit gezückter Waffe betritt man keinen Teleporter!");
+            GUI.Label(new Rect((Screen.width / 2) - 256f, (Screen.height / 2)- 256f, 512f, 512f), noWeaponTexture);
         }
 
     }
@@ -127,6 +127,7 @@ public class TeleportBehaviour : MonoBehaviour
 
     void OnTriggerExit(Collider collider)
     {
+        showNoWeaponText = false;
         if (inShooting)
         {
 
