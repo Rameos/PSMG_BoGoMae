@@ -25,9 +25,10 @@ public class NetworkManager : MonoBehaviour
 	{
 		if (!Network.isClient && !Network.isServer)
 		{
+			Screen.lockCursor = false;
             if (GUI.Button(new Rect(Screen.width - 200f, 100, 100, 50), "Quit"))
             {
-
+				Application.Quit();
             }
 
             if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
