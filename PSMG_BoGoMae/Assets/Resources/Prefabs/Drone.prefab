@@ -292,7 +292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb0f723000f4dc4e9a03ff6322f3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootIcon: {fileID: 2800000, guid: ab8c4f3c7b3761e4d91cb28a4c7a4568, type: 3}
+  shootIcon: {fileID: 2800000, guid: 8c21130b3258f5d4cba6da3195153121, type: 3}
+  upIcon: {fileID: 2800000, guid: 2c18a78b19b88714a9644488e9224223, type: 3}
+  downIcon: {fileID: 2800000, guid: 54d3c2125ee2dea40b78c42203d1a5bb, type: 3}
+  lupeIcon: {fileID: 2800000, guid: 008ac162468a89744be2563a2efaa18f, type: 3}
+  slowIcon: {fileID: 2800000, guid: 21a30ec050ebdce40986140bf060197e, type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daedbdb58cbcbe2418e0eb4d88099f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 100
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
