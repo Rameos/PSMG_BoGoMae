@@ -43,7 +43,7 @@ public class NetworkManager : MonoBehaviour
 
         InstantiateDrone();
 
-        InstantiateRefugee();
+//        InstantiateRefugee();
         
 
     }
