@@ -161,7 +161,7 @@ public class GameLogic : MonoBehaviour
 				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
 				if (gazeModel.diamLeftEye == 0) {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
-						Debug.Log ("show == true");
+//						Debug.Log ("show == true");
 
 				} else {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
