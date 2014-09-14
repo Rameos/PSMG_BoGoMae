@@ -32,9 +32,9 @@ public class GameLogic : MonoBehaviour
 		void Update ()
 		{
 				if (Network.connections.Length == 1) {
-						if(Network.isServer){
-							GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
-							refugee.transform.FindChild("Main Camera").gameObject.SetActive(false);
+						if (Network.isServer) {
+								GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
+								refugee.transform.FindChild ("Main Camera").gameObject.SetActive (false);
 						}
 						Countdown ();
 				}
@@ -42,8 +42,20 @@ public class GameLogic : MonoBehaviour
 						showRefugeeTraceWhileLeftEyeClosed ();
 				}
 				ShowMenu ();
+				CheckPlayersAlive ();
 		}
 
+		void CheckPlayersAlive ()
+		{
+				if (deadPlayer != null) {
+						if (deadPlayer == Config.REFUGEE_TAG) {
+								networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
+						} else if (deadPlayer == Config.DRONE_TAG) {
+								networkView.RPC ("QuitGame", RPCMode.All, "RefugeeWon");
+						}
+				}
+		}
+    
 		private void ShowMenu ()
 		{
 				if (Input.GetKeyDown (KeyCode.Escape)) {
@@ -84,6 +96,7 @@ public class GameLogic : MonoBehaviour
 		private void reactOnGoalReached ()
 		{
 				Debug.Log ("Flüchtling erreicht Ziel, Sieg, hurra!");
+				deadPlayer = "Drone";
 		}
 
 		private void reactOnTransmitterDestroyd ()
@@ -166,7 +179,7 @@ public class GameLogic : MonoBehaviour
 
 				} else {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
-                        showRefugeeTrace = false;
+						showRefugeeTrace = false;
 						Debug.Log ("sRTELEC else");
 				}
 
@@ -187,7 +200,7 @@ public class GameLogic : MonoBehaviour
 		[RPC]
 		public void QuitGame (string situation)
 		{
-						Application.LoadLevel (situation);
+				Application.LoadLevel (situation);
 		}
 
 		void OnGUI ()
@@ -201,14 +214,6 @@ public class GameLogic : MonoBehaviour
 						GUI.Label (new Rect (10, 10, 300, 20), "Time is over! Drone won the game, Refugee lost!");
 						deadPlayer = "Refugee";
 						networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
-				}
-
-				if (deadPlayer != null) {
-						if (deadPlayer == Config.REFUGEE_TAG) {
-								networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
-						} else if (deadPlayer == Config.DRONE_TAG) {
-								networkView.RPC ("QuitGame", RPCMode.All, "RefugeeWon");
-						}
 				}
 
 				if (showMenu) {
