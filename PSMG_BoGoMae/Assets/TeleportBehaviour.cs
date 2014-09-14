@@ -51,13 +51,10 @@ public class TeleportBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Network.isServer)
-        {
-            return;
-        }
+
         if (onTeleporter && !inShooting)
         {
-
+            if(Network.isClient)
             GameeventManager.onTeleporterField();
             /*float inputXAxis = Input.GetAxis("Vertical") + gazeInput.gazeRotationSpeedXAxis();
             xAxisWithLimit += inputXAxis * 1f;
@@ -65,12 +62,16 @@ public class TeleportBehaviour : MonoBehaviour
             float inputYAxis = Input.GetAxis("Horizontal") + gazeInput.gazeRotationSpeedYAxis();
             yAxisWithLimit += inputYAxis * 1f; ;
             */
-            refugee.transform.FindChild("Main Camera").gameObject.SetActive(false);
-            refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(true);
-            camera = refugee.transform.FindChild("TopDownCamera").camera;
-            camera.transform.position = new Vector3(camera.transform.position.x + gazeInput.getCameraXPositionWithGaze() * gazeSpeed, camera.transform.position.y, camera.transform.position.z + gazeInput.getCameraYPositionWithGaze() * gazeSpeed);
-            lookForTeleportPosition();
-            teleport();
+            if (Network.isClient)
+            {
+                refugee.transform.FindChild("Main Camera").gameObject.SetActive(false);
+                refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(true);
+                camera = refugee.transform.FindChild("TopDownCamera").camera;
+                camera.transform.position = new Vector3(camera.transform.position.x + gazeInput.getCameraXPositionWithGaze() * gazeSpeed, camera.transform.position.y, camera.transform.position.z + gazeInput.getCameraYPositionWithGaze() * gazeSpeed);
+                lookForTeleportPosition();
+                teleport();
+
+            }
         }
 
     }
@@ -94,6 +95,7 @@ public class TeleportBehaviour : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        
         if (collider.gameObject.tag == Tags.REFUGEE)
         {
             if (inShooting)
@@ -107,12 +109,15 @@ public class TeleportBehaviour : MonoBehaviour
                 //refugee.transform.FindChild("Main Camera").camera.enabled = false;
                 //refugee.transform.FindChild("TopDownCamera").camera.enabled = true;
                 //camera = refugee.transform.FindChild("Main Camera").camera;
+                if (Network.isClient)
+                {
+                    refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(true);
+                    camera = refugee.transform.FindChild("TopDownCamera").gameObject.camera;
+                    camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                    onTeleporter = true;
+                    calculateAOI();
 
-                refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(true);
-                camera = refugee.transform.FindChild("TopDownCamera").gameObject.camera;
-                camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-                onTeleporter = true;
-                calculateAOI();
+                }
             }
         }
         else
@@ -139,8 +144,11 @@ public class TeleportBehaviour : MonoBehaviour
         else
         {
             GameeventManager.onTeleportLeft();
-            refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
-            refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
+            if (Network.isClient)
+            {
+                refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
+                refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
+            }
         }
         if (collider.gameObject.tag == Tags.REFUGEE)
         {
@@ -174,12 +182,16 @@ public class TeleportBehaviour : MonoBehaviour
         {
             Debug.Log("refugee" + refugee);
             Debug.Log("position: " + refugeeTeleportPositionTo);
+            if (Network.isClient)
+            {
+
             refugee.transform.position = refugeeTeleportPositionTo;
             refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
             refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
             camera = refugee.transform.FindChild("Main Camera").camera;
             refugee.GetComponent<CameraController>().reactOnEnableSound();
             refugee.GetComponent<CameraController>().reactOnEnableSound();
+            }
 
         }
     }
