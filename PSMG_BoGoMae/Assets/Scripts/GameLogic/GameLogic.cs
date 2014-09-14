@@ -111,6 +111,7 @@ public class GameLogic : MonoBehaviour
 		private void reactOnShowEnemy ()
 		{
 				//leuchtkegel in refugee script anzeigen
+				Debug.Log ("reactOnShowEnemy");
 				networkView.RPC ("ShowRefugeeTrace", RPCMode.All, null);
 		}
 
@@ -140,7 +141,7 @@ public class GameLogic : MonoBehaviour
 		[RPC]
 		public void ShowRefugeeTrace ()
 		{
-            
+				Debug.Log ("ShowRefugeeTrace");    
 				showRefugeeTrace = true;  
 				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
 
@@ -157,15 +158,16 @@ public class GameLogic : MonoBehaviour
 
 		private void showRefugeeTraceWhileLeftEyeClosed ()
 		{
-
+				Debug.Log ("showRefugeeTraceWhileLeftEyeClosed");
 				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
 				if (gazeModel.diamLeftEye == 0) {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
-//						Debug.Log ("show == true");
+						Debug.Log ("sRTELEC if");
 
 				} else {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
                         showRefugeeTrace = false;
+						Debug.Log ("sRTELEC else");
 				}
 
             
