@@ -141,7 +141,7 @@ public class GameLogic : MonoBehaviour
 		public void ShowRefugeeTrace ()
 		{
             
-				showRefugeeTrace = !showRefugeeTrace;  
+				showRefugeeTrace = true;  
 				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
 
 				/*
@@ -165,6 +165,7 @@ public class GameLogic : MonoBehaviour
 
 				} else {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
+                        showRefugeeTrace = false;
 				}
 
             
