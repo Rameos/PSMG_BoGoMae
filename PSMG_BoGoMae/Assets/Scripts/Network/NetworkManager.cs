@@ -25,6 +25,11 @@ public class NetworkManager : MonoBehaviour
 	{
 		if (!Network.isClient && !Network.isServer)
 		{
+            if (GUI.Button(new Rect(Screen.width - 200f, 100, 100, 50), "Quit"))
+            {
+
+            }
+
             if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
             {
                 sound.PlayOneShot(audio);
