@@ -78,7 +78,7 @@ public class NetworkManager : MonoBehaviour
 
     private void InstantiateRefugee()
     {
-        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 50));
+        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-1200, 2, 2800));
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
         refugeePlayer.GetComponent<HasHealth>().enabled = true;
@@ -93,7 +93,7 @@ public class NetworkManager : MonoBehaviour
 
     private void InstantiateDrone()
     {
-        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(-30, 500, 50));
+        GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(-30, 2500, -1000));
         dronePlayer.GetComponent<DroneController>().enabled = true;
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
         dronePlayer.GetComponent<DroneItemBehavior>().enabled = true;
