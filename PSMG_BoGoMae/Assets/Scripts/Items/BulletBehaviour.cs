@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletBehaviour : MonoBehaviour {
 
     private float bulletLifespan = 5.0f;
-    private float bulletSpeed = 400f;
+    private float bulletSpeed = 600f;
     private float bulletDamage = 50f;
     private float explosionRadius = 3f;
     public GameObject fireEffect;
