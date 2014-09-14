@@ -33,6 +33,10 @@ public class GameLogic : MonoBehaviour
 				if (Network.connections.Length == 1) {
 						Countdown ();
 				}
+                if (showRefugeeTrace)
+                {
+                    showRefugeeTraceWhileLeftEyeClosed();
+                }
 		}
 
 		private void Countdown ()
@@ -114,17 +118,39 @@ public class GameLogic : MonoBehaviour
 		[RPC]
 		public void ShowRefugeeTrace ()
 		{
+            
 				showRefugeeTrace = !showRefugeeTrace;  
 				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
- 
+
+ /*
 				if (showRefugeeTrace) {
 						// evtl nach kurzer zeit wieder deaktivieren
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
+                        Debug.Log("show == true");
 				} else {
 						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
 				}
-              
+              */
 		}
+
+        private void showRefugeeTraceWhileLeftEyeClosed()
+        {
+
+            GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+            if (gazeModel.diamLeftEye == 0)
+            {
+                refugee.transform.FindChild("TraceLight").gameObject.SetActive(true);
+                Debug.Log("show == true");
+
+            }
+            else
+            {
+                refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
+
+            }
+
+            
+        }
 
 		[RPC]
 		public void SlowDownRefugee ()

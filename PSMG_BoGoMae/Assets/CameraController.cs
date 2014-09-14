@@ -178,6 +178,7 @@ public class CameraController : MonoBehaviour
 
     private void reactOnTeleportField()
     {
+
         onTeleportField = true;
         if (setTeleportCamOnce)
         {

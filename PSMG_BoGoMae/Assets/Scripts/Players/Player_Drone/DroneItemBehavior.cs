@@ -77,7 +77,7 @@ public class DroneItemBehavior : MonoBehaviour
                 notEnoughEnergy = true;
             }
         }
-        else if (Input.GetButtonUp("DroneShowEnemy"))
+        else if (/*(Input.GetButtonUp("DroneShowEnemy")*/gazeModel.diamLeftEye == 0)
         {
 
             if (EnergyLeft(energyCostsForShowRefugee))
