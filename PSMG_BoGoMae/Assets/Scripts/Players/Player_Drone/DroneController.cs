@@ -17,7 +17,7 @@ public class DroneController : MonoBehaviour {
 
     private float moveForwardSpeed = 50;
     private float moveBackwardSpeed = 50;
-    private float turnSpeed = 10;
+    private float turnSpeed = 15;
     private float speed = 0;
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
