@@ -12,16 +12,16 @@ public class DroneController : MonoBehaviour {
     private bool onTrapClicked = false;
     private bool trapUsed = false;
 
-    private float crosshairWidth = 32;
-    private float crosshairHeight = 32;
+    private float crosshairWidth = 32f;
+    private float crosshairHeight = 32f;
 
-    private float moveForwardSpeed = 50;
-    private float moveBackwardSpeed = 50;
-    private float turnSpeed = 15;
-    private float speed = 0;
+    private float moveForwardSpeed = 75f;
+    private float moveBackwardSpeed = 75f;
+    private float turnSpeed = 20f;
+    private float speed = 0f;
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
-	private float upAndDownSpeed = 100f;
+	private float upAndDownSpeed = 150f;
 
     public static bool soundEnabled = false;
 

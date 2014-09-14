@@ -53,7 +53,7 @@ public class HasHealth : MonoBehaviour
     {
 		if (gameObject.tag != Config.TRANSMITTER_TAG && networkView.isMine) {
 						GUI.Box (new Rect (Screen.width - 200, 10, 100, 25), "Health:" + Mathf.Round (health) + "/" + maxHealth);
-						GUI.Box (new Rect (Screen.width - 200, 30, health, 25), "");
+						//GUI.Box (new Rect (Screen.width - 200, 30, health, 25), "");
 				}
     }
 }
