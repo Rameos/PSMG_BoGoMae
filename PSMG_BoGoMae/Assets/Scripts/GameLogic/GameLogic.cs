@@ -178,6 +178,12 @@ public class GameLogic : MonoBehaviour
 
 		}
 
+		[RPC]
+		public void QuitGame (string situation)
+		{
+						Application.LoadLevel (situation);
+		}
+
 		void OnGUI ()
 		{
 				if (gameTime > 0) {
@@ -187,25 +193,26 @@ public class GameLogic : MonoBehaviour
 						gameTimeString = "0:00";
 						GUI.Box (gameTimeGUIPosition, "Zeit: " + gameTimeString);
 						GUI.Label (new Rect (10, 10, 300, 20), "Time is over! Drone won the game, Refugee lost!");
-						Application.LoadLevel ("DroneWon");
+						deadPlayer = "Refugee";
+						networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
 				}
 
 				if (deadPlayer != null) {
-						//GUI.Label (new Rect (10, 10, 300, 20), winner + " won the game, " + deadPlayer + " lost!");
 						if (deadPlayer == Config.REFUGEE_TAG) {
-								Application.LoadLevel ("DroneWon");
+								networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
 						} else if (deadPlayer == Config.DRONE_TAG) {
-								Application.LoadLevel ("RefugeeWon");
+								networkView.RPC ("QuitGame", RPCMode.All, "RefugeeWon");
 						}
 				}
+
 				if (showMenu) {
 						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 50), "B: Beenden")) {
-				if (Network.isClient)
-					Application.LoadLevel ("DroneWon");
-				if (Network.isServer)
-					Application.LoadLevel ("RefugeeWon");
-            }
-            if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "F: Fortsetzen")) {
+								if (Network.isClient)
+										deadPlayer = "Refugee";
+								if (Network.isServer)
+										deadPlayer = "Drone";
+						}
+						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "F: Fortsetzen")) {
 								showMenu = !showMenu;
 						}
             
