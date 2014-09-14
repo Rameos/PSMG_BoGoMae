@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerCollisionResponse : MonoBehaviour
 {
-    private bool soundEnabled;
+    private bool soundEnabled = true;
 
 
     // Use this for initialization
