@@ -73,7 +73,7 @@ public class NetworkManager : MonoBehaviour
     {
         menuCamera = GameObject.Find("Menu Camera");
         menuCamera.SetActive(false);
-        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 0));
+        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 50));
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
         refugeePlayer.GetComponent<RefugeeHealth>().enabled = true;
