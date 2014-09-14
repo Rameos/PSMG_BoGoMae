@@ -8,8 +8,6 @@ public class BulletBehaviour : MonoBehaviour {
     private float bulletDamage = 50f;
     private float explosionRadius = 3f;
     public GameObject fireEffect;
-    private bool fireIsSet = false;
-    private float fireLife = 8f;
 
     private bool soundEnabled;
 
@@ -26,12 +24,7 @@ public class BulletBehaviour : MonoBehaviour {
         {
             Explode();
         }
-        if (fireIsSet)
-        {
-            fireLife -= Time.deltaTime;
-            DestroyFire(fireEffect);
 
-        }
 	}
 
     void FixedUpdate()
@@ -50,8 +43,6 @@ public class BulletBehaviour : MonoBehaviour {
         GameObject gameObject = collider.gameObject;
 
         Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
-        fireIsSet = true;
-
 
         if (gameObjectTag == Config.TRANSMITTER_TAG)
         {
@@ -69,14 +60,6 @@ public class BulletBehaviour : MonoBehaviour {
         Explode();
         PlayExplosionSound();
 
-    }
-
-    private void DestroyFire(GameObject fireEffect)
-    {
-        if (fireIsSet && fireLife <= 0)
-        {
-            Destroy(fireEffect);
-        }
     }
 
     private void PlayExplosionSound()
