@@ -35,6 +35,7 @@ public class DroneItemBehavior : MonoBehaviour
     private float energyCostsForShowRefugee = 80;
     private bool notEnoughEnergy = false;
     private bool showBlinkNotification = false;
+	private bool showRefugeePressed = false;
     private float notificationTimer = 3f;
 
     // Use this for initialization
@@ -52,18 +53,39 @@ public class DroneItemBehavior : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         DetectButtonPress();
         EnableShoot();
         if (showBlinkNotification)
         {
             blinkNotificationTimer();
         }
+		if (showRefugeePressed) {
+			LeftEyeClosedTrigger();
+				}
 
 
         //changeWeapon();
     }
 
+	void LeftEyeClosedTrigger ()
+	{
+		if (EnergyLeft(energyCostsForShowRefugee) && gazeModel.diamLeftEye == 0)
+		{
+			Debug.Log("DroneItemBehavior DetectButtonPress");
+			notEnoughEnergy = false;
+			energymanagment.Energy = energymanagment.Energy - energyCostsForShowRefugee;
+			GameeventManager.droneShowEnemy();
+			showBlinkNotification = false;
+			showRefugeePressed = false;
+		}
+		else
+		{
+			Debug.Log("notEnoughEnergy");
+			notEnoughEnergy = true;
+		} 	
+	}
+	
     private void DetectButtonPress()
     {
         if (Input.GetButtonUp("DroneShoot"))
@@ -86,17 +108,7 @@ public class DroneItemBehavior : MonoBehaviour
         else if (Input.GetButtonUp("DroneShowEnemy"))
         {
             showBlinkNotification = true;
-            if (EnergyLeft(energyCostsForShowRefugee) && gazeModel.diamLeftEye == 0)
-            {
-                notEnoughEnergy = false;
-                energymanagment.Energy = energymanagment.Energy - energyCostsForShowRefugee;
-                GameeventManager.droneShowEnemy();
-				showBlinkNotification = false;
-            }
-            else
-            {
-                notEnoughEnergy = true;
-            } 
+			showRefugeePressed = true;
         }
 
     }

@@ -179,7 +179,7 @@ public class DroneController : MonoBehaviour {
             if (speed < 0)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
-                Debug.Log(transform);
+//                Debug.Log(transform);
             }
             handleRotation();
         }
