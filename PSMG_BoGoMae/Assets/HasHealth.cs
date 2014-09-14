@@ -27,6 +27,8 @@ public class HasHealth : MonoBehaviour
         health -= damageAmount;
         if (health <= 0)
         {
+			if(networkView.isMine)
+				Debug.Log(gameObject.tag);
             Die();
         }
     }
