@@ -8,6 +8,7 @@ public class NetworkManager : MonoBehaviour
 	
 	private bool isRefreshingHostList = false;
 	private HostData[] hostList;
+    GameObject menuCamera;
 	
 	//public GameObject playerPrefab;
 	
@@ -34,6 +35,7 @@ public class NetworkManager : MonoBehaviour
 	
 	private void StartServer()
 	{
+        
 		Network.InitializeServer(2, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
 	}
@@ -42,14 +44,15 @@ public class NetworkManager : MonoBehaviour
 	{
 
         InstantiateDrone();
-
-//        InstantiateRefugee();
-        
-
+		
+       // InstantiateRefugee();
+		
     }
 
     private void InstantiateRefugee()
     {
+        menuCamera = GameObject.Find("Menu Camera");
+        menuCamera.SetActive(false);
         GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 0));
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
@@ -65,6 +68,8 @@ public class NetworkManager : MonoBehaviour
 
     private void InstantiateDrone()
     {
+        menuCamera = GameObject.Find("Menu Camera");
+        menuCamera.SetActive(false);
         GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(-30, 500, 50));
         dronePlayer.GetComponent<DroneController>().enabled = true;
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
