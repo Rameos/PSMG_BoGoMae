@@ -71,7 +71,9 @@ public class NetworkManager : MonoBehaviour
 
     private void InstantiateRefugee()
     {
-        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 50));
+        menuCamera = GameObject.Find("Menu Camera");
+        menuCamera.SetActive(false);
+        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, 0));
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
         refugeePlayer.GetComponent<RefugeeHealth>().enabled = true;
@@ -86,6 +88,8 @@ public class NetworkManager : MonoBehaviour
 
     private void InstantiateDrone()
     {
+        menuCamera = GameObject.Find("Menu Camera");
+        menuCamera.SetActive(false);
         GameObject dronePlayer = SpawnPlayer(Config.INSTANTIATE_DRONE, new Vector3(-30, 500, 50));
         dronePlayer.GetComponent<DroneController>().enabled = true;
         dronePlayer.GetComponent<Energymanagement>().enabled = true;
@@ -93,8 +97,6 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.GetComponent<HasHealth>().enabled = true;
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
-        GameObject.Find("Menu Camera").camera.gameObject.SetActive(false);
-
     }
 	
 	

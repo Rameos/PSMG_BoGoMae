@@ -32,6 +32,10 @@ public class GameLogic : MonoBehaviour
 		void Update ()
 		{
 				if (Network.connections.Length == 1) {
+						if(Network.isServer){
+							GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
+							refugee.transform.FindChild("Main Camera").gameObject.SetActive(false);
+						}
 						Countdown ();
 				}
 				if (showRefugeeTrace) {
