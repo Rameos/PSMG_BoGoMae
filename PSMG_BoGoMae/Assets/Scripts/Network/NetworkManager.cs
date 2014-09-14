@@ -63,9 +63,9 @@ public class NetworkManager : MonoBehaviour
 	void OnServerInitialized()
 	{
 
-        //InstantiateDrone();
+        InstantiateDrone();
 		
-        InstantiateRefugee();
+        //InstantiateRefugee();
 		
     }
 
