@@ -2875,6 +2875,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9500004
 Animator:
   serializedVersion: 3
@@ -2889,6 +2890,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -2900,7 +2902,7 @@ Light:
   m_Type: 0
   m_Color: {r: .97647059, g: 1, b: 0, a: 1}
   m_Intensity: 8
-  m_Range: 10
+  m_Range: 50
   m_SpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
