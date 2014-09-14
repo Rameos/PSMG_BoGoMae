@@ -36,7 +36,7 @@ public class DroneItemBehavior : MonoBehaviour
     private bool notEnoughEnergy = false;
     private bool showBlinkNotification = false;
 	private bool showRefugeePressed = false;
-    private float notificationTimer = 3f;
+    private float notificationTimer = 5f;
 
     // Use this for initialization
     void Start()
@@ -59,11 +59,8 @@ public class DroneItemBehavior : MonoBehaviour
         if (showBlinkNotification)
         {
             blinkNotificationTimer();
-        }
-		if (showRefugeePressed) {
 			LeftEyeClosedTrigger();
-				}
-
+		}
 
         //changeWeapon();
     }
@@ -81,7 +78,6 @@ public class DroneItemBehavior : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("notEnoughEnergy");
 			notEnoughEnergy = true;
 		} 	
 	}
