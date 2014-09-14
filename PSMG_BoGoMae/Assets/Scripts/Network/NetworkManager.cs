@@ -97,6 +97,8 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.GetComponent<HasHealth>().enabled = true;
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
+        GameObject.Find("Menu Camera").camera.gameObject.SetActive(false);
+
     }
 	
 	
