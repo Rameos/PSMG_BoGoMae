@@ -22,6 +22,8 @@ public class DroneController : MonoBehaviour {
     private float decreaseSpeed = 0.05f;
     private float increaseSpeed = 0.15f;
 	private float upAndDownSpeed = 150f;
+    public Texture2D sound_on;
+    public Texture2D sound_off;
 
     public static bool soundEnabled = true;
 
@@ -88,7 +90,11 @@ public class DroneController : MonoBehaviour {
     {
         if (soundEnabled)
         {
-            GUI.Box(new Rect(100, 10, 100, 50), "Sound an");
+            GUI.DrawTexture(new Rect(50, 10, 50, 50), sound_on);
+        }
+        else
+        {
+            GUI.DrawTexture(new Rect(50, 10, 50, 50), sound_off);
         }
       /*  if(onTrapClicked) {
             GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
