@@ -18,6 +18,7 @@ public class FlameLife : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
 	}
 
     void OnTriggerEnter(Collider collider)

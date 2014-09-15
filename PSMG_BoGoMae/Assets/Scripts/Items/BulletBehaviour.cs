@@ -1,31 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletBehaviour : MonoBehaviour {
+public class BulletBehaviour : MonoBehaviour
+{
 
     private float bulletLifespan = 5.0f;
     private float bulletSpeed = 600f;
     private float bulletDamage = 50f;
     private float explosionRadius = 3f;
+    private bool refugeeProtection = true;
     public GameObject fireEffect;
 
     private bool soundEnabled;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         bulletLifespan -= Time.deltaTime;
 
         if (bulletLifespan <= 0)
         {
             Explode();
         }
+        if (bulletLifespan <= 4.5)
+        {
+            refugeeProtection = false;
+        }
 
-	}
+
+    }
 
     void FixedUpdate()
     {
@@ -36,13 +45,16 @@ public class BulletBehaviour : MonoBehaviour {
     {
         transform.Translate(transform.forward * bulletSpeed * Time.deltaTime, Space.World);
     }
-    
+
     void OnTriggerEnter(Collider collider)
     {
         string gameObjectTag = collider.gameObject.tag;
         GameObject gameObject = collider.gameObject;
-
-        Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
+        if (!refugeeProtection)
+        {
+            Network.Instantiate(fireEffect, transform.position, Quaternion.identity, 0);
+        }
+  
 
         if (gameObjectTag == Config.TRANSMITTER_TAG)
         {
@@ -50,13 +62,21 @@ public class BulletBehaviour : MonoBehaviour {
         }
         else if (gameObjectTag == Config.REFUGEE_TAG)
         {
-            addDamageToGameObject(gameObject);
+            if (refugeeProtection)
+            {
+
+            }
+            else
+            {
+                addDamageToGameObject(gameObject);
+
+            }
         }
         else if (gameObjectTag == Config.DRONE_TAG)
         {
             addDamageToGameObject(gameObject);
         }
-        
+
         Explode();
         PlayExplosionSound();
 
