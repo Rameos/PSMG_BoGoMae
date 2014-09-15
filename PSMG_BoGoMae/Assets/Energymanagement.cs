@@ -9,6 +9,7 @@ public class Energymanagement : MonoBehaviour {
 
     private static Texture2D rectTexture;
     private static GUIStyle rectStyle;
+    public Texture2D akku;
 
 
 	// Use this for initialization
@@ -64,8 +65,10 @@ public class Energymanagement : MonoBehaviour {
         GUI.Box(new Rect(Screen.width / 2 + 200, Screen.height / 2 - 100, energy, 25), "" , rectStyle);
         */
 
-        GUI.Box(new Rect(Screen.width / 2 -50, 10, 100, 25), "Energy:" + Mathf.Round(energy) + "/" + maxEnergy);
-        GUI.Box(new Rect(Screen.width / 2 -50, 10, energy, 25), "");
+        GUI.DrawTexture(new Rect(Screen.width / 2 -50, 10, 131, 60),  akku);
+      
+       
+        GUI.Box(new Rect(Screen.width / 2 -26, 18, energy, 45), "");
     }
 
 
