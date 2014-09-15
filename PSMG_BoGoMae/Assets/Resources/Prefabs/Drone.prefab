@@ -322,6 +322,8 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   trap: {fileID: 0}
   trapSpawnPosition: {fileID: 0}
+  sound_on: {fileID: 2800000, guid: 086c69125186ef0448110d90f77c9bb3, type: 3}
+  sound_off: {fileID: 2800000, guid: 0e911b16a2f86f747a5c7190b227ddfe, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

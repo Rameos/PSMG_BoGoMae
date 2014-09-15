@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour
     private Vector3 defaultCameraPosition;
     private bool active = false;
     private bool inactive = true;
+    public Texture2D sound_on;
+    public Texture2D sound_off;
 
     public static bool soundEnabled = false;
 
@@ -81,7 +83,11 @@ public class CameraController : MonoBehaviour
     {
         if (soundEnabled)
         {
-            GUI.Box(new Rect(100, 10, 100, 50), "Sound an");
+            GUI.DrawTexture(new Rect(50, 10, 50, 50), sound_on);
+        }
+        else
+        {
+            GUI.DrawTexture(new Rect(50, 10, 50, 50), sound_off);
         }
     }
 

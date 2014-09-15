@@ -2934,6 +2934,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9500004
 Animator:
   serializedVersion: 3
@@ -2948,6 +2949,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -3048,6 +3050,8 @@ MonoBehaviour:
   jumpSpeed: 20
   upDownRange: 60
   camera: {fileID: 2000000}
+  sound_on: {fileID: 2800000, guid: 086c69125186ef0448110d90f77c9bb3, type: 3}
+  sound_off: {fileID: 2800000, guid: 0e911b16a2f86f747a5c7190b227ddfe, type: 3}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
