@@ -30,7 +30,7 @@ public class DroneItemBehavior : MonoBehaviour
     private int droneShootingCounter = 0;
     private int droneShootingPressedCounter = 0;
     private bool rocketsActivatedOrDeactivated;
-    private Rect rocketsStatusGUIposition = new Rect(Screen.width / 2 - 200, 10, 50, 50);
+    private Rect rocketsStatusGUIposition = new Rect(120, 10, 50, 50);
     private RefugeeMovement refugeeMovement;
     private Energymanagement energymanagment;
     private float energyCostsForSlowing = 50f;
