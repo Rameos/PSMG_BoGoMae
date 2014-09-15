@@ -28,7 +28,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             Explode();
         }
-        if (bulletLifespan <= 4.5)
+        if (bulletLifespan <= 4.7)
         {
             refugeeProtection = false;
         }
