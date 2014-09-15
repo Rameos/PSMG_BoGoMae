@@ -8,6 +8,8 @@ public class DroneItemBehavior : MonoBehaviour
     public Texture2D downIcon;
     public Texture2D lupeIcon;
     public Texture2D slowIcon;
+    public Texture2D weaponArmed;
+    public Texture2D weaponUnarmed;
 
     private float iconDistance = 4f;
     private float inventoryXposition = (Screen.width/2)-170f;
@@ -27,8 +29,8 @@ public class DroneItemBehavior : MonoBehaviour
 
     private int droneShootingCounter = 0;
     private int droneShootingPressedCounter = 0;
-    private string rocketsActivatedOrDeactivated;
-    private Rect rocketsStatusGUIposition = new Rect(Screen.width / 2 - 200, 10, 150, 25);
+    private bool rocketsActivatedOrDeactivated;
+    private Rect rocketsStatusGUIposition = new Rect(Screen.width / 2 - 200, 10, 50, 50);
     private RefugeeMovement refugeeMovement;
     private Energymanagement energymanagment;
     private float energyCostsForSlowing = 50f;
@@ -136,12 +138,12 @@ public class DroneItemBehavior : MonoBehaviour
         if (droneShootingPressedCounter % 2 == 0)
         {
             GameeventManager.onDisableShoot();
-            rocketsActivatedOrDeactivated = "deaktiviert";
+            rocketsActivatedOrDeactivated = false;
         }
         else
         {
             GameeventManager.onEnableShoot();
-            rocketsActivatedOrDeactivated = "aktiviert";
+            rocketsActivatedOrDeactivated = true;
         }
 
     }
@@ -181,7 +183,16 @@ public class DroneItemBehavior : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(rocketsStatusGUIposition, "Raketen: " + rocketsActivatedOrDeactivated);
+        if (rocketsActivatedOrDeactivated)
+        {
+            GUI.DrawTexture(rocketsStatusGUIposition, weaponArmed);
+        }
+        else
+        {
+            GUI.DrawTexture(rocketsStatusGUIposition, weaponUnarmed);
+        }
+        
+
         DrawIcon(downIconXposition, iconYposition, iconWidth, iconHeight, downIcon);
         DrawIcon(upIconXposition, iconYposition, iconWidth, iconHeight, upIcon);
         DrawIcon(showIconXposition, iconYposition, iconWidth, iconHeight, lupeIcon);

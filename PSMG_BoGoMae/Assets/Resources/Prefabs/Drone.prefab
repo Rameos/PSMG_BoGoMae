@@ -363,6 +363,8 @@ MonoBehaviour:
   downIcon: {fileID: 2800000, guid: 54d3c2125ee2dea40b78c42203d1a5bb, type: 3}
   lupeIcon: {fileID: 2800000, guid: 008ac162468a89744be2563a2efaa18f, type: 3}
   slowIcon: {fileID: 2800000, guid: 21a30ec050ebdce40986140bf060197e, type: 3}
+  weaponArmed: {fileID: 2800000, guid: 6964132ec9436a64a9b46253c985eb21, type: 3}
+  weaponUnarmed: {fileID: 2800000, guid: e7f76ac5855137348ac3365f00a57a59, type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
