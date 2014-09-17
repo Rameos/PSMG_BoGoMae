@@ -110,7 +110,7 @@ public class DroneController : MonoBehaviour {
 
     }
 
-    private void playSoundIfEnabled()
+    public void playSoundIfEnabled()
     {
         AudioSource sound = GameObject.FindGameObjectWithTag("DroneCamera").GetComponent<AudioSource>();
         if (soundEnabled)

@@ -89,6 +89,7 @@ public class NetworkManager : MonoBehaviour
         //refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
 		refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
 		GameObject.Find ("Menu Camera").camera.gameObject.SetActive (false);
+        refugeePlayer.GetComponent<CameraController>().playSoundIfEnabled();
     }
 
     private void InstantiateDrone()
@@ -101,6 +102,7 @@ public class NetworkManager : MonoBehaviour
         dronePlayer.transform.FindChild("DroneCamera").gameObject.SetActive(true);
         dronePlayer.GetComponent<DroneRocketAttack>().enabled = true;
 		GameObject.Find ("Menu Camera").camera.gameObject.SetActive (false);
+        dronePlayer.GetComponent<DroneController>().playSoundIfEnabled();
     }
 	
 	

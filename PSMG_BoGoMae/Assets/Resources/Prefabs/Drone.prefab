@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f7737e19bc15b45bfef2d0fb5f4319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultTexture: {fileID: 0}
+  defaultTexture: {fileID: 2800000, guid: c65405de1316e7f47b4884a5143589cc, type: 3}
   akku: {fileID: 2800000, guid: 4c74be7c420818a428053dd9fdcbbb3b, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:

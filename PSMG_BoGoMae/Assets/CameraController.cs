@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
     public Texture2D sound_on;
     public Texture2D sound_off;
 
-    public static bool soundEnabled = false;
+    public static bool soundEnabled = true;
 
     public enum CameraStates
     {
@@ -150,7 +150,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    private void playSoundIfEnabled()
+    public void playSoundIfEnabled()
     {
         AudioSource sound = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
         if (soundEnabled)
