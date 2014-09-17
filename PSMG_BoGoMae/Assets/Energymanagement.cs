@@ -7,7 +7,7 @@ public class Energymanagement : MonoBehaviour {
     private float maxEnergy = 100f;
     private float energyIncreaseFactor = 10f;
 
-    private static Texture2D rectTexture;
+    public Texture2D defaultTexture;
     private static GUIStyle rectStyle;
     public Texture2D akku;
 
@@ -66,10 +66,22 @@ public class Energymanagement : MonoBehaviour {
         */
 
         GUI.DrawTexture(new Rect(Screen.width / 2 -50, 10, 131, 60),  akku);
-      
-       
-        GUI.Box(new Rect(Screen.width / 2 -26, 18, energy, 45), "");
+
+        
+        GUI.Box(new Rect(Screen.width / 2 -26, 18, energy, 45), createTexture(new Color32(0,255,0,150)));
+        GUI.skin.box.normal.background = null;
+       // createTexture(new Color32(100,100,100,150));
+        
     }
 
+    private Texture2D createTexture(Color32 color)
+    {
+        Texture2D texture = new Texture2D(1, 1);
+        texture.SetPixel(0, 0, color);
+        texture.alphaIsTransparency = true;
+        texture.Apply();
+        GUI.skin.box.normal.background = texture;
+        return texture;
+    }
 
 }
