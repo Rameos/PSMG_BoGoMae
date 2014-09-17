@@ -189,8 +189,7 @@ public class TeleportBehaviour : MonoBehaviour
             refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
             refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
             camera = refugee.transform.FindChild("Main Camera").camera;
-            refugee.GetComponent<CameraController>().reactOnEnableSound();
-            refugee.GetComponent<CameraController>().reactOnEnableSound();
+            refugee.GetComponent<CameraController>().playSoundIfEnabled();
             }
 
         }
