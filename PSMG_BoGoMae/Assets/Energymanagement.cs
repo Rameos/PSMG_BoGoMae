@@ -43,34 +43,9 @@ public class Energymanagement : MonoBehaviour {
     void OnGUI()
     {
         GUI.color = Color.white;
-        
-        /* Style für Balken
-        if (rectTexture == null)
-        {
-            rectTexture = new Texture2D(1, 1);
-        }
-
-        if (rectStyle == null)
-        {
-            rectStyle = new GUIStyle();
-        }
-
-        rectTexture.SetPixel(5, 5, Color.grey);
-        rectTexture.Apply();
-
-        rectStyle.normal.background = rectTexture;
-        
-
-        GUI.Box(new Rect(Screen.width / 2 + 200, Screen.height / 2 - 100, 100, 25), "Energy:" + Mathf.Round(energy) +"/"+maxEnergy);
-        GUI.Box(new Rect(Screen.width / 2 + 200, Screen.height / 2 - 100, energy, 25), "" , rectStyle);
-        */
-
         GUI.DrawTexture(new Rect(Screen.width / 2 -50, 10, 131, 60),  akku);
-
-        
         GUI.Box(new Rect(Screen.width / 2 -26, 18, energy, 45), createTexture(new Color32(0,255,0,150)));
         GUI.skin.box.normal.background = null;
-       // createTexture(new Color32(100,100,100,150));
         
     }
 
@@ -78,7 +53,6 @@ public class Energymanagement : MonoBehaviour {
     {
         Texture2D texture = new Texture2D(1, 1);
         texture.SetPixel(0, 0, color);
-       // texture.alphaIsTransparency = true;
         texture.Apply();
         GUI.skin.box.normal.background = texture;
         return texture;
