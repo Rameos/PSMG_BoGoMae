@@ -63,15 +63,12 @@ public class DroneItemBehavior : MonoBehaviour
             blinkNotificationTimer();
 			LeftEyeClosedTrigger();
 		}
-
-        //changeWeapon();
     }
 
 	void LeftEyeClosedTrigger ()
 	{
 		if (EnergyLeft(energyCostsForShowRefugee) && gazeModel.diamLeftEye == 0)
 		{
-			Debug.Log("DroneItemBehavior DetectButtonPress");
 			notEnoughEnergy = false;
 			energymanagment.Energy = energymanagment.Energy - energyCostsForShowRefugee;
 			GameeventManager.droneShowEnemy();
@@ -117,7 +114,6 @@ public class DroneItemBehavior : MonoBehaviour
         if (notificationTimer <= 0)
         {
             showBlinkNotification = false;
-            Debug.Log(showBlinkNotification);
         }
     }
 
@@ -148,27 +144,6 @@ public class DroneItemBehavior : MonoBehaviour
 
     }
 
-    /*
-
-    void changeWeapon()
-    {
-        if (Input.GetButtonUp("DroneShoot"))
-        {
-            droneShootingCounter++;
-            Debug.Log("shotting counter: " + droneShootingCounter);
-            if (droneShootingCounter % 2 == 0)
-            {
-                Screen.lockCursor = true;
-                GameeventManager.onDisableShoot();
-            }
-            else
-            {
-                GameeventManager.onEnableShoot();
-                Screen.lockCursor = false;
-            }
-        }
-    }
-    */
     private void DrawIcon(float xPosition, float yPosition, float width, float height, Texture2D icon)
     {
 
@@ -202,23 +177,6 @@ public class DroneItemBehavior : MonoBehaviour
         {
             GUI.Label(new Rect((Screen.width / 2)-200f, Screen.height / 2, 400f, 100f), "linkes Auge geschlossen halten, um Flüchtling Position anzuzeigen");
         }
-        //DrawNotEnoughEnergy();
-        /*  GUI.Box(new Rect(inventoryXposition, inventoryYposition, inventoryWidth, inventoryHeight), "");
-
-          if (GUI.Button(new Rect(trapButtonXposition, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 1"))
-          {
-             // GameeventManager.setTrap();
-          }
-          if (GUI.Button(new Rect(trapButtonXposition+160, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 2"))
-          {
-              // GameeventManager.setTrap();
-          }
-          if (GUI.Button(new Rect(trapButtonXposition+320, trapButtonYposition, trapButtonWidth, trapButtonHeight), "Waffe 3"))
-          {
-              // GameeventManager.setTrap();
-          }
-         * 
-         * */
     }
 
     private void DrawNotEnoughEnergy()
