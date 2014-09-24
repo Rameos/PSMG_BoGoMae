@@ -139,6 +139,7 @@ public class TeleportBehaviour : MonoBehaviour
             {
                 refugee.transform.FindChild("TopDownCamera").gameObject.SetActive(false);
                 refugee.transform.FindChild("Main Camera").gameObject.SetActive(true);
+                refugee.GetComponent<CameraController>().playSoundIfEnabled();
             }
         }
         if (collider.gameObject.tag == Tags.REFUGEE)
