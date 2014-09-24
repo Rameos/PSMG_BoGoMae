@@ -113,32 +113,4 @@ public class BulletBehaviour : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    /*
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("rakete collision mit: " + collision.gameObject);
-        Network.Instantiate(fireEffect, collision.transform.position, Quaternion.identity, 0);
-        Explode();
-
-    }
-    */
-
-    /*
-    private void Explode()
-    {
-        Destroy(gameObject);
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        Debug.Log (colliders.Length);
-        foreach (Collider collider in colliders)
-        {
-            HasHealth hasHealth = collider.GetComponent<HasHealth>();
-			Debug.Log(hasHealth);
-            if (hasHealth != null)
-            {
-                float distance = Vector3.Distance(transform.position, collider.transform.position);
-                float damageRatio = 1f * (distance / explosionRadius);
-                hasHealth.ReceiveDamage(bulletDamage * damageRatio);
-            }
-        }
-    }*/
 }
