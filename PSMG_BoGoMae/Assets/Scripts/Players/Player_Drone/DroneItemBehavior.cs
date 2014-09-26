@@ -11,6 +11,8 @@ public class DroneItemBehavior : MonoBehaviour
     public Texture2D weaponArmed;
     public Texture2D weaponUnarmed;
 
+
+    private float eyesClosedForTwoSeconds = 2f;
     private float iconDistance = 4f;
     private float inventoryXposition = (Screen.width/2)-170f;
     private float inventoryYposition = Screen.height - 100f;
@@ -50,7 +52,6 @@ public class DroneItemBehavior : MonoBehaviour
         slowIconXposition = showIconXposition + iconWidth + iconDistance;
         shootIconXposition = slowIconXposition + iconWidth + iconDistance;
         Screen.lockCursor = true;
-
     }
 
     // Update is called once per frame
@@ -58,28 +59,57 @@ public class DroneItemBehavior : MonoBehaviour
     {        
         DetectButtonPress();
         EnableShoot();
+        /*
         if (showBlinkNotification)
         {
             blinkNotificationTimer();
-			LeftEyeClosedTrigger();
-		}
+		}*/
+		EyesClosedTrigger();
     }
 
-	void LeftEyeClosedTrigger ()
+	void EyesClosedTrigger ()
 	{
-		if (EnergyLeft(energyCostsForShowRefugee) && gazeModel.diamLeftEye == 0)
+		if (EnergyLeft(energyCostsForShowRefugee) && BothEyesClosed())
 		{
 			notEnoughEnergy = false;
 			energymanagment.Energy = energymanagment.Energy - energyCostsForShowRefugee;
 			GameeventManager.droneShowEnemy();
 			showBlinkNotification = false;
 			showRefugeePressed = false;
+            itemUsedNotification();
 		}
 		else
 		{
 			notEnoughEnergy = true;
 		} 	
 	}
+
+    private void itemUsedNotification()
+    {
+        // TO DO
+    }
+
+    private bool BothEyesClosed()
+    {  
+
+        if (gazeModel.diamLeftEye == 0 && gazeModel.diamRightEye == 0)
+        {
+            eyesClosedForTwoSeconds -= Time.deltaTime;
+        }
+        else
+        {
+            eyesClosedForTwoSeconds = 2f;
+        }
+
+        if (eyesClosedForTwoSeconds <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 	
     private void DetectButtonPress()
     {

@@ -4,229 +4,285 @@ using System.Collections;
 public class GameLogic : MonoBehaviour
 {
 
-		private float gameTime = 540f;
-		private string gameTimeString;
-		private float minutes;
-		private float seconds;
-		private RefugeeMovement refugeeMovement;
-		private int transmitterCounter;
-		private string deadPlayer = null;
-		private string winner = null;
-		private Rect gameTimeGUIPosition = new Rect (Screen.width - 200f, 50f, 150f, 25f);
-		private bool showMenu = false;
-		private bool showRefugeeTrace = false;
+    private float gameTime = 540f;
+    private float showRefugeeTime;
+    private string gameTimeString;
+    private float minutes;
+    private float seconds;
+    private RefugeeMovement refugeeMovement;
+    private int transmitterCounter;
+    private string deadPlayer = null;
+    private string winner = null;
+    private Rect gameTimeGUIPosition = new Rect(Screen.width - 200f, 50f, 150f, 25f);
+    private bool showMenu = false;
+    private bool showRefugeeTrace = false;
 
-		// Use this for initialization
-		void Start ()
-		{
-				GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
-				GameeventManager.onGoalReachedHandler += reactOnGoalReached;
-				GameeventManager.onDroneSetSlowTrapHandler += reactOnSetSlowTrap;
-				GameeventManager.onShowEnemyHandler += reactOnShowEnemy;
-				GameeventManager.onPlayerDiedHandler += reactOnPlayerDied;
-				transmitterCounter = GameObject.FindGameObjectsWithTag ("Transmitter").Length;
-				Debug.Log (transmitterCounter);
-		}
+    // Use this for initialization
+    void Start()
+    {
+        GameeventManager.transmitterIsDestroydHandler += reactOnTransmitterDestroyd;
+        GameeventManager.onGoalReachedHandler += reactOnGoalReached;
+        GameeventManager.onDroneSetSlowTrapHandler += reactOnSetSlowTrap;
+        GameeventManager.onShowEnemyHandler += reactOnShowEnemy;
+        GameeventManager.onPlayerDiedHandler += reactOnPlayerDied;
+        transmitterCounter = GameObject.FindGameObjectsWithTag("Transmitter").Length;
+        Debug.Log(transmitterCounter);
+    }
 
-		// Update is called once per frame
-		void Update ()
-		{
-				if (Network.connections.Length == 1) {
-						if (Network.isServer) {
-								GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
-								refugee.transform.FindChild ("Main Camera").gameObject.SetActive (false);
-						}
-						Countdown ();
-				}
-				if (showRefugeeTrace) {
-						showRefugeeTraceWhileLeftEyeClosed ();
-				}
-				ShowMenu ();
-				CheckPlayersAlive ();
-		}
+    // Update is called once per frame
+    void Update()
+    {
+        if (Network.connections.Length == 1)
+        {
+            if (Network.isServer)
+            {
+                GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+                refugee.transform.FindChild("Main Camera").gameObject.SetActive(false);
+            }
+            Countdown();
+        }
+        if (showRefugeeTrace)
+        {
+            showRefugeeTraceWhileEyesClosed();
+        }
+        ShowMenu();
+        CheckPlayersAlive();
+    }
 
-		void CheckPlayersAlive ()
-		{
-				if (deadPlayer != null) {
-						if (deadPlayer == Config.REFUGEE_TAG) {
-								networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
-						} else if (deadPlayer == Config.DRONE_TAG) {
-								networkView.RPC ("QuitGame", RPCMode.All, "RefugeeWon");
-						}
-				}
-		}
-    
-		private void ShowMenu ()
-		{
-				if (Input.GetKeyDown (KeyCode.Escape)) {
-						showMenu = !showMenu;
-				}
+    void CheckPlayersAlive()
+    {
+        if (deadPlayer != null)
+        {
+            if (deadPlayer == Config.REFUGEE_TAG)
+            {
+                networkView.RPC("QuitGame", RPCMode.All, "DroneWon");
+            }
+            else if (deadPlayer == Config.DRONE_TAG)
+            {
+                networkView.RPC("QuitGame", RPCMode.All, "RefugeeWon");
+            }
+        }
+    }
 
-				if (Input.GetKeyDown (KeyCode.B)) {
-						if (Network.isClient)
-								Application.LoadLevel ("DroneWon");
-						if (Network.isServer)
-								Application.LoadLevel ("RefugeeWon");
-				} else if (Input.GetKeyDown (KeyCode.F)) {
-						showMenu = !showMenu;
-				}
-        
-		}
-    
-		private void Countdown ()
-		{
-				gameTime -= Time.deltaTime;
-				if (gameTime >= 60f) {
-						minutes = gameTime / 60;
-				} else {
+    private void ShowMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            showMenu = !showMenu;
+        }
 
-						minutes = 0;
-				}
-				if (seconds <= 9) {
-						seconds = gameTime % 60;
-						gameTimeString = minutes.ToString ("0") + ":0" + seconds.ToString ("0");
-				} else {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (Network.isClient)
+                Application.LoadLevel("DroneWon");
+            if (Network.isServer)
+                Application.LoadLevel("RefugeeWon");
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            showMenu = !showMenu;
+        }
 
-						seconds = gameTime % 60;
-						gameTimeString = minutes.ToString ("0") + ":" + seconds.ToString ("0");
-				}
+    }
 
-		}
+    private void Countdown()
+    {
+        gameTime -= Time.deltaTime;
+        if (gameTime >= 60f)
+        {
+            minutes = gameTime / 60;
+        }
+        else
+        {
 
-		private void reactOnGoalReached ()
-		{
-				Debug.Log ("Flüchtling erreicht Ziel, Sieg, hurra!");
-				deadPlayer = "Drone";
-		}
+            minutes = 0;
+        }
+        if (seconds <= 9)
+        {
+            seconds = gameTime % 60;
+            gameTimeString = minutes.ToString("0") + ":0" + seconds.ToString("0");
+        }
+        else
+        {
 
-		private void reactOnTransmitterDestroyd ()
-		{
-				Debug.Log ("in react on transmitter destroyd");
-				transmitterCounter--;
-				if (transmitterCounter == 0) {
+            seconds = gameTime % 60;
+            gameTimeString = minutes.ToString("0") + ":" + seconds.ToString("0");
+        }
 
-						Debug.Log ("Refugee hat gewonnen | alle transmitter kaputt");
-						networkView.RPC ("CrashDrone", RPCMode.All, null);
-				}
-		}
+    }
 
-		private void reactOnPlayerDied (GameObject gameObject)
-		{
-				Debug.Log ("GameLogic.reactOnPlayerDied: " + gameObject.name);
-				networkView.RPC ("PlayerDied", RPCMode.All, gameObject.tag);
-		}
+    private void reactOnGoalReached()
+    {
+        Debug.Log("Flüchtling erreicht Ziel, Sieg, hurra!");
+        deadPlayer = "Drone";
+    }
 
-		private void reactOnSetSlowTrap ()
-		{
-				networkView.RPC ("SlowDownRefugee", RPCMode.All, null);
-		}
+    private void reactOnTransmitterDestroyd()
+    {
+        Debug.Log("in react on transmitter destroyd");
+        transmitterCounter--;
+        if (transmitterCounter == 0)
+        {
 
-		private void reactOnShowEnemy ()
-		{
-				//leuchtkegel in refugee script anzeigen
-				Debug.Log ("reactOnShowEnemy");
-				networkView.RPC ("ShowRefugeeTrace", RPCMode.All, null);
-		}
+            Debug.Log("Refugee hat gewonnen | alle transmitter kaputt");
+            networkView.RPC("CrashDrone", RPCMode.All, null);
+        }
+    }
 
-		[RPC]
-		public void CrashDrone ()
-		{
-				GameObject drone = GameObject.FindGameObjectWithTag (Config.DRONE_TAG);
-				drone.rigidbody.useGravity = true;
-				drone.rigidbody.freezeRotation = false;
-		}
+    private void reactOnPlayerDied(GameObject gameObject)
+    {
+        Debug.Log("GameLogic.reactOnPlayerDied: " + gameObject.name);
+        networkView.RPC("PlayerDied", RPCMode.All, gameObject.tag);
+    }
 
-		[RPC]
-		public void PlayerDied (string gameOjectTag)
-		{
-				Debug.Log ("RPC PlayerDied");
-				if (gameOjectTag == Config.DRONE_TAG) {
-						Debug.Log ("1");
-						deadPlayer = gameOjectTag;
-						winner = "Refugee";
-				} else if (gameOjectTag == Config.REFUGEE_TAG) {
-						Debug.Log ("2");
-						deadPlayer = gameOjectTag;
-						winner = "Drone";
-				}
-		}
+    private void reactOnSetSlowTrap()
+    {
+        networkView.RPC("SlowDownRefugee", RPCMode.All, null);
+    }
 
-		[RPC]
-		public void ShowRefugeeTrace ()
-		{
-				Debug.Log ("ShowRefugeeTrace");    
-				showRefugeeTrace = true;  
-				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
+    private void reactOnShowEnemy()
+    {
+        //leuchtkegel in refugee script anzeigen
+        Debug.Log("reactOnShowEnemy");
+        networkView.RPC("ShowRefugeeTrace", RPCMode.All, null);
+    }
 
-				/*
-				if (showRefugeeTrace) {
-						// evtl nach kurzer zeit wieder deaktivieren
-						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
-                        Debug.Log("show == true");
-				} else {
-						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
-				}
-              */
-		}
+    [RPC]
+    public void CrashDrone()
+    {
+        GameObject drone = GameObject.FindGameObjectWithTag(Config.DRONE_TAG);
+        drone.rigidbody.useGravity = true;
+        drone.rigidbody.freezeRotation = false;
+    }
 
-		private void showRefugeeTraceWhileLeftEyeClosed ()
-		{
-				Debug.Log ("showRefugeeTraceWhileLeftEyeClosed");
-				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
-				if (gazeModel.diamLeftEye == 0) {
-						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
-						Debug.Log ("sRTELEC if");
+    [RPC]
+    public void PlayerDied(string gameOjectTag)
+    {
+        Debug.Log("RPC PlayerDied");
+        if (gameOjectTag == Config.DRONE_TAG)
+        {
+            Debug.Log("1");
+            deadPlayer = gameOjectTag;
+            winner = "Refugee";
+        }
+        else if (gameOjectTag == Config.REFUGEE_TAG)
+        {
+            Debug.Log("2");
+            deadPlayer = gameOjectTag;
+            winner = "Drone";
+        }
+    }
 
-				} else {
-						refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
-						showRefugeeTrace = false;
-						Debug.Log ("sRTELEC else");
-				}
+    [RPC]
+    public void ShowRefugeeTrace()
+    {
+        Debug.Log("ShowRefugeeTrace");
+        showRefugeeTrace = true;
+        showRefugeeTime = 5f;
+        GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
 
-            
-		}
+        /*
+        if (showRefugeeTrace) {
+                // evtl nach kurzer zeit wieder deaktivieren
+                refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
+                Debug.Log("show == true");
+        } else {
+                refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
+        }
+      */
+    }
 
-		[RPC]
-		public void SlowDownRefugee ()
-		{
-				Debug.Log ("RPC SlowDownRefugee");
+    private void showRefugeeTraceWhileEyesClosed()
+    {
+        Debug.Log("showRefugeeTraceWhileEyesClosed");
+        GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+        if (ShowRefugeeTimeRemaining())
+        {
+            refugee.transform.FindChild("TraceLight").gameObject.SetActive(true);
 
-				float speed = 1f;
-				GameObject refugee = GameObject.FindGameObjectWithTag (Config.REFUGEE_TAG);
-				refugee.GetComponent<RefugeeMovement> ().setMovementSpeedTo (speed);
+        }
+        else
+        {
+            refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
+            showRefugeeTrace = false;
+        }
+        /*
+        if (gazeModel.diamLeftEye == 0)
+        {
+            refugee.transform.FindChild("TraceLight").gameObject.SetActive(true);
+            Debug.Log("sRTELEC if");
 
-		}
+        }
+        else
+        {
+            refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
+            showRefugeeTrace = false;
+            Debug.Log("sRTELEC else");
+        }
+        */
 
-		[RPC]
-		public void QuitGame (string situation)
-		{
-				Application.LoadLevel (situation);
-		}
+    }
 
-		void OnGUI ()
-		{
-				if (gameTime > 0) {
-						GUI.Box (gameTimeGUIPosition, "Zeit: " + gameTimeString);
+    private bool ShowRefugeeTimeRemaining()
+    {
+        showRefugeeTime -= Time.deltaTime;
+        if (showRefugeeTime <= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
-				} else {
-						gameTimeString = "0:00";
-						GUI.Box (gameTimeGUIPosition, "Zeit: " + gameTimeString);
-						GUI.Label (new Rect (10, 10, 300, 20), "Time is over! Drone won the game, Refugee lost!");
-						deadPlayer = "Refugee";
-						networkView.RPC ("QuitGame", RPCMode.All, "DroneWon");
-				}
+    [RPC]
+    public void SlowDownRefugee()
+    {
+        Debug.Log("RPC SlowDownRefugee");
 
-				if (showMenu) {
-						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 50), "B: Beenden")) {
-								if (Network.isClient)
-										deadPlayer = "Refugee";
-								if (Network.isServer)
-										deadPlayer = "Drone";
-						}
-						if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "F: Fortsetzen")) {
-								showMenu = !showMenu;
-						}
-            
-				}
-		}
+        float speed = 1f;
+        GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+        refugee.GetComponent<RefugeeMovement>().setMovementSpeedTo(speed);
+
+    }
+
+    [RPC]
+    public void QuitGame(string situation)
+    {
+        Application.LoadLevel(situation);
+    }
+
+    void OnGUI()
+    {
+        if (gameTime > 0)
+        {
+            GUI.Box(gameTimeGUIPosition, "Zeit: " + gameTimeString);
+
+        }
+        else
+        {
+            gameTimeString = "0:00";
+            GUI.Box(gameTimeGUIPosition, "Zeit: " + gameTimeString);
+            GUI.Label(new Rect(10, 10, 300, 20), "Time is over! Drone won the game, Refugee lost!");
+            deadPlayer = "Refugee";
+            networkView.RPC("QuitGame", RPCMode.All, "DroneWon");
+        }
+
+        if (showMenu)
+        {
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 50), "B: Beenden"))
+            {
+                if (Network.isClient)
+                    deadPlayer = "Refugee";
+                if (Network.isServer)
+                    deadPlayer = "Drone";
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "F: Fortsetzen"))
+            {
+                showMenu = !showMenu;
+            }
+
+        }
+    }
 }
