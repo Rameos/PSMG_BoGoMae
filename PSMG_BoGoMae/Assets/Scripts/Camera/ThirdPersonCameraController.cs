@@ -29,8 +29,6 @@ public class ThirdPersonCameraController : MonoBehaviour {
     [SerializeField]
     private float rotationSpeed = 2f;
     private float mouseSensitivity = 5.0f;
-   // public GameObject refugee;
-
 
     /*
      * third person camera variables
@@ -62,7 +60,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     void Start()
     {
-        //Screen.showCursor = false;
+
         gazeInput = gameObject.GetComponent<GazeInputFromAOI>();
         targetToFollow = GameObject.FindGameObjectWithTag("TargetToFollow").transform;
         GameeventManager.onLookAroundClickedHandler += reactOnEnableFirstPersonCamera;
@@ -223,114 +221,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     private void rotateCamWithMouse()
     {
-        rotationLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;
-        //transform.Rotate(0, rotationLeftRight, 0);
-        
+        rotationLeftRight += Input.GetAxis("Mouse X") * mouseSensitivity;     
         rotationUpDown -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         rotationUpDown = Mathf.Clamp(rotationUpDown, -upDownLookRange, upDownLookRange);
         transform.rotation = Quaternion.Euler(rotationUpDown, rotationLeftRight, 0);
         this.transform.rotation = Quaternion.Euler(0, rotationLeftRight, 0);
 
-        //Camera.main.transform.localRotation = Quaternion.Euler(rotationUpDown, 0, 0);
     }
-
-
-
-
-    /*
-    public float smooth = 1.5f;
-
-    private Transform playerRefugee;
-    private Vector3 relativeCameraPosition;
-    private float relativeCameraPositionMagnitude;
-    private Vector3 newPosition;
-
-    void Awake()
-    {
-        playerRefugee = GameObject.FindGameObjectWithTag(Tags.REFUGEE).transform;
-        relativeCameraPosition = transform.position - playerRefugee.position;
-        relativeCameraPositionMagnitude = relativeCameraPosition.magnitude - 0.5f;
-    }
-
-    void FixedUpdate()
-    {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            transform.LookAt(playerRefugee.position);
-        }
-        Vector3 standardPosition = playerRefugee.position + relativeCameraPosition;
-        Vector3 abovePosition = playerRefugee.position + Vector3.up * relativeCameraPositionMagnitude;
-        Vector3[] cameraPositionCheckPoints = new Vector3[5];
-        cameraPositionCheckPoints[0] = standardPosition;
-        cameraPositionCheckPoints[1] = Vector3.Lerp(standardPosition, abovePosition, 0.25f);
-        cameraPositionCheckPoints[2] = Vector3.Lerp(standardPosition, abovePosition, 0.5f);
-        cameraPositionCheckPoints[3] = Vector3.Lerp(standardPosition, abovePosition, 0.75f);
-        cameraPositionCheckPoints[4] = abovePosition;
-        
-        for (int i = 0; i < cameraPositionCheckPoints.Length; i++)
-        {
-            if (ViewingPositionsCheck(cameraPositionCheckPoints[i]))
-            {
-                break;
-            }
-        }
-        
-        transform.position = Vector3.Lerp(transform.position, newPosition, smooth * Time.deltaTime);
-        SmoothLookAt();
-    }
-
-    bool ViewingPositionsCheck(Vector3 checkPosition)
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(checkPosition, playerRefugee.position - checkPosition, out hit, relativeCameraPositionMagnitude))
-        {
-            if (hit.transform != playerRefugee)
-            {
-                return false;
-            }
-        }
-
-        newPosition = checkPosition;
-        return true;
-    }
-
-    void SmoothLookAt()
-    {
-        Vector3 relativePlayerPosition = playerRefugee.position - transform.position;
-        Quaternion lookAtRotation = Quaternion.LookRotation(relativePlayerPosition, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookAtRotation, smooth * Time.deltaTime);
-    }
-
-    */
-    /*
-    void reactOnRefugeeIsActive()
-    {
-        Debug.Log("in reactOnRefugeeIsActive");
-        if (GameObject.FindWithTag("Refugee") != null)
-        {
-            GameObject refugee = GameObject.FindWithTag("Refugee");
-            //setPlayerControllerVariables(refugee);
-            
-        }
-    }
-
-
-    void setPlayerControllerVariables(GameObject refugee)
-    {
-        Debug.Log("in setPlayerControllerVariables");
-        PlayerController playerController = refugee.AddComponent<PlayerController>();
-        ThirdPersonCameraController thirdPersonCameraController = Camera.main.GetComponent<ThirdPersonCameraController>();
-
-        playerController.thirdPersonCamera = Camera.main;
-       // playerController.firstPersonCamera = GameObject.FindGameObjectWithTag("FirstPersonCamera").camera;
-        playerController.mainGameCamera = thirdPersonCameraController;
-        
-        targetToFollow = refugee.transform;
-        lookDirection = targetToFollow.forward;
-    }
-
-   
-    */
 }

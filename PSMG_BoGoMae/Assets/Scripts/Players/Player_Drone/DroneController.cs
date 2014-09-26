@@ -32,32 +32,16 @@ public class DroneController : MonoBehaviour {
     {
         GameeventManager.setTrapHandler += reactOnSetTrap;
     }
-    /*
-    void OnNetworkInstantiate(NetworkMessageInfo info)
-    {
-        Camera camera = GameObject.FindGameObjectWithTag("DroneCamera").camera;
-        if (networkView.isMine)
-        {
-            camera.enabled = true;
-        }
-        else
-        {
-            camera.enabled = false;
-        }
-    }
-*/
+
     void Update()
     {
-
          movePlayerWithInput();
          setTrap();
 
          if (Input.GetButtonDown("Sound"))
          {
              reactOnEnableSound();
-
-         }
-        
+         }   
     }
 
     private void reactOnSetTrap()
@@ -75,14 +59,7 @@ public class DroneController : MonoBehaviour {
     
         if (Input.GetMouseButtonDown(0) && onTrapClicked)
         {
-            /*
-            Vector3 test = new Vector3(getCrosshairXPosition(), getCrosshairYPosition(), 2);
-            Ray ray = Camera.main.ScreenPointToRay(test);
-            if (Physics.Raycast(ray)
-            GameObject trapGameObject = (GameObject)Instantiate(trap.gameObject, test, Quaternion.identity);
-            onTrapClicked = false;
-            */
-        
+      
         }
     }
 
@@ -96,16 +73,11 @@ public class DroneController : MonoBehaviour {
         {
             GUI.DrawTexture(new Rect(50, 10, 50, 50), sound_off);
         }
-      /*  if(onTrapClicked) {
-            GUI.DrawTexture(new Rect(getCrosshairXPosition(), getCrosshairYPosition(), crosshairWidth, crosshairHeight), crosshair);
-        }
-       */
     }
 
     private void reactOnEnableSound()
     {
         soundEnabled = !soundEnabled;
-        Debug.Log("Sound: " + soundEnabled.ToString());
         playSoundIfEnabled();
 
     }
@@ -116,7 +88,6 @@ public class DroneController : MonoBehaviour {
         if (soundEnabled)
         {
             sound.audio.Play();
-            Debug.Log(sound);
         }
         else
         {
@@ -177,7 +148,7 @@ public class DroneController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.S))
         {
-            //Debug.Log("speed " + speed);
+
             if (speed > -moveForwardSpeed)
             {
                 speed += -increaseSpeed;
@@ -185,7 +156,6 @@ public class DroneController : MonoBehaviour {
             if (speed < 0)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime, transform);
-//                Debug.Log(transform);
             }
             handleRotation();
         }

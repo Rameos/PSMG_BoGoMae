@@ -79,8 +79,7 @@ public class NetworkManager : MonoBehaviour
     private void InstantiateRefugee()
     {
         
-        //GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-1200, 2, 2800));
-        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-30, 2, -1000));
+        GameObject refugeePlayer = SpawnPlayer(Config.INSTANTIATE_REFUGEE, new Vector3(-1200, 2, 2800));
         refugeePlayer.GetComponent<RefugeeFPShooting>().enabled = true;
         refugeePlayer.GetComponent<CameraController>().enabled = true;
         refugeePlayer.GetComponent<HasHealth>().enabled = true;
