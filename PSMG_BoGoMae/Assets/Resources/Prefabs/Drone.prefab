@@ -367,6 +367,10 @@ MonoBehaviour:
   slowIcon: {fileID: 2800000, guid: 21a30ec050ebdce40986140bf060197e, type: 3}
   weaponArmed: {fileID: 2800000, guid: 6964132ec9436a64a9b46253c985eb21, type: 3}
   weaponUnarmed: {fileID: 2800000, guid: e7f76ac5855137348ac3365f00a57a59, type: 3}
+  slowActivatedTexture: {fileID: 2800000, guid: a4fba06952903794794a5a6efdeb3dec,
+    type: 3}
+  showActivatedTexture: {fileID: 2800000, guid: 97343028323658047a42bb641c96a837,
+    type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

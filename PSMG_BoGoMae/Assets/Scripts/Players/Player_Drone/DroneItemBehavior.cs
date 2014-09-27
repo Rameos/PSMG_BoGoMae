@@ -10,9 +10,12 @@ public class DroneItemBehavior : MonoBehaviour
     public Texture2D slowIcon;
     public Texture2D weaponArmed;
     public Texture2D weaponUnarmed;
-
+    public Texture2D slowActivatedTexture;
+    public Texture2D showActivatedTexture;
 
     private float eyesClosedForTwoSeconds = 2f;
+    private float slowMessageDuration = 4f;
+    private float showMessageDuration = 4f;
     private float iconDistance = 4f;
     private float inventoryXposition = (Screen.width/2)-170f;
     private float inventoryYposition = Screen.height - 100f;
@@ -42,6 +45,9 @@ public class DroneItemBehavior : MonoBehaviour
 	private bool showRefugeePressed = false;
     private float notificationTimer = 5f;
 
+    private bool slowedMessageActivated;
+    private bool showMessageActivated;
+
     // Use this for initialization
     void Start()
     {
@@ -59,11 +65,6 @@ public class DroneItemBehavior : MonoBehaviour
     {        
         DetectButtonPress();
         EnableShoot();
-        /*
-        if (showBlinkNotification)
-        {
-            blinkNotificationTimer();
-		}*/
 		EyesClosedTrigger();
     }
 
@@ -76,7 +77,7 @@ public class DroneItemBehavior : MonoBehaviour
 			GameeventManager.droneShowEnemy();
 			showBlinkNotification = false;
 			showRefugeePressed = false;
-            itemUsedNotification();
+            showMessageActivated = true;
 		}
 		else
 		{
@@ -84,10 +85,7 @@ public class DroneItemBehavior : MonoBehaviour
 		} 	
 	}
 
-    private void itemUsedNotification()
-    {
-        // TO DO
-    }
+
 
     private bool BothEyesClosed()
     {  
@@ -124,6 +122,7 @@ public class DroneItemBehavior : MonoBehaviour
                 notEnoughEnergy = false;
                 energymanagment.Energy = energymanagment.Energy - energyCostsForSlowing;
                 GameeventManager.droneSetSlowTrap();
+                slowedMessageActivated = true; 
             }
             else
             {
@@ -195,6 +194,14 @@ public class DroneItemBehavior : MonoBehaviour
         else
         {
             GUI.DrawTexture(rocketsStatusGUIposition, weaponUnarmed);
+        } 
+        if (showMessageActivated)
+        {
+            ShowEnemyNotification();
+        }
+        if (slowedMessageActivated)
+        {
+            SlowEnemyNotification();
         }
         
 
@@ -207,6 +214,36 @@ public class DroneItemBehavior : MonoBehaviour
         {
             GUI.Label(new Rect((Screen.width / 2)-200f, Screen.height / 2, 400f, 100f), "linkes Auge geschlossen halten, um Flüchtling Position anzuzeigen");
         }
+    }
+
+    private void ShowEnemyNotification()
+    {
+        showMessageDuration -= Time.deltaTime;
+        if (showMessageDuration >= 0)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), showActivatedTexture);
+        }
+        else
+        {
+            showMessageActivated = false;
+            showMessageDuration = 4f;
+        }
+
+    }
+
+    private void SlowEnemyNotification()
+    {
+        slowMessageDuration -= Time.deltaTime;
+        if (slowMessageDuration >= 0)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), slowActivatedTexture);
+        }
+        else
+        {
+            slowedMessageActivated = false;
+            slowMessageDuration = 4f;
+        }
+
     }
 
     private void DrawNotEnoughEnergy()
