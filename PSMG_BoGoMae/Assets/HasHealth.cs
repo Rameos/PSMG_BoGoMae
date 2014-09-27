@@ -51,7 +51,11 @@ public class HasHealth : MonoBehaviour
     void OnGUI()
     {
 		if (gameObject.tag != Config.TRANSMITTER_TAG && networkView.isMine) {
-						GUI.Box (new Rect (Screen.width - 200, 10, 100, 25), "Health:" + Mathf.Round (health) + "/" + maxHealth);
+            GUIStyle font = new GUIStyle();
+            font.fontSize = 15;
+            font.fontStyle = FontStyle.Normal;
+            font.normal.textColor = new Color32(50, 50, 50, 150);
+						GUI.Label (new Rect (Screen.width - 200, 10, 100, 25), "Health:" + Mathf.Round (health) + "/" + maxHealth,font);
 				}
     }
 }
