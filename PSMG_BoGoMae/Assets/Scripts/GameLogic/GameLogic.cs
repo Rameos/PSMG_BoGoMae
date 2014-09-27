@@ -13,7 +13,7 @@ public class GameLogic : MonoBehaviour
     private int transmitterCounter;
     private string deadPlayer = null;
     private string winner = null;
-    private Rect gameTimeGUIPosition = new Rect(Screen.width - 145, 50, 150f, 25f);
+    private Rect gameTimeGUIPosition = new Rect(Screen.width - 90, 50, 40, 25);
     private bool showMenu = false;
     private bool showRefugeeTrace = false;
     public Texture2D stopwatch;
@@ -262,7 +262,11 @@ public class GameLogic : MonoBehaviour
     {
         if (gameTime > 0)
         {
-            GUI.Box(gameTimeGUIPosition," "+ gameTimeString);
+            GUIStyle font = new GUIStyle();
+            font.fontSize = 20;
+            font.fontStyle = FontStyle.Italic;
+            
+            GUI.Label(gameTimeGUIPosition," "+ gameTimeString, font);
             GUI.DrawTexture(new Rect(Screen.width-100, 10, 74, 90), stopwatch);
 
         }
