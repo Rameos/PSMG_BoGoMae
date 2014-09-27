@@ -87,27 +87,30 @@ public class GameLogic : MonoBehaviour
 
     private void Countdown()
     {
-        gameTime -= Time.deltaTime;
-        if (gameTime >= 60f)
+        if (gameTime > 59)
         {
             minutes = gameTime / 60;
+            seconds = gameTime % 60;
         }
         else
         {
-
             minutes = 0;
+            seconds = gameTime % 60f;
         }
-        if (seconds <= 9)
+
+        if (seconds < 10)
         {
-            seconds = gameTime % 60;
-            gameTimeString = minutes.ToString("0") + ":0" + seconds.ToString("0");
+            minutes = (int)minutes;
+            seconds = (int)seconds;
+            gameTimeString = minutes.ToString() + ":0" + seconds.ToString();
         }
         else
         {
-
-            seconds = gameTime % 60;
-            gameTimeString = minutes.ToString("0") + ":" + seconds.ToString("0");
+            minutes = (int)minutes;
+            seconds = (int)seconds;
+            gameTimeString = minutes.ToString() + ":" + seconds.ToString();
         }
+        gameTime -= Time.deltaTime;
 
     }
 
