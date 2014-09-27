@@ -20,6 +20,15 @@ public class RefugeeMovement : MonoBehaviour
     private Vector3 curVel = Vector3.zero;
     private float friction = 0.4f;
 
+    public bool showDiscoveredMessage;
+    private bool showSlowedMessage;
+
+    private float discoveredMessageDuration = 4f;
+    private float slowedMessageduration = 4f;
+
+    public Texture2D slowActivatedTexture;
+    public Texture2D discoveredActivatedTexture;
+
     // Use this for initialization
     void Start()
     {
@@ -74,6 +83,44 @@ public class RefugeeMovement : MonoBehaviour
         {
             GUI.Box(slowItemDurationGUIposition, "Slow Effect: " + slowItemDuration.ToString("0"));
         }
+        if (showDiscoveredMessage)
+        {
+            ShowDiscoveredNotification();
+        }
+        if (showSlowedMessage)
+        {
+            ShowSlowedNotification();
+        }
+    }
+
+    private void ShowDiscoveredNotification()
+    {
+        discoveredMessageDuration -= Time.deltaTime;
+        if (discoveredMessageDuration >= 0)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), discoveredActivatedTexture);
+        }
+        else
+        {
+            showDiscoveredMessage = false;
+            discoveredMessageDuration = 4f;
+        }
+
+    }
+
+    private void ShowSlowedNotification()
+    {
+        slowedMessageduration -= Time.deltaTime;
+        if (slowedMessageduration >= 0)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), slowActivatedTexture);
+        }
+        else
+        {
+            showSlowedMessage = false;
+            slowedMessageduration = 4f;
+        }
+
     }
 
     private void HandleSpeedItem()
@@ -94,6 +141,7 @@ public class RefugeeMovement : MonoBehaviour
         CheckSlowItemDuration();
         if (slowItemIsUsed && slowItemDuration > 0)
         {
+            showSlowedMessage = true;
             movementSpeed = movementSpeedSlowed;
         }
         else

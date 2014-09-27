@@ -181,8 +181,9 @@ public class GameLogic : MonoBehaviour
     {
         Debug.Log("ShowRefugeeTrace");
         showRefugeeTrace = true;
-        showRefugeeTime = 5f;
+        showRefugeeTime = 20f;
         GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
+        refugee.GetComponent<RefugeeMovement>().showDiscoveredMessage = true;
 
         /*
         if (showRefugeeTrace) {
