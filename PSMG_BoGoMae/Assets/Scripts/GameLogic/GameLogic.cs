@@ -19,6 +19,8 @@ public class GameLogic : MonoBehaviour
     public Texture2D stopwatch;
     public Texture2D droneCrashed;
     public Texture2D youAreCrashingDrone;
+    private bool showDroneCrashed = false;
+    private bool showYouAreCrashingDrone = false;
 
     // Use this for initialization
     void Start()
@@ -129,11 +131,11 @@ public class GameLogic : MonoBehaviour
         {
             if (Network.isClient)
             {
-                GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), droneCrashed);
+                showDroneCrashed = true;
             }
             else
             {
-                GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), youAreCrashingDrone);
+                showYouAreCrashingDrone = true;
             }
             networkView.RPC("CrashDrone", RPCMode.All, null);
         }
@@ -234,6 +236,16 @@ public class GameLogic : MonoBehaviour
 
     void OnGUI()
     {
+        if (showDroneCrashed)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), droneCrashed);
+
+        }
+        if (showYouAreCrashingDrone)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), youAreCrashingDrone);
+
+        }
         if (gameTime > 0)
         {
             GUIStyle font = new GUIStyle();
