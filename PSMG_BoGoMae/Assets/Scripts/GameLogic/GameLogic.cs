@@ -199,7 +199,6 @@ public class GameLogic : MonoBehaviour
 
     private void showRefugeeTraceWhileEyesClosed()
     {
-        Debug.Log("showRefugeeTraceWhileEyesClosed");
         GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
         if (ShowRefugeeTimeRemaining())
         {
