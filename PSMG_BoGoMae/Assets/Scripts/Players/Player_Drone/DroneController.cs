@@ -6,7 +6,6 @@ public class DroneController : MonoBehaviour {
 
 
     public Texture2D crosshair;
-    public Trap trap;
     public Transform trapSpawnPosition;
 
     private bool onTrapClicked = false;
@@ -42,6 +41,11 @@ public class DroneController : MonoBehaviour {
          {
              reactOnEnableSound();
          }   
+
+        if(transform.position.y <=1)
+        {
+            transform.rigidbody.position = new Vector3(transform.position.x,1,transform.position.z);
+        }
     }
 
     private void reactOnSetTrap()

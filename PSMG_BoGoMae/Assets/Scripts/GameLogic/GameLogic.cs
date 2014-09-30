@@ -13,9 +13,14 @@ public class GameLogic : MonoBehaviour
     private int transmitterCounter;
     private string deadPlayer = null;
     private string winner = null;
-    private Rect gameTimeGUIPosition = new Rect(Screen.width - 200f, 50f, 150f, 25f);
+    private Rect gameTimeGUIPosition = new Rect(Screen.width - 90, 50, 40, 30);
     private bool showMenu = false;
     private bool showRefugeeTrace = false;
+    public Texture2D stopwatch;
+    public Texture2D droneCrashed;
+    public Texture2D youAreCrashingDrone;
+    private bool showDroneCrashed = false;
+    private bool showYouAreCrashingDrone = false;
 
     // Use this for initialization
     void Start()
@@ -116,25 +121,28 @@ public class GameLogic : MonoBehaviour
 
     private void reactOnGoalReached()
     {
-        Debug.Log("Flüchtling erreicht Ziel, Sieg, hurra!");
         deadPlayer = "Drone";
     }
 
     private void reactOnTransmitterDestroyd()
     {
-        Debug.Log("in react on transmitter destroyd");
         transmitterCounter--;
         if (transmitterCounter == 0)
         {
-
-            Debug.Log("Refugee hat gewonnen | alle transmitter kaputt");
+            if (Network.isClient)
+            {
+                showDroneCrashed = true;
+            }
+            else
+            {
+                showYouAreCrashingDrone = true;
+            }
             networkView.RPC("CrashDrone", RPCMode.All, null);
         }
     }
 
     private void reactOnPlayerDied(GameObject gameObject)
     {
-        Debug.Log("GameLogic.reactOnPlayerDied: " + gameObject.name);
         networkView.RPC("PlayerDied", RPCMode.All, gameObject.tag);
     }
 
@@ -145,8 +153,6 @@ public class GameLogic : MonoBehaviour
 
     private void reactOnShowEnemy()
     {
-        //leuchtkegel in refugee script anzeigen
-        Debug.Log("reactOnShowEnemy");
         networkView.RPC("ShowRefugeeTrace", RPCMode.All, null);
     }
 
@@ -161,16 +167,13 @@ public class GameLogic : MonoBehaviour
     [RPC]
     public void PlayerDied(string gameOjectTag)
     {
-        Debug.Log("RPC PlayerDied");
         if (gameOjectTag == Config.DRONE_TAG)
         {
-            Debug.Log("1");
             deadPlayer = gameOjectTag;
             winner = "Refugee";
         }
         else if (gameOjectTag == Config.REFUGEE_TAG)
         {
-            Debug.Log("2");
             deadPlayer = gameOjectTag;
             winner = "Drone";
         }
@@ -179,26 +182,15 @@ public class GameLogic : MonoBehaviour
     [RPC]
     public void ShowRefugeeTrace()
     {
-        Debug.Log("ShowRefugeeTrace");
         showRefugeeTrace = true;
         showRefugeeTime = 20f;
         GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
         refugee.GetComponent<RefugeeMovement>().showDiscoveredMessage = true;
 
-        /*
-        if (showRefugeeTrace) {
-                // evtl nach kurzer zeit wieder deaktivieren
-                refugee.transform.FindChild ("TraceLight").gameObject.SetActive (true);
-                Debug.Log("show == true");
-        } else {
-                refugee.transform.FindChild ("TraceLight").gameObject.SetActive (false);
-        }
-      */
     }
 
     private void showRefugeeTraceWhileEyesClosed()
     {
-        Debug.Log("showRefugeeTraceWhileEyesClosed");
         GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
         if (ShowRefugeeTimeRemaining())
         {
@@ -210,20 +202,7 @@ public class GameLogic : MonoBehaviour
             refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
             showRefugeeTrace = false;
         }
-        /*
-        if (gazeModel.diamLeftEye == 0)
-        {
-            refugee.transform.FindChild("TraceLight").gameObject.SetActive(true);
-            Debug.Log("sRTELEC if");
-
-        }
-        else
-        {
-            refugee.transform.FindChild("TraceLight").gameObject.SetActive(false);
-            showRefugeeTrace = false;
-            Debug.Log("sRTELEC else");
-        }
-        */
+     
 
     }
 
@@ -243,8 +222,6 @@ public class GameLogic : MonoBehaviour
     [RPC]
     public void SlowDownRefugee()
     {
-        Debug.Log("RPC SlowDownRefugee");
-
         float speed = 1f;
         GameObject refugee = GameObject.FindGameObjectWithTag(Config.REFUGEE_TAG);
         refugee.GetComponent<RefugeeMovement>().setMovementSpeedTo(speed);
@@ -259,9 +236,24 @@ public class GameLogic : MonoBehaviour
 
     void OnGUI()
     {
+        if (showDroneCrashed)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), droneCrashed);
+
+        }
+        if (showYouAreCrashingDrone)
+        {
+            GUI.Box(new Rect((Screen.width / 2) - 200f, Screen.height / 2, 400f, 100f), youAreCrashingDrone);
+
+        }
         if (gameTime > 0)
         {
-            GUI.Box(gameTimeGUIPosition, "Zeit: " + gameTimeString);
+            GUIStyle font = new GUIStyle();
+            font.fontSize = 20;
+            font.fontStyle = FontStyle.Italic;
+            font.normal.textColor = new Color32(50,50,50,150);
+            GUI.Label(gameTimeGUIPosition," "+ gameTimeString, font);
+            GUI.DrawTexture(new Rect(Screen.width-100, 10, 74, 90), stopwatch);
 
         }
         else

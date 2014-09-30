@@ -6,8 +6,10 @@ public class NetworkManager : MonoBehaviour
 	private const string typeName = "PSMGHideAndSeek";
 	private const string gameName = "LAUFENDES SPIEL";
     private AudioSource sound;
+    private float clickCounter = 0;
 
     private AudioClip audio;
+    public Texture2D helpTexture;
 	
 	private bool isRefreshingHostList = false;
 	private HostData[] hostList;
@@ -29,6 +31,20 @@ public class NetworkManager : MonoBehaviour
             if (GUI.Button(new Rect(Screen.width - 200f, 100, 100, 50), "Quit"))
             {
                 Application.Quit();
+
+            }
+
+            if (GUI.Button(new Rect(Screen.width - 200f, 160, 100, 50), "Help"))
+            {
+                clickCounter++;
+            }
+
+            if (clickCounter % 2 == 0)
+            {
+            }
+            else
+            {
+                GUI.Label(new Rect((Screen.width / 2) - 256f, (Screen.height / 2) - 256f, 512f, 512f), helpTexture);
 
             }
 
@@ -87,7 +103,6 @@ public class NetworkManager : MonoBehaviour
         refugeePlayer.GetComponent<CharacterController>().enabled = true;
         refugeePlayer.GetComponent<GazeInputFromAOI>().enabled = true;
         refugeePlayer.GetComponent<ChangeItemInput>().enabled = true; 
-        //refugeePlayer.transform.FindChild("Main Camera").GetComponent<ChangeItemInput>().enabled = true;
 		refugeePlayer.transform.FindChild("Main Camera").gameObject.SetActive(true);
 		GameObject.Find ("Menu Camera").camera.gameObject.SetActive (false);
         refugeePlayer.GetComponent<CameraController>().playSoundIfEnabled();

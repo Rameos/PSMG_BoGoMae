@@ -210,10 +210,6 @@ public class DroneItemBehavior : MonoBehaviour
         DrawIcon(showIconXposition, iconYposition, iconWidth, iconHeight, lupeIcon);
         DrawIcon(slowIconXposition, iconYposition, iconWidth, iconHeight, slowIcon);
         DrawIcon(shootIconXposition, iconYposition, iconWidth, iconHeight, shootIcon);
-        if (showBlinkNotification)
-        {
-            GUI.Label(new Rect((Screen.width / 2)-200f, Screen.height / 2, 400f, 100f), "linkes Auge geschlossen halten, um Flüchtling Position anzuzeigen");
-        }
     }
 
     private void ShowEnemyNotification()
