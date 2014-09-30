@@ -6,7 +6,6 @@ public class DroneController : MonoBehaviour {
 
 
     public Texture2D crosshair;
-    public Trap trap;
     public Transform trapSpawnPosition;
 
     private bool onTrapClicked = false;
