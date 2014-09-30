@@ -42,6 +42,11 @@ public class DroneController : MonoBehaviour {
          {
              reactOnEnableSound();
          }   
+
+        if(transform.position.y <=1)
+        {
+            transform.rigidbody.position = new Vector3(transform.position.x,1,transform.position.z);
+        }
     }
 
     private void reactOnSetTrap()
