@@ -24437,6 +24437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbc1593b1142a6440b3c77ce5fec6c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  helpTexture: {fileID: 2800000, guid: c9e16d70134507745bb63b5409054522, type: 3}
 --- !u!4 &1988252671
 Transform:
   m_ObjectHideFlags: 0
