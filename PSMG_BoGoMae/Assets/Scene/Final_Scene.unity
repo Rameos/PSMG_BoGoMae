@@ -24462,6 +24462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopwatch: {fileID: 2800000, guid: 4dc798727653d3a42bfa55ad54cd2a9c, type: 3}
+  droneCrashed: {fileID: 2800000, guid: 8d3ac2f60493d944c930e09689aace8e, type: 3}
+  youAreCrashingDrone: {fileID: 2800000, guid: 3141701d2943c0546877e6461f33cd44, type: 3}
 --- !u!114 &1988252673
 MonoBehaviour:
   m_ObjectHideFlags: 0
